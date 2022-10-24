@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".Sign_In_Activity">
+
+    <TextView
+        android:id="@+id/titleIniciApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginBottom="40dp"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:text="Benvingut/da" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:src="@drawable/image_round_hd"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="160dp"/>
+
+    <EditText
+        android:id="@+id/loginUsertxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:inputType="text"
+        android:hint="Usuari"/>
+
+    <EditText
+        android:id="@+id/passUsertxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:inputType="textPassword"
+        android:hint="Contrasenya"/>
+
+    <Button
+        android:id="@+id/singInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="40dp"
+        android:text="Sign In" />
+
+
+</LinearLayout>
