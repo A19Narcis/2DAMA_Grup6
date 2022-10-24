@@ -35,7 +35,7 @@ await con.connect(function(err){
 
 app.post("/getUsers", (req, res) =>{
     var data = [];
-    con.query("SELECT * FROM ADMIN JOIN PERSONA USING (email)WHERE PERSONA.email = email", function(err, result, fields){
+    con.query("SELECT * FROM PRODUCTE, PERSONA WHERE PERSONA.email = PRODUCTE.correu_usu", function(err, result, fields){
         if (err) throw err;
         data.push(result);
         res.json(data);
@@ -53,6 +53,17 @@ function checkUser(datosUsu)
 
 }
 
+
+function checkPass(datosUsu)
+{
+     const rows = await con.query("SELECT nom FROM PERSONA");
+    for (let index = 0; index < rows.length; index++) 
+        if (datosUsu[0][1] == result[index].pass)
+            return 1;
+        else 
+            return 0;
+
+}
 
 
 //Filtra per usuari els productes que es demanen
