@@ -46,7 +46,7 @@ var app = new Vue({
             console.log(this.info.values);
             console.log("Get Data");
             const myHeaders = new Headers();
-            fetch("http://localhost:3000/getUsers/",
+            fetch("http://localhost:3000/getAdmins/",
             {
                 method: "POST",
                 headers: {

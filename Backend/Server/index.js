@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const fs = require("fs");
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const app = express();
 const PORT = 3000;
@@ -14,14 +14,14 @@ app.use (cors({
 }));
 
 
-var con = mysql.createConnection({
+var con = await mysql.createConnection({
     host: "labs.inspedralbes.cat",
     user: "a19teomerrod_user",
     password: "Pedralbes22_23",
     database: "a19teomerrod_project"
 });
 
-con.connect(function(err){
+await con.connect(function(err){
     if (err)
         throw err;
     else{
@@ -42,15 +42,17 @@ app.post("/getUsers", (req, res) =>{
     });
 });
 
+function checkUser(datosUsu)
+{
+     const rows = await con.query("SELECT nom FROM PERSONA");
+    for (let index = 0; index < rows.length; index++) 
+        if (datosUsu[0][0] == result[index].nom)
+            return 1;
+        else 
+            return 0;
 
-app.post("/getProducts", (req, res) =>{
-    var data = [];
-    con.query("SELECT * FROM `PERSONA`, `PRODUCTE` WHERE PRODUCTE.correu_usu=PERSONA.email;", function(err, result, fields){
-        if (err) throw err;
-        data.push(result);
-        res.json(data);
-    });
-});
+}
+
 
 
 //Filtra per usuari els productes que es demanen
