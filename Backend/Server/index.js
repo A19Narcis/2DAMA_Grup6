@@ -43,7 +43,26 @@ app.post("/getUsers", (req, res) =>{
 });
 
 
+app.post("/getProducts", (req, res) =>{
+    var data = [];
+    con.query("SELECT * FROM `PERSONA`, `PRODUCTE` WHERE PRODUCTE.correu_usu=PERSONA.email;", function(err, result, fields){
+        if (err) throw err;
+        data.push(result);
+        res.json(data);
+    });
+});
 
+
+//Filtra per usuari els productes que es demanen
+app.post("/getProductUser", (req, res) =>{
+    var data = [];
+    var emailUser="x@i";
+    con.query("SELECT nom FROM PRODUCTE WHERE correu_usu='"+emailUser+"';", function(err, result, fields){
+        if (err) throw err;
+        data.push(result);
+        res.json(data);
+    });
+});
 
 
 /*Obrir Servidor*/
