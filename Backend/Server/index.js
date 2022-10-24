@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const fs = require("fs");
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const app = express();
 const PORT = 3000;
@@ -14,14 +14,14 @@ app.use (cors({
 }));
 
 
-var con = mysql.createConnection({
+var con = await mysql.createConnection({
     host: "labs.inspedralbes.cat",
     user: "a19teomerrod_user",
     password: "Pedralbes22_23",
     database: "a19teomerrod_project"
 });
 
-con.connect(function(err){
+await con.connect(function(err){
     if (err)
         throw err;
     else{
@@ -42,7 +42,36 @@ app.post("/getUsers", (req, res) =>{
     });
 });
 
+function checkUser(datosUsu)
+{
+     const rows = await con.query("SELECT nom FROM PERSONA");
+    for (let index = 0; index < rows.length; index++) 
+        if (datosUsu[0][0] == result[index].nom)
+            return 1;
+        else 
+            return 0;
 
+}
+
+function checkPass(datosUsu){
+    const rows =  await con.query("SELECT pass FROM PERSONA");
+    for (let index = 0; index < rows.length; index++) 
+        if (datosUsu[0][1] == result[index].pass)
+            return 1;
+        else 
+            return 0;
+}
+
+
+app.post("/getAdmins", (req, res) =>{
+    var datosUsu = [];
+    datosUsu.push(req.body.values);
+    console.log(datosUsu[0][1]);
+    var userAdmin = checkUser(datosUsu);
+    console.log(userAdmin);
+    var passAdmin = checkPass(datosUsu);
+    console.log(passAdmin);
+});
 
 
 
