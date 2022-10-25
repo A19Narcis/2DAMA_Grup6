@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".SignIn">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/titleIniciApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginBottom="40dp"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:text="Benvingut/da" />
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:src="@drawable/logo_rounded_hd"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="160dp"/>
+
+            <EditText
+                android:id="@+id/loginUsertxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:inputType="text"
+                android:paddingEnd="5dp"
+                android:drawableEnd="@drawable/ic_person"
+                android:hint="Usuari"/>
+
+            <EditText
+                android:id="@+id/loginPasstxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:inputType="textPassword"
+                android:drawableEnd="@drawable/ic_password"
+                android:paddingEnd="5dp"
+                android:hint="Contrasenya"/>
+
+            <Button
+                android:id="@+id/sendDataSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="40dp"
+                android:text="Sign In" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
