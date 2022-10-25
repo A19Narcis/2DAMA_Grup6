@@ -2,6 +2,7 @@ package com.example.projecte_2dam_grup6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,13 +37,15 @@ public class SignIn extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        txtPasswordSignIn = findViewById(R.id.loginUsertxt);
+        txtUserSignIn = findViewById(R.id.loginUsertxt);
         txtPasswordSignIn = findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
     }
 
     public void validarUserLogin(View view){
         new MostraTask().execute();
+        //Intent intent = new Intent(this, PantallaPrincipal.class);
+        //startActivity(intent);
     }
 
 
@@ -57,9 +60,11 @@ public class SignIn extends AppCompatActivity {
 
         private void mostra() {
             try {
-                URL url = new URL("http://localhost:3000/validarLogIn/:" + txtUserSignIn + "/:" + txtPasswordSignIn);
+                URL url = new URL("http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText());
+                System.out.println("USEEEEEEEEEEEEER " + txtUserSignIn.getText());
+                System.out.println("PAAAAAAAAAAAAAAS " + txtPasswordSignIn.getText());
                 con = (HttpURLConnection) url.openConnection();
-                con.connect();
+                System.out.println("COOOOOOOOOOOOOOON --> "  + con);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String linea;
@@ -78,8 +83,8 @@ public class SignIn extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
-
                 JSONObject jsonObject = new JSONObject(s);
+                System.out.println("Object --> " + jsonObject);
                 JSONArray itemsArray = jsonObject.getJSONArray("PERSONES");
 
                 int i = 0;
@@ -101,13 +106,13 @@ public class SignIn extends AppCompatActivity {
                 }
 
                 if (user != null && pass != null){
-                    txtUserSignIn.setText("BIEEEEEEEN");
+                    Toast.makeText(SignIn.this, "Bien hecho", Toast.LENGTH_SHORT).show();
                 } else {
-                    txtUserSignIn.setText("MAAAAAAAAL");
+                    Toast.makeText(SignIn.this, "Mal hecho", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (Exception e) {
-                System.out.println("Error");
+                e.printStackTrace();
             }
         }
     }
