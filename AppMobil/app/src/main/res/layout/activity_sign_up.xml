@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".SingUp">
+    tools:context=".SignUp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +38,8 @@
             <EditText
                 android:id="@+id/newNomtxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:layout_height="45dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
@@ -48,7 +49,8 @@
             <EditText
                 android:id="@+id/newCognomtxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
@@ -58,7 +60,8 @@
             <EditText
                 android:id="@+id/newUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
@@ -68,7 +71,8 @@
             <EditText
                 android:id="@+id/newPasstxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
@@ -78,17 +82,21 @@
             <EditText
                 android:id="@+id/newDescrtxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
+                android:paddingTop="10dp"
                 android:inputType="textMultiLine"
+                android:gravity="top"
                 android:hint="Descripció"/>
 
             <EditText
                 android:id="@+id/newEmailtxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
@@ -98,7 +106,8 @@
             <EditText
                 android:id="@+id/newNomUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"

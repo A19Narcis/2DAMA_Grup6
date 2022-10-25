@@ -39,23 +39,27 @@
             <EditText
                 android:id="@+id/loginUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
                 android:inputType="text"
+                android:paddingEnd="5dp"
                 android:drawableEnd="@drawable/ic_person"
                 android:hint="Usuari"/>
 
             <EditText
                 android:id="@+id/loginPasstxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/ic_password"
+                android:paddingEnd="5dp"
                 android:hint="Contrasenya"/>
 
             <Button
