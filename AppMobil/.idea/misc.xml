@@ -3,21 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.225" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.225" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_info_product.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_info_user.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_inici_app.xml" value="0.35208333333333336" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_menu_principal.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_pujar_producte.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_settings_user.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_valoracions_users.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/layout/activity_vendes_user.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.215" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/App_Mòbil/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.215" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_inici_app.xml" value="0.35208333333333336" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_in.xml" value="0.33697916666666666" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sing_up.xml" value="0.33697916666666666" />
       </map>
     </option>
   </component>

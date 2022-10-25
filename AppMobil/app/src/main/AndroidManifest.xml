@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.projecte_2dam_grup6" >
+    package="com.example.projecte_2dam_grup6">
 
     <application
         android:allowBackup="true"
@@ -12,40 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projecte_2DAM_Grup6"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".InfoProduct"
+            android:name=".SignIn"
             android:exported="false" />
         <activity
-            android:name=".PeticioArtista"
-            android:exported="false" />
-        <activity
-            android:name=".VendesUser"
-            android:exported="false" />
-        <activity
-            android:name=".ValoracionsUsers"
-            android:exported="false" />
-        <activity
-            android:name=".MenuPrincipal"
-            android:exported="false" />
-        <activity
-            android:name=".PujarProducte"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsUser"
-            android:exported="false" />
-        <activity
-            android:name=".InfoUser"
-            android:exported="false" />
-        <activity
-            android:name=".Sign_Up_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Sign_In_Activity"
+            android:name=".SingUp"
             android:exported="false" />
         <activity
             android:name=".IniciApp"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
