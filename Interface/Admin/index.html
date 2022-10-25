@@ -25,7 +25,14 @@
                     <v-card-text>
                      <img src="../../Documentació/logo_pr1er.png" style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;" ></img>
                       <v-text-field id="user" style="margin-top: 35px;" outlined label="User"></v-text-field>
-                     <v-text-field id ="pass"outlined type ="password" label ="Password" ></v-text-field>
+                      <v-text-field 
+                        id ="pass"
+                        outlined 
+                        :type ="showPassword ? 'text' : 'password'" 
+                        label = "Password" 
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" 
+                        @click:append="showPassword = !showPassword">
+                     </v-text-field>
                     <v-btn @click ="getAdmins" class="mt-2" color="primary">Sign In</v-btn>
                     </v-card-text>
                 </v-col>

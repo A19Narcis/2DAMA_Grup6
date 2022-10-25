@@ -21,6 +21,8 @@ var app = new Vue({
         search: '',
         users: [ ],
         isadmin: 0,
+        showPassword: false,
+        password: null,
         info: {values: []},
     }},
     methods: {
