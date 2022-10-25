@@ -32,14 +32,16 @@ con.connect(function(err){
 app.post("/getUsers", (req, res) =>{
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
         if (err) throw err;
+        console.log(result);
         res.json(result);
     });
 });
 
 app.post("/getAdmins", (req, res) =>{
+    var dades = [];
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
-        console.log(result);
-        res.json(result);
+        dades = result;
+        res.json(dades);
     });
 });
 

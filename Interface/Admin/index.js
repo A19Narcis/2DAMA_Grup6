@@ -10,7 +10,7 @@ var app = new Vue({
               text: 'Nom',
               align: 'start',
               sortable: false,
-              value: 'name',
+              value: 'nom',
             },
             { text: 'cognoms', value: 'cognoms' },
             { text: 'edad', value: 'edad' },
@@ -18,22 +18,8 @@ var app = new Vue({
             { text: 'ubicacio', value: 'ubicacio' },
             { text: 'pass', value: 'pass' },
           ],
-        users: [ {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },],
+        search: '',
+        users: [ ],
         isadmin: 0,
         info: {values: []},
     }},
@@ -60,7 +46,7 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    this.text = (data);
+                    this.users = data;
                      
                 }
             ).catch(
