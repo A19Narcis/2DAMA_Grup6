@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const fs = require("fs");
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 const app = express();
 const PORT = 3000;
@@ -14,14 +14,14 @@ app.use (cors({
 }));
 
 
-var con = await mysql.createConnection({
+var con = mysql.createConnection({
     host: "labs.inspedralbes.cat",
     user: "a19teomerrod_user",
     password: "Pedralbes22_23",
     database: "a19teomerrod_project"
 });
 
-await con.connect(function(err){
+con.connect(function(err){
     if (err)
         throw err;
     else{
@@ -29,41 +29,30 @@ await con.connect(function(err){
     }
 });
 
-
-
-
-
 app.post("/getUsers", (req, res) =>{
-    var data = [];
-    con.query("SELECT * FROM PRODUCTE, PERSONA WHERE PERSONA.email = PRODUCTE.correu_usu", function(err, result, fields){
+    con.query("SELECT * FROM PERSONA", function(err, result, fields){
         if (err) throw err;
-        data.push(result);
-        res.json(data);
+        console.log(result);
+        res.json(result);
     });
 });
 
-function checkUser(datosUsu)
-{
-     const rows = await con.query("SELECT nom FROM PERSONA");
-    for (let index = 0; index < rows.length; index++) 
-        if (datosUsu[0][0] == result[index].nom)
-            return 1;
-        else 
-            return 0;
+app.post("/getAdmins", (req, res) =>{
+    var dades = [];
+    con.query("SELECT * FROM PERSONA", function(err, result, fields){
+        dades = result;
+        res.json(dades);
+    });
+});
 
-}
+app.get("/validadarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
+    let user = req.params.txtUserSignIn;
+    let passwd = req.params.txtPasswordSignIn;
+    con.query("SELECT * FROM PERSONA WHERE " + user + " == nom && " + passwd + " == pass", function(err, result, fields){
+        res.json(result);
+    });
+})
 
-
-function checkPass(datosUsu)
-{
-     const rows = await con.query("SELECT nom FROM PERSONA");
-    for (let index = 0; index < rows.length; index++) 
-        if (datosUsu[0][1] == result[index].pass)
-            return 1;
-        else 
-            return 0;
-
-}
 
 
 //Filtra per usuari els productes que es demanen
@@ -76,6 +65,8 @@ app.post("/getProductUser", (req, res) =>{
         res.json(data);
     });
 });
+
+
 
 
 /*Obrir Servidor*/

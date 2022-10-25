@@ -1,11 +1,28 @@
 var app = new Vue({
     el: "#app",
     vuetify: new Vuetify(),
-    data: {
-        text: [
+    data(){
+        return{
+         text: [
         ],
-        info: {values: []}
-    },
+        headers: [
+            {
+              text: 'NOM',
+              align: 'start',
+              sortable: true,
+              value: 'nom',
+            },
+            { text: 'COGNOMS', value: 'cognoms' },
+            { text: 'EDAD', value: 'edad' },
+            { text: 'EMAIL', value: 'email' },
+            { text: 'UBICACIO', value: 'ubicacio' },
+            { text: 'PASSWORD', value: 'pass' },
+          ],
+        search: '',
+        users: [ ],
+        isadmin: 0,
+        info: {values: []},
+    }},
     methods: {
         getUsers: function (data) {
             
@@ -29,7 +46,7 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    this.text = data;
+                    this.users = data;
                      
                 }
             ).catch(
@@ -44,6 +61,7 @@ var app = new Vue({
             this.info.values.push(document.getElementById("user").value);
             this.info.values.push(document.getElementById("pass").value);
             console.log(this.info.values);
+            this.isAdmin = 0;
             console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getAdmins/",
@@ -65,8 +83,15 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    this.text = data;
-                     
+                    for (let index = 0; index < data.length; index++) 
+                    if (this.info.values[0] == data[index].nom && this.info.values[1] == data[index].pass)
+                    {
+                        this.isadmin = 1;
+                        window.open("./Users.html","_self");
+                        return ;
+                    }
+                    else 
+                        this.isadmin = 0;
                 }
             ).catch(
                 (error) => {
@@ -79,3 +104,4 @@ var app = new Vue({
 
     }
 });
+

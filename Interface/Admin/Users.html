@@ -17,21 +17,30 @@
 </head>
 <body>
     <v-app id="app">
-        <v-container fill-height>
-            <v-row justify="center" align-items="center">
-              <v-col cols="10" sm="5">
-                
-                <v-card width="448" height="500" elevation="8" outlined >
-                    <v-card-text>
-                     <img src="../../Documentació/logo_pr1er.png" style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;" ></img>
-                      <v-text-field id="user" style="margin-top: 35px;" outlined label="User"></v-text-field>
-                     <v-text-field id ="pass"outlined type ="password" label ="Password" ></v-text-field>
-                    <v-btn @click ="getAdmins" class="mt-2" color="primary">Sign In</v-btn>
-                    </v-card-text>
-                </v-col>
+                <v-btn @click ="getUsers"></v-btn>
+                <template>
+                    <v-card>
+                      <v-card-title>
+                        <v-text-field
+                          v-model="search"
+                          append-icon="mdi-magnify"
+                          label="Search"
+                          single-line
+                          hide-details
+                        ></v-text-field>
+                      </v-card-title>
+                      <v-data-table
+                        :headers="headers"
+                        :items="users"
+                        :search="search"
+                      >
+                    </v-data-table>
+                    </v-card>
+                  </template>
             </v-row>
         </v-container>
         <script src="index.js"></script>
+        <script></script>
     </v-app>
 </body>
 </html>
