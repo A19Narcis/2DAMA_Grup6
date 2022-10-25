@@ -17,9 +17,12 @@
 </head>
 <body>
     <v-app id="app">
+        <v-container fill-height>
+            <v-row justify="center" align="center">
+            <v-col cols="14">
                 <v-btn @click ="getUsers"></v-btn>
-                <template>
-                    <v-card>
+                <template >
+                    <v-card class="cyan lighten-5 elevation-8 " >
                       <v-card-title>
                         <v-text-field
                           v-model="search"
@@ -27,17 +30,19 @@
                           label="Search"
                           single-line
                           hide-details
+                          class="cyan lighten-5"
                         ></v-text-field>
                       </v-card-title>
                       <v-data-table
+                    
                         :headers="headers"
                         :items="users"
                         :search="search"
-                      >
+                        class="cyan lighten-5">
                     </v-data-table>
                     </v-card>
                   </template>
-            </v-row>
+            </v-col>
         </v-container>
         <script src="index.js"></script>
         <script></script>
