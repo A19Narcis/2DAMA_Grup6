@@ -45,11 +45,11 @@ app.post("/getAdmins", (req, res) =>{
     });
 });
 
-app.get("/validadarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
+app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
     let user = req.params.txtUserSignIn;
     let passwd = req.params.txtPasswordSignIn;
-    con.query("SELECT * FROM PERSONA WHERE " + user + " == nom && " + passwd + " == pass", function(err, result, fields){
-        res.json(result);
+    con.query("SELECT nom, pass FROM PERSONA WHERE nom = '" + user + "' && pass ='" + passwd + "'", function(err, result, fields){
+        console.log(result);
     });
 })
 

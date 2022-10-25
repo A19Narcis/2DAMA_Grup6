@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +39,6 @@ public class SignIn extends AppCompatActivity {
         txtPasswordSignIn = findViewById(R.id.loginUsertxt);
         txtPasswordSignIn = findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
-
     }
 
     public void validarUserLogin(View view){
@@ -54,7 +57,7 @@ public class SignIn extends AppCompatActivity {
 
         private void mostra() {
             try {
-                URL url = new URL("http://localhost:3000/validarLogIn/" + txtUserSignIn + "/" + txtPasswordSignIn);
+                URL url = new URL("http://localhost:3000/validarLogIn/:" + txtUserSignIn + "/:" + txtPasswordSignIn);
                 con = (HttpURLConnection) url.openConnection();
                 con.connect();
 
@@ -67,6 +70,44 @@ public class SignIn extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+
+            try {
+
+                JSONObject jsonObject = new JSONObject(s);
+                JSONArray itemsArray = jsonObject.getJSONArray("PERSONES");
+
+                int i = 0;
+                String user = null;
+                String pass = null;
+
+                while (i < itemsArray.length() && (user == null && pass == null)){
+                    JSONObject persona = itemsArray.getJSONObject(i);
+                    JSONObject persInfo = persona.getJSONObject("persona");
+
+                    try {
+                        user = persInfo.getString("nom");
+                        pass = persInfo.getString("pass");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    i++;
+                }
+
+                if (user != null && pass != null){
+                    txtUserSignIn.setText("BIEEEEEEEN");
+                } else {
+                    txtUserSignIn.setText("MAAAAAAAAL");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error");
             }
         }
     }
