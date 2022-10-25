@@ -45,6 +45,14 @@ app.post("/getAdmins", (req, res) =>{
     });
 });
 
+app.get("/validadarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
+    let user = req.params.txtUserSignIn;
+    let passwd = req.params.txtPasswordSignIn;
+    con.query("SELECT * FROM PERSONA WHERE " + user + " == nom && " + passwd + " == pass", function(err, result, fields){
+        res.json(result);
+    });
+})
+
 
 
 //Filtra per usuari els productes que es demanen

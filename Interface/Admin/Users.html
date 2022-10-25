@@ -17,31 +17,26 @@
 </head>
 <body>
     <v-app id="app">
-   
                 <v-btn @click ="getUsers"></v-btn>
-              
-               <template >
-
-                <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
-                    <v-data-table
-                      dense
-                      style="border: 2px solid black;"
-                      class="mt-9"
-                      :headers = "headers"
-                      :items="users"
-                      width = "100%"
-                      :search ="search"
-                      class="elevation-3"
-                    ></v-data-table>
-
-              </template>
-               
+                <template>
+                    <v-card>
+                      <v-card-title>
+                        <v-text-field
+                          v-model="search"
+                          append-icon="mdi-magnify"
+                          label="Search"
+                          single-line
+                          hide-details
+                        ></v-text-field>
+                      </v-card-title>
+                      <v-data-table
+                        :headers="headers"
+                        :items="users"
+                        :search="search"
+                      >
+                    </v-data-table>
+                    </v-card>
+                  </template>
             </v-row>
         </v-container>
         <script src="index.js"></script>
