@@ -49,9 +49,15 @@ app.post("/getAdmins", (req, res) =>{
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
     let user = req.params.txtUserSignIn;
     let passwd = req.params.txtPasswordSignIn;
+    let auth = false;
     con.query("SELECT nom, pass FROM PERSONA WHERE nom = '" + user + "' && pass ='" + passwd + "'", function(err, result, fields){
         console.log(JSON.stringify(result));
-        res.send(JSON.stringify(result));
+        if (result != 0) {
+            auth = true;
+            res.send(auth)
+        } else {
+            res.send(auth)
+        }
     });
 })
 

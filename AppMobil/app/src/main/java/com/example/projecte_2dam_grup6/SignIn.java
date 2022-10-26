@@ -37,15 +37,22 @@ public class SignIn extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        txtUserSignIn = findViewById(R.id.loginUsertxt);
-        txtPasswordSignIn = findViewById(R.id.loginPasstxt);
+        txtUserSignIn = (EditText) findViewById(R.id.loginUsertxt);
+        txtPasswordSignIn = (EditText) findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
     }
 
     public void validarUserLogin(View view){
+
+        String userValue = txtUserSignIn.getText().toString();
+        String passValue = txtPasswordSignIn.getText().toString();
+
+        if (userValue.length() == 0 | passValue.length() == 0){
+            Toast.makeText(SignIn.this, "Omple tots els camps", Toast.LENGTH_LONG).show();
+        }
+
+
         new MostraTask().execute();
-        //Intent intent = new Intent(this, PantallaPrincipal.class);
-        //startActivity(intent);
     }
 
 
@@ -54,21 +61,25 @@ public class SignIn extends AppCompatActivity {
         HttpURLConnection con;
         @Override
         protected String doInBackground(String... strings) {
-            mostra();
-            return null;
+            return mostra();
         }
 
-        private void mostra() {
+        private String mostra() {
+            String bufferStr = "";
+            String linea = "";
+
             try {
-                URL url = new URL("http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText());
-                System.out.println("USEEEEEEEEEEEEER " + txtUserSignIn.getText());
-                System.out.println("PAAAAAAAAAAAAAAS " + txtPasswordSignIn.getText());
+                URL url = new URL("http://192.168.194.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText());
+                System.out.println("USUARIO PARA LOGIN -> " + txtUserSignIn.getText());
+                System.out.println("CPNTRASENYA USUARI -> " + txtPasswordSignIn.getText());
                 con = (HttpURLConnection) url.openConnection();
-                System.out.println("COOOOOOOOOOOOOOON --> "  + con);
+                con.connect();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String linea;
-                while ((linea = reader.readLine()) != null){
+                while ((bufferStr = reader.readLine()) != null){
+                    linea = bufferStr;
+
+                    Log.d("Mostra", bufferStr);
                     Log.d("Mostra", linea);
                 }
             } catch (MalformedURLException e){
@@ -76,48 +87,24 @@ public class SignIn extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println( linea);
+
+            return linea;
         }
 
         @Override
         protected void onPostExecute(String s){
+            System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
-
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                System.out.println("Object --> " + jsonObject);
-                JSONArray itemsArray = jsonObject.getJSONArray("PERSONES");
-
-                int i = 0;
-                String user = null;
-                String pass = null;
-
-                while (i < itemsArray.length() && (user == null && pass == null)){
-                    JSONObject persona = itemsArray.getJSONObject(i);
-                    JSONObject persInfo = persona.getJSONObject("persona");
-
-                    try {
-                        user = persInfo.getString("nom");
-                        pass = persInfo.getString("pass");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    i++;
-                }
-
-                if (user != null && pass != null){
-                    Toast.makeText(SignIn.this, "Bien hecho", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(SignIn.this, "Mal hecho", Toast.LENGTH_SHORT).show();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (s.equals("false")){
+                Toast.makeText(SignIn.this, "Mal hecho", Toast.LENGTH_SHORT).show();
+            } else if (s.equals("true")){
+                Toast.makeText(SignIn.this, "Welcome", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(this, PantallaPrincipal.class);
+                //startActivity(intent);
             }
         }
     }
-
-
 }
 
 
