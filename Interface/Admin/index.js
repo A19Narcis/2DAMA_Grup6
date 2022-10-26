@@ -17,17 +17,21 @@ var app = new Vue({
             { text: 'EMAIL', value: 'email' },
             { text: 'UBICACIO', value: 'ubicacio' },
             { text: 'PASSWORD', value: 'pass' },
+            { text: 'ROL', value: 'rol'},
+            { text: 'VER'}
           ],
         search: '',
         users: [ ],
-        isadmin: 0,
+        seeUs: [ ],
+        dialog: false,
+        isadmin: 4,
         showPassword: false,
         password: null,
         info: {values: []},
+        error: ' '
     }},
     methods: {
-        getUsers: function (data) {
-            
+        getUsers: function (data) {   
             console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getUsers/",
@@ -63,7 +67,6 @@ var app = new Vue({
             this.info.values.push(document.getElementById("user").value);
             this.info.values.push(document.getElementById("pass").value);
             console.log(this.info.values);
-            this.isAdmin = 0;
             console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getAdmins/",
@@ -86,14 +89,19 @@ var app = new Vue({
                 (data) => {
                     console.log(data);
                     for (let index = 0; index < data.length; index++) 
-                    if (this.info.values[0] == data[index].nom && this.info.values[1] == data[index].pass)
+                    if (this.info.values[0] == data[index].nom && this.info.values[1] == data[index].pass && data[index].rol == "admin")
                     {
                         this.isadmin = 1;
+                        this.info.values = [];
                         window.open("./Users.html","_self");
                         return ;
                     }
                     else 
-                        this.isadmin = 0;
+                    {
+                        this.info.values = [];
+                        this.isadmin = 0;        
+                        //alert(this.error = "Usuario y/o password incorrectos");
+                    }
                 }
             ).catch(
                 (error) => {
@@ -102,8 +110,43 @@ var app = new Vue({
                 }
             );
         },
-        
 
+        seeUsers: function (email) {
+            this.info.values.push(email);
+            console.log(this.info.values);  
+            console.log(email);
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/seeUsers/",
+            {
+                method: "POST",
+                headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                },
+                mode: "cors",
+                body: JSON.stringify(this.info),
+                cache: "default"
+            }
+            ).then(
+                (response) =>{
+                   console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    
+                    this.seeUs = data[0];
+                    this.info.values = [];
+                    
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
     }
 });
 

@@ -20,11 +20,11 @@
         <v-container fill-height>
             <v-row justify="center" align-items="center">
               <v-col cols="10" sm="5">
-                
+                <v-text-title v-if="!isadmin" class="success">{{error}}</v-text-title>
                 <v-card width="448" height="500" elevation="8" outlined >
                     <v-card-text>
                      <img src="../../Documentació/logo_pr1er.png" style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;" ></img>
-                      <v-text-field id="user" style="margin-top: 35px;" outlined label="User"></v-text-field>
+                      <v-text-field id="user" style="margin-top: 35px;" outlined label="User" append-icon="mdi-account"></v-text-field>
                       <v-text-field 
                         id ="pass"
                         outlined 
