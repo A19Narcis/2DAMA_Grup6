@@ -17,21 +17,13 @@
 </head>
 <body>
     <v-app id="app">
-        <script>
 
-
-        window.onload=function(){
-            scr="index.js";
-        };
-
-
-        </script>
         <v-container fill-height>
             <v-row justify="center" align="center">
             <v-col cols="14">
-                <v-btn id ="linkid" @click ="getUsers"></v-btn>
                 <template >
-                    <v-card class="cyan lighten-5 elevation-8 " >
+                    <v-card class="elevation-10" style="border: 1px solid black;" >
+                      <v-card-title center>USERS</v-card-title>
                       <v-card-title>
                         <v-text-field
                           v-model="search"
@@ -39,7 +31,7 @@
                           label="Search"
                           single-line
                           hide-details
-                          class="cyan lighten-5"
+                          
                         ></v-text-field>
                       </v-card-title>
                       <v-data-table
@@ -47,14 +39,100 @@
                         :headers="headers"
                         :items="users"
                         :search="search"
-                        class="cyan lighten-5">
+                        >
+
+                        <template v-slot:item="row">
+                          <tr>
+                            <td>{{row.item.nom}}</td>
+                            <td>{{row.item.cognoms}}</td>
+                            <td>{{row.item.edad}}</td>
+                            <td>{{row.item.email}}</td>
+                            <td>{{row.item.ubicacio}}</td>
+                            <td>{{row.item.pass}}</td>
+                            <td>{{row.item.rol}}</td>
+                            <td>
+                              <v-dialog
+                              transition="dialog-top-transition"
+                              max-width="600"
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                  color="primary"
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  @click="seeUsers(row.item.email)"
+                                ><v-icon>mdi-account</v-icon></v-btn>
+                              </template>
+                              <template v-slot:default="dialog">
+                                <v-card>
+                                  <v-toolbar
+                                    color="primary"
+                                    dark
+                                  >Información del usuario: {{seeUs.nom}}</v-toolbar>
+                                  <v-container>
+                                    <v-row>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                        <div style="border: 2px solid black; border-radius: 50%; width: 100px; height: 100px;"></div>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                      <p>{{seeUs.nom}}</p>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                       
+                                      </v-col>
+                                      <v-col cols="12">
+                                      <p>{{seeUs.cognoms}}</p>
+                                      </v-col>
+                                      <v-col cols="12">
+                                      <p>{{seeUs.ubicacio}}</p>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                      >
+                                        <p>{{seeUs.edad}}</p>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                      >
+                                        <p>{{seeUs.rol}}</p>
+                                      </v-col>
+                                    </v-row>
+                                  </v-container>
+                                  <v-card-actions class="justify-end">
+                                    <v-btn
+                                      text
+                                      @click="dialog.value = false"
+                                    >Close</v-btn>
+                                  </v-card-actions>
+                                </v-card>
+                              </template>
+                            </v-dialog>
+                            </td>
+                          </tr>
+                      </template>
                     </v-data-table>
                     </v-card>
                   </template>
             </v-col>
         </v-container>
         <script src="index.js"></script>
-        <script></script>
     </v-app>
+    <script>app.getUsers()</script>
+
 </body>
 </html>
+

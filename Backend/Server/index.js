@@ -32,7 +32,6 @@ con.connect(function(err){
 app.post("/getUsers", (req, res) =>{
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
         if (err) throw err;
-        console.log(result);
         res.json(result);
     });
 });
@@ -42,6 +41,13 @@ app.post("/getAdmins", (req, res) =>{
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
         dades = result;
         res.json(dades);
+    });
+});
+app.post("/seeUsers", (req, res) =>{
+    var dades = [];
+    console.log(req.body.values[0]);
+    con.query("SELECT * FROM PERSONA WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, fields){
+        res.json(result);
     });
 });
 
