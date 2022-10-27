@@ -1,8 +1,27 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">176dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    //Text - Image - EditText Size
+    <dimen name="textSizeQuestion">10sp</dimen>
+    <dimen name="titleTextSize">40sp</dimen>
+    <dimen name="alturaLogo">200dp</dimen>
+    <dimen name="alturaEditText">45dp</dimen>
+    <dimen name="altura_editText_descripcio">200dp</dimen>
+
+    //Paddings
+    <dimen name="paddingTopTitleLogIn">50dp</dimen>
+    <dimen name="paddinIMG_EditText">5dp</dimen>
+    <dimen name="paddingTopTitleRegister">25dp</dimen>
+    <dimen name="padding_bottom_TitleInici">30dp</dimen>
+
+    //Margins
+    <dimen name="marginTitle_Image">40dp</dimen>
+    <dimen name="marginBOT_image_buttons">130dp</dimen>
+    <dimen name="screenMargin">100dp</dimen>
+    <dimen name="marginBottomScreen">100dp</dimen>
+    <dimen name="margin_between_btns">20dp</dimen>
+    <dimen name="margenBottom_BTN">30dp</dimen>
+    <dimen name="marginEditTextScreen">70dp</dimen>
+    <dimen name="maringEditText_Register">30dp</dimen>
+    <dimen name="marginTopBTN_register">50dp</dimen>
+    <dimen name="marginBTN_Bottom_register">25dp</dimen>
+
 </resources>

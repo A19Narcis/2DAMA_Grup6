@@ -15,7 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="vertical" >
 
             <TextView
@@ -23,106 +22,107 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginBottom="40dp"
-                android:textSize="40sp"
+                android:layout_marginBottom="@dimen/marginTitle_Image"
+                android:paddingTop="@dimen/paddingTopTitleRegister"
+                android:textSize="@dimen/titleTextSize"
                 android:textAlignment="center"
-                android:text="Register" />
+                android:text="@string/title_register" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:src="@drawable/logo_rounded_hd"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginBottom="40dp"/>
+                android:layout_height="@dimen/alturaLogo"
+                android:layout_marginBottom="@dimen/marginTitle_Image"/>
 
             <EditText
                 android:id="@+id/newNomtxt"
                 android:layout_width="match_parent"
                 android:background="@drawable/edit_text_background"
-                android:layout_height="45dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_height="@dimen/alturaEditText"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="text"
-                android:hint="Nom"/>
+                android:hint="@string/hint_register_nom"/>
 
             <EditText
                 android:id="@+id/newCognomtxt"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="text"
-                android:hint="Gognom"/>
+                android:hint="@string/hint_register_cognom"/>
 
             <EditText
                 android:id="@+id/newUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="text"
-                android:hint="User"/>
+                android:hint="@string/hint_register_user"/>
 
             <EditText
                 android:id="@+id/newPasstxt"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:hint="@string/hint_register_password"/>
 
             <EditText
                 android:id="@+id/newDescrtxt"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/altura_editText_descripcio"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:paddingTop="10dp"
                 android:inputType="textMultiLine"
                 android:gravity="top"
-                android:hint="Descripció"/>
+                android:hint="@string/hint_register_desc"/>
 
             <EditText
                 android:id="@+id/newEmailtxt"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="textEmailAddress"
-                android:hint="Email"/>
+                android:hint="@string/hint_register_email"/>
 
             <EditText
                 android:id="@+id/newNomUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="textPostalAddress"
-                android:hint="Location"/>
+                android:hint="@string/hint_register_location"/>
 
             <Button
                 android:id="@+id/btnCreateUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="60dp"
-                android:layout_marginTop="50dp"
-                android:text="Create User" />
+                android:layout_marginStart="@dimen/screenMargin"
+                android:layout_marginEnd="@dimen/screenMargin"
+                android:layout_marginBottom="@dimen/marginBTN_Bottom_register"
+                android:layout_marginTop="@dimen/marginTopBTN_register"
+                android:text="@string/txt_Register_btn" />
 
         </LinearLayout>
     </ScrollView>

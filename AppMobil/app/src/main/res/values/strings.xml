@@ -1,14 +1,27 @@
 <resources>
-    <string name="app_name">Projecte_2DAM_Grup6</string>
-    <string name="title_activity_pantalla_principal">PantallaPrincipal</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    //General
+    <string name="app_name">Recicla APP</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    //Inici APP
+    <string name="preguntaTopSignUp">No tens compte?</string>
+    <string name="txtBtnSignUp">Sign Up</string>
+    <string name="preguntaTopSignIn">Ja estàs registrat?</string>
+    <string name="txtBtnSignIn">Sign In</string>
+
+    //Register
+    <string name="title_register">Register</string>
+    <string name="txt_Register_btn">Create User</string>
+    <string name="hint_register_location">Location</string>
+    <string name="hint_register_email">Email</string>
+    <string name="hint_register_desc">Descripció</string>
+    <string name="hint_register_nom">Nom</string>
+    <string name="hint_register_cognom">Cognom</string>
+    <string name="hint_register_user">User</string>
+    <string name="hint_register_password">Password</string>
+
+    //LOGIN
+    <string name="hintPassword">Contrasenya</string>
+    <string name="hintUsuari">Usuari</string>
+    <string name="txt_benvingut_da">Benvingut/da</string>
+
 </resources>

@@ -22,55 +22,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginBottom="40dp"
-                android:paddingTop="20dp"
-                android:textSize="40sp"
+                android:layout_marginBottom="@dimen/marginTitle_Image"
+                android:paddingTop="@dimen/paddingTopTitleLogIn"
+                android:textSize="@dimen/titleTextSize"
                 android:textAlignment="center"
-                android:text="Benvingut/da" />
+                android:text="@string/txt_benvingut_da" />
 
 
             <ImageView
                 android:id="@+id/imageView"
                 android:src="@drawable/logo_rounded_hd"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginBottom="160dp"/>
+                android:layout_height="@dimen/alturaLogo"
+                android:layout_marginBottom="@dimen/marginBOT_image_buttons"/>
 
             <EditText
                 android:id="@+id/loginUsertxt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/margenBottom_BTN"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="text"
-                android:paddingEnd="5dp"
+                android:paddingEnd="@dimen/paddinIMG_EditText"
                 android:drawableEnd="@drawable/ic_person"
-                android:hint="Usuari"/>
+                android:hint="@string/hintUsuari"/>
 
             <EditText
                 android:id="@+id/loginPasstxt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/alturaEditText"
                 android:background="@drawable/edit_text_background"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="@dimen/margenBottom_BTN"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/ic_password"
-                android:paddingEnd="5dp"
-                android:hint="Contrasenya"/>
+                android:paddingEnd="@dimen/paddinIMG_EditText"
+                android:hint="@string/hintPassword"/>
 
             <Button
                 android:id="@+id/sendDataSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginStart="@dimen/screenMargin"
+                android:layout_marginEnd="@dimen/screenMargin"
+                android:layout_marginBottom="@dimen/marginBottomScreen"
                 android:onClick="validarUserLogin"
-                android:text="Sign In" />
+                android:text="@string/txtBtnSignIn" />
 
         </LinearLayout>
     </ScrollView>

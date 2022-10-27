@@ -3,6 +3,7 @@ package com.example.projecte_2dam_grup6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -43,53 +45,79 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void validarUserLogin(View view){
-
+        boolean valid = true;
         String userValue = txtUserSignIn.getText().toString();
         String passValue = txtPasswordSignIn.getText().toString();
 
         if (userValue.length() == 0 | passValue.length() == 0){
             Toast.makeText(SignIn.this, "Omple tots els camps", Toast.LENGTH_LONG).show();
+            valid = false;
         }
 
-
-        new MostraTask().execute();
+        if (valid){
+            new validarLoginUser().execute();
+        }
+        
     }
 
 
-    private class MostraTask extends AsyncTask<String, Void, String>{
+    private class validarLoginUser extends AsyncTask<String, Void, String>{
 
-        HttpURLConnection con;
         @Override
         protected String doInBackground(String... strings) {
-            return mostra();
+            return veureResultat();
         }
 
-        private String mostra() {
-            String bufferStr = "";
-            String linea = "";
+        private String veureResultat(){
+            String url_server = "http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            String validacioUsuari = null;
 
             try {
-                URL url = new URL("http://192.168.194.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText());
-                System.out.println("USUARIO PARA LOGIN -> " + txtUserSignIn.getText());
-                System.out.println("CPNTRASENYA USUARI -> " + txtPasswordSignIn.getText());
-                con = (HttpURLConnection) url.openConnection();
-                con.connect();
+                Uri builtURI = Uri.parse(url_server).buildUpon().build();
+                URL requestURL = new URL(builtURI.toString());
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                while ((bufferStr = reader.readLine()) != null){
-                    linea = bufferStr;
+                urlConnection = (HttpURLConnection) requestURL.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
 
-                    Log.d("Mostra", bufferStr);
-                    Log.d("Mostra", linea);
+                // Get the InputStream.
+                InputStream inputStream = urlConnection.getInputStream();
+
+                // Create a buffered reader from that input stream.
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                // Use a StringBuilder to hold the incoming response.
+                StringBuilder builder = new StringBuilder();
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
                 }
-            } catch (MalformedURLException e){
-                e.printStackTrace();
+                if (builder.length() == 0) {
+                    // Stream was empty. No point in parsing.
+                    return null;
+                }
+                validacioUsuari = builder.toString();
+
+                Log.d("Mostra", validacioUsuari);
+
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-            System.out.println( linea);
-
-            return linea;
+            return validacioUsuari;
         }
 
         @Override

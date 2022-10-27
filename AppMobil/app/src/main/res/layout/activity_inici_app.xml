@@ -12,61 +12,62 @@
         android:id="@+id/titleIniciApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginBottom="40dp"
-        android:textSize="40sp"
+        android:paddingBottom="@dimen/padding_bottom_TitleInici"
+        android:layout_marginBottom="@dimen/marginTitle_Image"
+        android:text="@string/app_name"
         android:textAlignment="center"
-        android:text="Recicla APP" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/titleTextSize" />
 
 
     <ImageView
         android:id="@+id/logoIniciApp"
         android:src="@drawable/logo_rounded_hd"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="160dp"/>
+        android:layout_height="@dimen/alturaLogo"
+        android:layout_marginBottom="@dimen/marginBOT_image_buttons"/>
 
     <TextView
         android:id="@+id/txtNewUserQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="@dimen/screenMargin"
+        android:layout_marginEnd="@dimen/screenMargin"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/textSizeQuestion"
         android:textAlignment="textStart"
-        android:text="No tens compte?" />
+        android:text="@string/preguntaTopSignUp" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="@dimen/screenMargin"
+        android:layout_marginEnd="@dimen/screenMargin"
         android:onClick="launchSignUp"
-        android:text="Sign Up" />
+        android:text="@string/txtBtnSignUp" />
 
 
     <TextView
         android:id="@+id/txtRegisteredUserQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/screenMargin"
+        android:layout_marginEnd="@dimen/screenMargin"
+        android:layout_marginTop="@dimen/margin_between_btns"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="@dimen/textSizeQuestion"
         android:textAlignment="textStart"
-        android:text="Ja estàs registrat?" />
+        android:text="@string/preguntaTopSignIn" />
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="@dimen/screenMargin"
+        android:layout_marginEnd="@dimen/screenMargin"
+        android:layout_marginBottom="@dimen/marginBottomScreen"
         android:onClick="launchSignIn"
-        android:text="Sign In" />
+        android:text="@string/txtBtnSignIn" />
 
 </LinearLayout>

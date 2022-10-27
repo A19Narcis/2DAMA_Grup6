@@ -14,6 +14,7 @@ app.use (cors({
 }));
 
 
+//Creacío connextió al LABS
 var con = mysql.createConnection({
     host: "labs.inspedralbes.cat",
     user: "a19teomerrod_user",
@@ -21,6 +22,7 @@ var con = mysql.createConnection({
     database: "a19teomerrod_project"
 });
 
+//Executar connexió
 con.connect(function(err){
     if (err)
         throw err;
@@ -29,6 +31,7 @@ con.connect(function(err){
     }
 });
 
+//Agafar els users
 app.post("/getUsers", (req, res) =>{
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
         if (err) throw err;
@@ -36,6 +39,7 @@ app.post("/getUsers", (req, res) =>{
     });
 });
 
+//Agafar els admins
 app.post("/getAdmins", (req, res) =>{
     var dades = [];
     con.query("SELECT * FROM PERSONA", function(err, result, fields){
@@ -43,6 +47,8 @@ app.post("/getAdmins", (req, res) =>{
         res.json(dades);
     });
 });
+
+//Veure tots els usuaris al Servidor
 app.post("/seeUsers", (req, res) =>{
     var dades = [];
     console.log(req.body.values[0]);
@@ -52,6 +58,7 @@ app.post("/seeUsers", (req, res) =>{
 });
 
 
+//Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
     let user = req.params.txtUserSignIn;
     let passwd = req.params.txtPasswordSignIn;
@@ -79,8 +86,6 @@ app.post("/getProductUser", (req, res) =>{
         res.json(data);
     });
 });
-
-
 
 
 /*Obrir Servidor*/
