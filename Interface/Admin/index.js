@@ -28,7 +28,8 @@ var app = new Vue({
         showPassword: false,
         password: null,
         info: {values: []},
-        error: ' '
+        error: ' ',
+        err: ' '
     }},
     methods: {
         getUsers: function (data) {   
@@ -100,7 +101,7 @@ var app = new Vue({
                     {
                         this.info.values = [];
                         this.isadmin = 0;        
-                        //alert(this.error = "Usuario y/o password incorrectos");
+                        this.err = "Correo y/o contraseña incorrectos"
                     }
                 }
             ).catch(
