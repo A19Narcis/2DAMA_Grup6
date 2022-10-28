@@ -53,8 +53,7 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    this.users = data;
-                     
+                    this.users = data; 
                 }
             ).catch(
                 (error) => {
@@ -89,20 +88,18 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    for (let index = 0; index < data.length; index++) 
-                    if (this.info.values[0] == data[index].nom && this.info.values[1] == data[index].pass && data[index].rol == "admin")
+                    for (let index = 0; index < data.length; index++)
+                    if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin")
                     {
+                        console.log("hola");
                         this.isadmin = 1;
                         this.info.values = [];
                         window.open("./Users.html","_self");
                         return ;
                     }
-                    else 
-                    {
-                        this.info.values = [];
-                        this.isadmin = 0;        
-                        this.err = "Correo y/o contraseña incorrectos"
-                    }
+                    this.info.values = [];
+                    this.isadmin = 0;        
+                    this.err = "Correo y/o contraseña incorrectos"
                 }
             ).catch(
                 (error) => {
@@ -140,6 +137,42 @@ var app = new Vue({
                     this.seeUs = data[0];
                     this.info.values = [];
                     
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+
+        ferAdmin: function (email, rol) {
+            this.info.values.push(email);
+            this.info.values.push(rol);
+            console.log(this.info.values);  
+            console.log(email);
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/seeUsers/",
+            {
+                method: "POST",
+                headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                },
+                mode: "cors",
+                body: JSON.stringify(this.info),
+                cache: "default"
+            }
+            ).then(
+                (response) =>{
+                   console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    this.seeUs = data[0];
+                    this.info.values = [];
                 }
             ).catch(
                 (error) => {

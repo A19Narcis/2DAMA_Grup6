@@ -89,6 +89,36 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
     }
   );
 });
+app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
+    let user = req.params.txtUserSignIn;
+    let passwd = req.params.txtPasswordSignIn;
+    let auth = false;
+    con.query("SELECT nom, pass FROM PERSONA WHERE nom = '" + user + "' && pass ='" + passwd + "'", function(err, result, fields){
+        console.log(JSON.stringify(result));
+        if (result != 0) {
+            auth = true;
+            res.send(auth)
+        } else {
+            res.send(auth)
+        }
+    });
+})
+
+app.post("/ferAdmin", (req, res) => {
+    if (req.body.values[1] == "admin")
+    {
+        con.query("UPDATE PERSONA SET PERSONA.rol = 'user' WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, field){
+            res.json(result);
+        });
+    }else{
+        con.query("UPDATE PERSONA SET PERSONA.rol = 'admin' WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, field){
+            res.json(result);
+        });
+    }
+});
+
+
+
 
 //Filtra per usuari els productes que es demanen
 app.post("/getProductUser", (req, res) => {
