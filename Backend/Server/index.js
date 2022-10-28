@@ -48,6 +48,14 @@ app.post("/getAdmins", (req, res) =>{
     });
 });
 
+//Agafar els productes
+app.post("/getProducts", (req, res) =>{
+    con.query("SELECT * FROM PRODUCTE", function(err, result, fields){
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
 //Veure tots els usuaris al Servidor
 app.post("/seeUsers", (req, res) =>{
     var dades = [];

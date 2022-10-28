@@ -31,6 +31,35 @@ var app = new Vue({
         error: ' ',
         err: ' '
     }},
+    dataProduct(){
+        return{
+         text: [
+        ],
+        headers: [
+            {
+              text: 'NOM',
+              align: 'start',
+              sortable: true,
+              value: 'nom',
+            },
+            { text: 'PREU', value: 'preu' },
+            { text: 'CATEGORIA', value: 'categoria' },
+            { text: 'ESTADO', value: 'estado_prod' },
+            { text: 'DESCRIPCIO', value: 'descripcio' },
+            { text: 'EMAIL', value: 'correu_usu' },
+            { text: 'VER'}
+          ],
+        search: '',
+        products: [ ],
+        seeUs: [ ],
+        dialog: false,
+        isadmin: 4,
+        showPassword: false,
+        password: null,
+        info: {values: []},
+        error: ' ',
+        err: ' '        
+    }},
     methods: {
         getUsers: function (data) {   
             console.log("Get Data");
@@ -100,6 +129,38 @@ var app = new Vue({
                     this.info.values = [];
                     this.isadmin = 0;        
                     this.err = "Correo y/o contraseña incorrectos"
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+
+        getProducts: function (data) {   
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/getProducts/",
+            {
+                method: "POST",
+                headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                },
+                mode: "cors",
+                cache: "default"
+            }
+            ).then(
+                (response) =>{
+                   console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    console.log(dataProduct);
+                    this.products = dataProduct;
+                     
                 }
             ).catch(
                 (error) => {
