@@ -20,12 +20,14 @@
     <string name="hint_register_user">User</string>
     <string name="hint_register_password">Password</string>
     <string name="hint_register_edat">Edat</string>
+    <string name="gmail_com">\@gmail.com</string>
 
     //LOGIN
     <string name="hintPassword">Contrasenya</string>
     <string name="hintUsuari">Usuari</string>
     <string name="txt_benvingut_da">Benvingut/da</string>
     <string name="txtDadesNoValides_login">Les dades no són vàlides</string>
+
 
 
 </resources>

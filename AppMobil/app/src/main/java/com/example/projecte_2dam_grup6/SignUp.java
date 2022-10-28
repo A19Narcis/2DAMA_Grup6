@@ -30,6 +30,7 @@ public class SignUp extends AppCompatActivity {
     private EditText descRegister;
     private EditText emailRegister;
     private EditText locationRegister;
+    private EditText edatRegister;
     private Button btnRegister;
 
 
@@ -50,6 +51,7 @@ public class SignUp extends AppCompatActivity {
         descRegister = findViewById(R.id.newDescrtxt);
         emailRegister = findViewById(R.id.newEmailtxt);
         locationRegister = findViewById(R.id.newLocationtxt);
+        edatRegister = findViewById(R.id.newEdattxt);
 
         nomRegister = findViewById(R.id.newNomtxt);
     }
@@ -78,7 +80,7 @@ public class SignUp extends AppCompatActivity {
         }
 
         private String veureResultat(){
-            String url_server = "http://192.168.244.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            String url_server = "http://192.168.244.66:3000/registerNewUser/";
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String validacioUsuari = null;
@@ -88,7 +90,17 @@ public class SignUp extends AppCompatActivity {
                 URL requestURL = new URL(builtURI.toString());
 
                 urlConnection = (HttpURLConnection) requestURL.openConnection();
-                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setDoOutput(true);
+
+                //Dades del BODY
+                //USUARI -> email, nom, cognoms, edat, ubicacio, user, pass, descripcio, rol
+                String jsonInputString = "{email:'" + emailRegister.getText() +"',nom:'" + nomRegister.getText() + "',cognoms:'" + cognomRegister.getText() + "',edad:" + edatRegister.getText() + ",ubicacio:'" + locationRegister.getText() + "',user: '" + userRegister.getText() + "',pass:'" + passRegister.getText() + "',descripcio: '" + descRegister.getText() + "',rol:'user'}";
+                Log.d("JSON",  jsonInputString);
+
+
                 urlConnection.connect();
 
                 // Get the InputStream.
@@ -134,10 +146,7 @@ public class SignUp extends AppCompatActivity {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             if (s.equals("false")){
-                textErrorDades.setVisibility(View.VISIBLE);
             } else if (s.equals("true")){
-                Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_SHORT).show();
-                textErrorDades.setVisibility(View.INVISIBLE);
                 //Intent intent = new Intent(this, PantallaPrincipal.class);
                 //startActivity(intent);
             }
