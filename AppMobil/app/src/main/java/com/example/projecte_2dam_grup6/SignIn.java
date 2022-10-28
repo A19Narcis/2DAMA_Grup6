@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -27,6 +28,7 @@ public class SignIn extends AppCompatActivity {
 
     private EditText txtUserSignIn;
     private EditText txtPasswordSignIn;
+    private TextView textErrorDades;
     private Button buttonSignIn;
 
     @Override
@@ -42,6 +44,8 @@ public class SignIn extends AppCompatActivity {
         txtUserSignIn = (EditText) findViewById(R.id.loginUsertxt);
         txtPasswordSignIn = (EditText) findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
+        textErrorDades = findViewById(R.id.txtNoValidUser);
+
     }
 
     public void validarUserLogin(View view){
@@ -50,7 +54,7 @@ public class SignIn extends AppCompatActivity {
         String passValue = txtPasswordSignIn.getText().toString();
 
         if (userValue.length() == 0 | passValue.length() == 0){
-            Toast.makeText(SignIn.this, "Omple tots els camps", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignIn.this, R.string.omplirCamps, Toast.LENGTH_LONG).show();
             valid = false;
         }
 
@@ -69,7 +73,7 @@ public class SignIn extends AppCompatActivity {
         }
 
         private String veureResultat(){
-            String url_server = "http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            String url_server = "http://192.168.244.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String validacioUsuari = null;
@@ -125,9 +129,10 @@ public class SignIn extends AppCompatActivity {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             if (s.equals("false")){
-                Toast.makeText(SignIn.this, "Mal hecho", Toast.LENGTH_SHORT).show();
+                textErrorDades.setVisibility(View.VISIBLE);
             } else if (s.equals("true")){
-                Toast.makeText(SignIn.this, "Welcome", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_SHORT).show();
+                textErrorDades.setVisibility(View.INVISIBLE);
                 //Intent intent = new Intent(this, PantallaPrincipal.class);
                 //startActivity(intent);
             }
