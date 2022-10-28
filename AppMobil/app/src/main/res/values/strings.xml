@@ -1,6 +1,7 @@
 <resources>
     //General
     <string name="app_name">Recicla APP</string>
+    <string name="omplirCamps">Omple tots els camps</string>
 
     //Inici APP
     <string name="preguntaTopSignUp">No tens compte?</string>
@@ -18,10 +19,13 @@
     <string name="hint_register_cognom">Cognom</string>
     <string name="hint_register_user">User</string>
     <string name="hint_register_password">Password</string>
+    <string name="hint_register_edat">Edat</string>
 
     //LOGIN
     <string name="hintPassword">Contrasenya</string>
     <string name="hintUsuari">Usuari</string>
     <string name="txt_benvingut_da">Benvingut/da</string>
+    <string name="txtDadesNoValides_login">Les dades no són vàlides</string>
+
 
 </resources>

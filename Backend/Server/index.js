@@ -74,8 +74,6 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
     });
 })
 
-
-
 //Filtra per usuari els productes que es demanen
 app.post("/getProductUser", (req, res) =>{
     var data = [];

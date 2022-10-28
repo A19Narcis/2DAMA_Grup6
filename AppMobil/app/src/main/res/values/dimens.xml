@@ -5,6 +5,7 @@
     <dimen name="alturaLogo">200dp</dimen>
     <dimen name="alturaEditText">45dp</dimen>
     <dimen name="altura_editText_descripcio">200dp</dimen>
+    <dimen name="width_errorText">185dp</dimen>
 
     //Paddings
     <dimen name="paddingTopTitleLogIn">50dp</dimen>
@@ -23,5 +24,8 @@
     <dimen name="maringEditText_Register">30dp</dimen>
     <dimen name="marginTopBTN_register">50dp</dimen>
     <dimen name="marginBTN_Bottom_register">25dp</dimen>
+    <dimen name="marginScreen_ageBox">160dp</dimen>
+    <dimen name="errorDadesTextSize">15sp</dimen>
+
 
 </resources>
