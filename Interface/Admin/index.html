@@ -33,7 +33,8 @@
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" 
                         @click:append="showPassword = !showPassword">
                      </v-text-field>
-                    <v-btn @click ="getAdmins" class="mt-2" color="primary">Sign In</v-btn>
+                     <v-card-text class="mt-n3">{{err}}</v-card-text>
+                    <v-btn @click ="getAdmins" class="" color="primary">Sign In</v-btn>
                     </v-card-text>
                 </v-col>
             </v-row>

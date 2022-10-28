@@ -69,47 +69,38 @@
                                     color="primary"
                                     dark
                                   >Información del usuario: {{seeUs.nom}}</v-toolbar>
-                                  <v-container>
-                                    <v-row>
-                                      <v-col
-                                        cols="12"
-                                        sm="6"
-                                        md="4"
-                                      >
-                                        <div style="border: 2px solid black; border-radius: 50%; width: 100px; height: 100px;"></div>
+                                  <v-container fill-height>
+                                    <v-row justify="center" align="center">
+                                      <v-col cols="14">
+                                  
+                                      <img src="../../Documentació/logo_pr1er.png" style="width: 120px; height: 120px; border: 2px solid black; border-radius: 50%;" ></img>
+                          
+                                
+                                        <v-card-title class="justify-center">NOM: {{seeUs.nom}}</v-card-title>
+                                          <v-card-title class="justify-center">COGNOMS: {{seeUs.cognoms}}</v-card-title>
+                                          <v-card-title class="justify-center">UBICACIO: {{seeUs.ubicacio}}</v-card-title>
+                                          <v-card-title class="justify-center">EDAD: {{seeUs.edad}}</v-card-title>
+                                          <v-card-title class="justify-center">ROL: {{seeUs.rol}}</v-card-title>
+
+                                      
+                                      <!-- <v-col cols="12" sm="6"  md="4">
+                                        <v-card-title>UBICACIO: {{seeUs.ubicacio}}</v-card-title>
                                       </v-col>
                                       <v-col
                                         cols="12"
                                         sm="6"
                                         md="4"
                                       >
-                                      <p>{{seeUs.nom}}</p>
+                                      <v-card-title>EDAD: {{seeUs.edad}}</v-card-title>
                                       </v-col>
                                       <v-col
                                         cols="12"
                                         sm="6"
                                         md="4"
                                       >
-                                       
-                                      </v-col>
-                                      <v-col cols="12">
-                                      <p>{{seeUs.cognoms}}</p>
-                                      </v-col>
-                                      <v-col cols="12">
-                                      <p>{{seeUs.ubicacio}}</p>
-                                      </v-col>
-                                      <v-col
-                                        cols="12"
-                                        sm="6"
-                                      >
-                                        <p>{{seeUs.edad}}</p>
-                                      </v-col>
-                                      <v-col
-                                        cols="12"
-                                        sm="6"
-                                      >
-                                        <p>{{seeUs.rol}}</p>
-                                      </v-col>
+                                      <v-card-title>ROL: {{seeUs.rol}}</v-card-title>
+                                      </v-col> -->
+                                    </v-col>
                                     </v-row>
                                   </v-container>
                                   <v-card-actions class="justify-end">
