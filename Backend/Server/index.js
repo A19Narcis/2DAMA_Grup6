@@ -74,6 +74,20 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
     });
 })
 
+app.post("/ferAdmin", (req, res) => {
+    if (req.body.values[1] == "admin")
+    {
+        con.query("UPDATE PERSONA SET rol = 'user' WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, field){
+            res.json(result);
+        });
+    }else{
+        con.query("", function(err, result, field){
+            res.json(result);
+        });
+    }
+});
+
+
 
 
 //Filtra per usuari els productes que es demanen

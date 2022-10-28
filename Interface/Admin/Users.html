@@ -77,29 +77,12 @@
                           
                                 
                                         <v-card-title class="justify-center">NOM: {{seeUs.nom}}</v-card-title>
-                                          <v-card-title class="justify-center">COGNOMS: {{seeUs.cognoms}}</v-card-title>
+                                          <v-card-title class="justify-center">COGNOMS{{seeUs.cognoms}}:</v-card-title>
                                           <v-card-title class="justify-center">UBICACIO: {{seeUs.ubicacio}}</v-card-title>
+                                          <v-card-title class="justify-center">UBICACIO: {{seeUs.email}}</v-card-title>
                                           <v-card-title class="justify-center">EDAD: {{seeUs.edad}}</v-card-title>
                                           <v-card-title class="justify-center">ROL: {{seeUs.rol}}</v-card-title>
-
-                                      
-                                      <!-- <v-col cols="12" sm="6"  md="4">
-                                        <v-card-title>UBICACIO: {{seeUs.ubicacio}}</v-card-title>
-                                      </v-col>
-                                      <v-col
-                                        cols="12"
-                                        sm="6"
-                                        md="4"
-                                      >
-                                      <v-card-title>EDAD: {{seeUs.edad}}</v-card-title>
-                                      </v-col>
-                                      <v-col
-                                        cols="12"
-                                        sm="6"
-                                        md="4"
-                                      >
-                                      <v-card-title>ROL: {{seeUs.rol}}</v-card-title>
-                                      </v-col> -->
+                                        <v-btn color="primary" @click="ferAdmin()">Admin/User</v-btn>
                                     </v-col>
                                     </v-row>
                                   </v-container>
