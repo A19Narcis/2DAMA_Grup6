@@ -2,6 +2,7 @@
     //General
     <string name="app_name">Recicla APP</string>
     <string name="omplirCamps">Omple tots els camps</string>
+    <string name="btnBackInici">&lt;</string>
 
     //Inici APP
     <string name="preguntaTopSignUp">No tens compte?</string>

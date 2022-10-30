@@ -30,6 +30,7 @@ public class SignIn extends AppCompatActivity {
     private EditText txtPasswordSignIn;
     private TextView textErrorDades;
     private Button buttonSignIn;
+    private Button btnStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,13 @@ public class SignIn extends AppCompatActivity {
         txtPasswordSignIn = (EditText) findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
         textErrorDades = findViewById(R.id.txtNoValidUser);
+        btnStart = findViewById(R.id.btnBackToStart);
 
+    }
+
+    public void backToStart(View view){
+        Intent intent = new Intent(this, IniciApp.class);
+        startActivity(intent);
     }
 
     public void validarUserLogin(View view){
@@ -73,7 +80,7 @@ public class SignIn extends AppCompatActivity {
         }
 
         private String veureResultat(){
-            String url_server = "http://192.168.244.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            String url_server = "http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String validacioUsuari = null;
@@ -131,7 +138,7 @@ public class SignIn extends AppCompatActivity {
             if (s.equals("false")){
                 textErrorDades.setVisibility(View.VISIBLE);
             } else if (s.equals("true")){
-                Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
                 textErrorDades.setVisibility(View.INVISIBLE);
                 //Intent intent = new Intent(this, PantallaPrincipal.class);
                 //startActivity(intent);

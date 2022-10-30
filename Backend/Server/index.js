@@ -71,17 +71,29 @@ app.post("/seeUsers", (req, res) => {
 
 //Registre USER nou APP
 app.post("/registerNewUser", (req, res) => {
-  console.log(req.body);
   let auth = true;
+  con.query(
+    "SELECT email, user FROM PERSONA WHERE email = '" + req.body.email + "' or user = '" + req.body.user + "'",
+    function (err, result, fields) {
+      if (result != 0) {
+        auth = false;
+      } else {
+        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "')");
+      }
+    }
+  );
+  res.json(auth);
 });
 
 //Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   let user = req.params.txtUserSignIn;
   let passwd = req.params.txtPasswordSignIn;
+  console.log("USER: " + user);
+  console.log("PASS: " + passwd);
   let auth = false;
   con.query(
-    "SELECT nom, pass FROM PERSONA WHERE nom = '" +
+    "SELECT user, pass FROM PERSONA WHERE user = '" +
       user +
       "' && pass ='" +
       passwd +
@@ -97,20 +109,6 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
     }
   );
 });
-app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) =>{
-    let user = req.params.txtUserSignIn;
-    let passwd = req.params.txtPasswordSignIn;
-    let auth = false;
-    con.query("SELECT nom, pass FROM PERSONA WHERE nom = '" + user + "' && pass ='" + passwd + "'", function(err, result, fields){
-        console.log(JSON.stringify(result));
-        if (result != 0) {
-            auth = true;
-            res.send(auth)
-        } else {
-            res.send(auth)
-        }
-    });
-})
 
 app.post("/ferAdmin", (req, res) => {
     if (req.body.values[1] == "admin")
