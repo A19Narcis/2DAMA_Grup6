@@ -1,15 +1,19 @@
 package com.example.projecte_2dam_grup6;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
@@ -62,6 +66,30 @@ public class SignUp extends AppCompatActivity {
         btnStart = findViewById(R.id.btnBackToStart);
         autoGmail = findViewById(R.id.txtAutoGmail);
         txtErrorRegister = findViewById(R.id.txtNoValidUserRegister);
+
+        btnAddImage = findViewById(R.id.pickImageButton);
+        btnAddImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 3);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            ImageView galleryImage = findViewById(R.id.userImage);
+            galleryImage.setImageURI(selectedImage);
+            galleryImage.setBackground(null);
+        }
+    }
+
+    public void cropSelectedImage(View view){
+
     }
 
     public void backToStart(View view){
@@ -81,7 +109,15 @@ public class SignUp extends AppCompatActivity {
 
         //Fer la connexió per afegir l'usuari
         if (valid){
-            String json = "{\"email\":\"" + emailRegister.getText() + "@gmail.com" + "\",\"nom\":\"" + nomRegister.getText() + "\",\"cognoms\":\"" + cognomRegister.getText() + "\",\"edad\":" + edatRegister.getText() + ",\"ubicacio\":\"" + locationRegister.getText() + "\",\"user\": \"" + userRegister.getText() + "\",\"pass\":\"" + passRegister.getText() + "\",\"descripcio\": \"" + descRegister.getText() + "\",\"rol\":\"user\"}";
+            String json = "{\"email\":\""
+                    + emailRegister.getText()+ "@gmail.com" + "\",\"nom\":\""
+                    + nomRegister.getText() + "\",\"cognoms\":\""
+                    + cognomRegister.getText() + "\",\"edad\":"
+                    + edatRegister.getText() + ",\"ubicacio\":\""
+                    + locationRegister.getText() + "\",\"user\": \""
+                    + userRegister.getText() + "\",\"pass\":\""
+                    + passRegister.getText() + "\",\"descripcio\": \""
+                    + descRegister.getText() + "\",\"rol\":\"user\"}";
             Log.d("JSON", json);
             new connexioRegisterUser().execute(HOST, json);
         }

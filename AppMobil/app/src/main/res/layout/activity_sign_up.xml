@@ -80,7 +80,7 @@
                     android:id="@+id/pickImageButton"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:onClick="validarRegisterUser"
+                    android:onClick="cropSelectedImage"
                     android:layout_marginStart="20dp"
                     android:text="+"
                     app:layout_constraintStart_toEndOf="@id/userImage"
