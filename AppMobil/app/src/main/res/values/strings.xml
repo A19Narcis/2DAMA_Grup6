@@ -11,6 +11,7 @@
     <string name="txtBtnSignIn">Sign In</string>
 
     //Register
+    <string name="addNewImageText">+</string>
     <string name="title_register">Register</string>
     <string name="txt_Register_btn">Create User</string>
     <string name="hint_register_location">Location</string>
@@ -28,7 +29,5 @@
     <string name="hintUsuari">Usuari</string>
     <string name="txt_benvingut_da">Benvingut/da</string>
     <string name="txtDadesNoValides_login">Les dades no són vàlides</string>
-
-
 
 </resources>

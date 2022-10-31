@@ -6,6 +6,10 @@
     <dimen name="alturaEditText">45dp</dimen>
     <dimen name="altura_editText_descripcio">200dp</dimen>
     <dimen name="width_errorText">185dp</dimen>
+    <dimen name="widthUserImage">125dp</dimen>
+    <dimen name="heigthUserImage">125dp</dimen>
+    <dimen name="widthSmallButton">40dp</dimen>
+    <dimen name="textSizeTextUserImage">20sp</dimen>
 
     //Paddings
     <dimen name="paddingTopTitleLogIn">50dp</dimen>
@@ -26,6 +30,9 @@
     <dimen name="marginBTN_Bottom_register">25dp</dimen>
     <dimen name="marginScreen_ageBox">160dp</dimen>
     <dimen name="errorDadesTextSize">15sp</dimen>
-
+    <dimen name="marginStartReturnButton">10dp</dimen>
+    <dimen name="marginTextUserImage">10dp</dimen>
+    <dimen name="marginScreen_UserImage">100dp</dimen>
+    <dimen name="marginBtnAddImage">20dp</dimen>
 
 </resources>
