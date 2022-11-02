@@ -1,6 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
 const mysql = require("mysql2");
 
 const app = express();
@@ -16,11 +17,15 @@ app.use(
 );
 
 //Creacío connextió al LABS
+//Llegir els valors del fitxer JSON
+var rutaFitxer = path.join(__dirname + '/server_settings.json');
+var dadesServer = JSON.parse(fs.readFileSync(rutaFitxer, 'utf-8'));
+
 var con = mysql.createConnection({
-  host: "labs.inspedralbes.cat",
-  user: "a19teomerrod_user",
-  password: "Pedralbes22_23",
-  database: "a19teomerrod_project",
+  host: dadesServer.host,
+  user: dadesServer.user,
+  password: dadesServer.password,
+  database: dadesServer.database,
 });
 
 //Executar connexió
