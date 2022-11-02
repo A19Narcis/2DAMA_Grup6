@@ -29,5 +29,6 @@
     <string name="hintUsuari">Usuari</string>
     <string name="txt_benvingut_da">Benvingut/da</string>
     <string name="txtDadesNoValides_login">Les dades no són vàlides</string>
+    <string name="emojiErrorSignUp">La descripció no pot tenir EMOJIS</string>
 
 </resources>

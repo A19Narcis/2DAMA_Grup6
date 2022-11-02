@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
     private TextView autoGmail;
     private TextView txtErrorRegister;
 
-    private final String HOST = "http://192.168.1.34:3000/registerNewUser";
+    private final String HOST = "http://192.168.251.66:3000/registerNewUser";
 
 
     @Override
@@ -88,10 +88,6 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    public void cropSelectedImage(View view){
-
-    }
-
     public void backToStart(View view){
         Intent intent = new Intent(this, IniciApp.class);
         startActivity(intent);
@@ -107,6 +103,14 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(this, R.string.omplirCamps, Toast.LENGTH_LONG).show();
         }
 
+        for (int i = 0; i < descRegister.getText().length() && valid; i++) {
+            char valorText = descRegister.getText().charAt(i);
+            if (!isEmojiCharacter(valorText)){
+                valid = false;
+                Toast.makeText(this, R.string.emojiErrorSignUp, Toast.LENGTH_LONG).show();
+            }
+        }
+
         //Fer la connexió per afegir l'usuari
         if (valid){
             String json = "{\"email\":\""
@@ -117,10 +121,17 @@ public class SignUp extends AppCompatActivity {
                     + locationRegister.getText() + "\",\"user\": \""
                     + userRegister.getText() + "\",\"pass\":\""
                     + passRegister.getText() + "\",\"descripcio\": \""
-                    + descRegister.getText() + "\",\"rol\":\"user\"}";
+                    + descRegister.getText().toString() + "\",\"rol\":\"user\"}";
             Log.d("JSON", json);
             new connexioRegisterUser().execute(HOST, json);
         }
+    }
+
+    private boolean isEmojiCharacter(char valorText) {
+        return (valorText == 0x0) || (valorText == 0x9) || (valorText == 0xA) ||
+                (valorText == 0xD) || ((valorText >= 0x20) && (valorText <= 0xD7FF)) ||
+                ((valorText >= 0xE000) && (valorText <= 0xFFFD)) || ((valorText >= 0x10000)
+                && (valorText <= 0x10FFFF));
     }
 
     private class connexioRegisterUser extends AsyncTask<String, Void, String> {
