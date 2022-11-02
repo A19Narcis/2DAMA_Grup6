@@ -21,8 +21,9 @@
     <string name="hint_register_cognom">Cognom</string>
     <string name="hint_register_user">User</string>
     <string name="hint_register_password">Password</string>
-    <string name="hint_register_edat">Edat</string>
+    <string name="hint_register_edat">Data</string>
     <string name="gmail_com">\@gmail.com</string>
+    <string name="errDataValue">La data no és vàlida</string>
 
     //LOGIN
     <string name="hintPassword">Contrasenya</string>
@@ -30,5 +31,6 @@
     <string name="txt_benvingut_da">Benvingut/da</string>
     <string name="txtDadesNoValides_login">Les dades no són vàlides</string>
     <string name="emojiErrorSignUp">La descripció no pot tenir EMOJIS</string>
+
 
 </resources>

@@ -2,11 +2,14 @@ package com.example.projecte_2dam_grup6;
 
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,6 +27,14 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SignUp extends AppCompatActivity {
 
@@ -34,14 +45,17 @@ public class SignUp extends AppCompatActivity {
     private EditText descRegister;
     private EditText emailRegister;
     private EditText locationRegister;
-    private EditText edatRegister;
+    private Button edatRegister;
     private Button btnRegister;
     private Button btnAddImage;
     private Button btnStart;
     private TextView autoGmail;
     private TextView txtErrorRegister;
+    private String dateUser;
+    private boolean validDate = true;
+    private TextView showDateContainer;
 
-    private final String HOST = "http://192.168.251.66:3000/registerNewUser";
+    private final String HOST = "http://192.168.1.34:3000/registerNewUser";
 
 
     @Override
@@ -61,11 +75,12 @@ public class SignUp extends AppCompatActivity {
         descRegister = findViewById(R.id.newDescrtxt);
         emailRegister = findViewById(R.id.newEmailtxt);
         locationRegister = findViewById(R.id.newLocationtxt);
-        edatRegister = findViewById(R.id.newEdattxt);
+        edatRegister = findViewById(R.id.btnPickerEdat);
         btnRegister = findViewById(R.id.btnCreateUser);
         btnStart = findViewById(R.id.btnBackToStart);
         autoGmail = findViewById(R.id.txtAutoGmail);
         txtErrorRegister = findViewById(R.id.txtNoValidUserRegister);
+        showDateContainer = findViewById(R.id.viewUserInputDate);
 
         btnAddImage = findViewById(R.id.pickImageButton);
         btnAddImage.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +103,42 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
+    public void showDatePicker(View view){
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void processDatePickerResult(int year, int month, int day) {
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+
+        dateUser = (day_string + "/" + month_string + "/" + year_string);
+        String dataActual = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+
+        validDate = true;
+        try {
+            Date dataAvuiFormatted = new SimpleDateFormat("dd/MM/yyyy").parse(dataActual);
+            Date dataUserFormatted = new SimpleDateFormat("dd/MM/yyyy").parse(dateUser);
+
+            showDateContainer.setText(dateUser);
+
+            if (dataAvuiFormatted.toInstant().isBefore(dataUserFormatted.toInstant())){
+                validDate = false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
+    }
+
     public void backToStart(View view){
         Intent intent = new Intent(this, IniciApp.class);
         startActivity(intent);
@@ -98,9 +149,13 @@ public class SignUp extends AppCompatActivity {
         boolean valid = true;
         if (nomRegister.getText().length() == 0 || cognomRegister.getText().length() == 0 || userRegister.getText().length() == 0
                 || passRegister.getText().length() == 0 || descRegister.getText().length() == 0 || emailRegister.getText().length() == 0
-                || locationRegister.getText().length() == 0){
+                || locationRegister.getText().length() == 0 || showDateContainer.getText().length() == 0){
             valid = false;
             Toast.makeText(this, R.string.omplirCamps, Toast.LENGTH_LONG).show();
+        }
+
+        if (!validDate){
+            Toast.makeText(this, R.string.errDataValue, Toast.LENGTH_LONG).show();
         }
 
         for (int i = 0; i < descRegister.getText().length() && valid; i++) {
@@ -112,12 +167,12 @@ public class SignUp extends AppCompatActivity {
         }
 
         //Fer la connexió per afegir l'usuari
-        if (valid){
+        if (valid && validDate){
             String json = "{\"email\":\""
                     + emailRegister.getText()+ "@gmail.com" + "\",\"nom\":\""
                     + nomRegister.getText() + "\",\"cognoms\":\""
-                    + cognomRegister.getText() + "\",\"edad\":"
-                    + edatRegister.getText() + ",\"ubicacio\":\""
+                    + cognomRegister.getText() + "\",\"edad\":\""
+                    + dateUser + "\",\"ubicacio\":\""
                     + locationRegister.getText() + "\",\"user\": \""
                     + userRegister.getText() + "\",\"pass\":\""
                     + passRegister.getText() + "\",\"descripcio\": \""

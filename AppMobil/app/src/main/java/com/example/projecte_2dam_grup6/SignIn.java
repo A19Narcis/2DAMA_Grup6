@@ -80,7 +80,7 @@ public class SignIn extends AppCompatActivity {
         }
 
         private String veureResultat(){
-            String url_server = "http://192.168.251.66:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            String url_server = "http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String validacioUsuari = null;
