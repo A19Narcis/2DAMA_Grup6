@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,6 +32,9 @@ public class SignIn extends AppCompatActivity {
     private TextView textErrorDades;
     private Button buttonSignIn;
     private Button btnStart;
+
+    private String server_path;
+    private String loginValidate_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,16 @@ public class SignIn extends AppCompatActivity {
         }
 
         private String veureResultat(){
-            String url_server = "http://192.168.1.34:3000/validarLogIn/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            //Llegir les dades del fitxer JSON en ASSETS
+            try {
+                JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
+                server_path = obj_settings.getString("server");
+                loginValidate_path = obj_settings.getString("loginUsuari_GET");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String url_server = server_path + loginValidate_path + "/" + txtUserSignIn.getText() + "/" + txtPasswordSignIn.getText();
+            Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String validacioUsuari = null;
@@ -145,6 +158,23 @@ public class SignIn extends AppCompatActivity {
             }
         }
     }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("settingsApp.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
 }
 
 
