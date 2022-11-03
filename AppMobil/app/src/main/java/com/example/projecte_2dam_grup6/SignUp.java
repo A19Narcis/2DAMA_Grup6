@@ -19,6 +19,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,8 +59,8 @@ public class SignUp extends AppCompatActivity {
     private boolean validDate = true;
     private TextView showDateContainer;
 
-    private final String HOST = "http://192.168.1.34:3000/registerNewUser";
-
+    private String server_path;
+    private String register_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +182,16 @@ public class SignUp extends AppCompatActivity {
                     + passRegister.getText() + "\",\"descripcio\": \""
                     + descRegister.getText().toString() + "\",\"rol\":\"user\"}";
             Log.d("JSON", json);
+
+            //Llegir les dades del fitxer JSON en ASSETS
+            try {
+                JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
+                server_path = obj_settings.getString("server");
+                register_path = obj_settings.getString("registerUser_POST");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            final String HOST = server_path + register_path;
             new connexioRegisterUser().execute(HOST, json);
         }
     }
@@ -255,6 +269,22 @@ public class SignUp extends AppCompatActivity {
         reader.close();
         streamReader.close();
         return stringBuilder.toString();
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("settingsApp.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
 }
