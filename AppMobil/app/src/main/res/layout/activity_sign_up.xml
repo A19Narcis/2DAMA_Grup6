@@ -57,6 +57,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutUserImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -77,18 +78,15 @@
                     app:civ_border_width="2dp"
                     tools:ignore="MissingConstraints" />
 
-                <Button
-                    android:id="@+id/pickImageButton"
-                    android:layout_width="@dimen/widthSmallButton"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    app:layout_constraintEnd_toEndOf="@id/layoutUserImage"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="cropSelectedImage"
-                    android:layout_marginStart="@dimen/marginBtnAddImage"
-                    android:text="@string/addNewImageText"
-                    app:layout_constraintStart_toEndOf="@id/userImage"
-                    tools:ignore="MissingConstraints"/>
+                    app:srcCompat="@android:drawable/ic_menu_camera"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <EditText
                 android:id="@+id/newNomtxt"

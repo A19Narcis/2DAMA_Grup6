@@ -3,6 +3,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const mysql = require("mysql2");
+const multer = require('multer');
+const bodyParser = require('body-parser')
 
 const app = express();
 const PORT = 3000;
@@ -144,6 +146,46 @@ app.post("/getProductUser", (req, res) => {
     }
   );
 });
+
+
+/* ---------------------- ENVIAR FITXERS A LA CARPETA ---------------------- */
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/user_images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now()+'.jpg')
+  }
+})
+
+var upload = multer({ storage: storage })
+
+app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    console.log("error", 'Please upload a file');
+    
+    res.send({code:500, msg:'Please upload a file'})
+    return next({code:500, msg:error})
+
+  }
+  res.send({code:200, msg:file})
+
+})
+
+app.post("/uploadProductImage", (req, res) => {
+  //TO-DO Pujar un fitxer a la carpeta "uploads/product_images"
+})
+
+
+
+
+
+
+
 
 /*Obrir Servidor*/
 app.listen(PORT, () => {
