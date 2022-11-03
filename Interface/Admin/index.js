@@ -13,15 +13,18 @@ var app = new Vue({
               value: 'nom',
             },
             { text: 'COGNOMS', value: 'cognoms' },
-            { text: 'EDAD', value: 'edad' },
+            { text: 'EDAD', value: 'data_naixament' },
             { text: 'EMAIL', value: 'email' },
             { text: 'UBICACIO', value: 'ubicacio' },
             { text: 'PASSWORD', value: 'pass' },
             { text: 'ROL', value: 'rol'},
-            { text: 'VER'}
+            { text: 'INFO'},
+            { text: 'ADMIN/USER'}
           ],
         search: '',
+        login: 0,
         users: [ ],
+        dial: 0,
         seeUs: [ ],
         dialog: false,
         isadmin: 4,
@@ -82,7 +85,7 @@ var app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    this.users = data; 
+                    this.users = data;
                 }
             ).catch(
                 (error) => {
@@ -123,7 +126,7 @@ var app = new Vue({
                         console.log("hola");
                         this.isadmin = 1;
                         this.info.values = [];
-                        window.open("./Users.html","_self");
+                        this.login = 1;
                         return ;
                     }
                     this.info.values = [];
@@ -208,13 +211,15 @@ var app = new Vue({
         },
 
         ferAdmin: function (email, rol) {
-            this.info.values.push(email);
+            if(confirm("Estas seguro de cambiar el rol a " + email) == true)
+            {
+                this.info.values.push(email);
             this.info.values.push(rol);
             console.log(this.info.values);  
             console.log(email);
             console.log("Get Data");
             const myHeaders = new Headers();
-            fetch("http://localhost:3000/seeUsers/",
+            fetch("http://localhost:3000/ferAdmin/",
             {
                 method: "POST",
                 headers: {
@@ -232,8 +237,10 @@ var app = new Vue({
                 }
             ).then(
                 (data) => {
-                    this.seeUs = data[0];
+                    console.log(data);
+                    this.users = data[0];
                     this.info.values = [];
+                    app.getUsers();
                 }
             ).catch(
                 (error) => {
@@ -241,6 +248,8 @@ var app = new Vue({
                     console.log(error);
                 }
             );
+            }
+            
         },
     }
 });
