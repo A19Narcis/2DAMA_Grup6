@@ -1,5 +1,5 @@
 {
-    "server": "http://192.168.157.16:3000",
+    "server": "http://192.168.157.66:3000",
     "registerUser_POST": "/registerNewUser",
     "loginUsuari_GET": "/validarLogIn"
 }

@@ -2,6 +2,7 @@ package com.example.projecte_2dam_grup6;
 
 
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -248,49 +250,69 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void multipartImageUpload() {
         try {
             File filesDir = getApplicationContext().getFilesDir();
-            File file = new File(filesDir, "image" + ".png");
+            Log.d("File img PATH", "PATH: " + filesDir.toString());
+            if (filesDir.toString().equals("/data/user/0/com.example.projecte_2dam_grup6/files")){
+                AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(SignUp.this);
+                myAlertBuilder.setTitle("Foto Usuario");
+                myAlertBuilder.setMessage("La teva foto de perfil serà la predeterminada:");
+                myAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "Pressed OK",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                myAlertBuilder.setNegativeButton("Escollir Foto", new
+                        DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+                            }
+                        });
+                myAlertBuilder.show();
+            } else {
+                File file = new File(filesDir, "image" + ".png");
+                OutputStream os;
+                try {
+                    os = new FileOutputStream(file);
+                    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+                    os.flush();
+                    os.close();
+                } catch (Exception e) {
+                    Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+                }
 
-            OutputStream os;
-            try {
-                os = new FileOutputStream(file);
-                mBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-                os.flush();
-                os.close();
-            } catch (Exception e) {
-                Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                byte[] bitmapdata = bos.toByteArray();
+
+
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+
+
+                RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("myFile", file.getName(), reqFile);
+                RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "myFile");
+
+                Call<ResponseBody> req = apiService.postImage(body, name);
+                req.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        Log.e("Upload", String.valueOf(response.body()));
+
+                        Toast.makeText(getApplicationContext(), response.code() + " ", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("Error onFailure", "Error onFailure: ");
+                    }
+
+                });
             }
-
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-            byte[] bitmapdata = bos.toByteArray();
-
-
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-
-
-            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("myFile", file.getName(), reqFile);
-            RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "myFile");
-
-            Call<ResponseBody> req = apiService.postImage(body, name);
-            req.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    Log.e("Upload", String.valueOf(response.body()));
-
-                    Toast.makeText(getApplicationContext(), response.code() + " ", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.d("Error onFailure", "Error onFailure: ");
-                }
-
-            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
