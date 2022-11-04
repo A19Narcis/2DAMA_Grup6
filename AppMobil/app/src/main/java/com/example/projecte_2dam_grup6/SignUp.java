@@ -252,6 +252,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             File filesDir = getApplicationContext().getFilesDir();
             Log.d("File img PATH", "PATH: " + filesDir.toString());
             if (filesDir.toString().equals("/data/user/0/com.example.projecte_2dam_grup6/files")){
+                /*
                 AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(SignUp.this);
                 myAlertBuilder.setTitle("Foto Usuario");
                 myAlertBuilder.setMessage("La teva foto de perfil serà la predeterminada:");
@@ -268,7 +269,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
                             }
                         });
-                myAlertBuilder.show();
+                myAlertBuilder.show();*/
             } else {
                 File file = new File(filesDir, "image" + ".png");
                 OutputStream os;
