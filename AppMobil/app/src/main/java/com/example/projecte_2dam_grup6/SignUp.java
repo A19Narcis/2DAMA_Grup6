@@ -69,7 +69,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText userRegister;
     private EditText passRegister;
     private EditText descRegister;
-    private EditText emailRegister;
+    public EditText emailRegister;
     private EditText locationRegister;
     private Button edatRegister;
     private Button btnRegister;

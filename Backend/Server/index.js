@@ -85,7 +85,7 @@ app.post("/registerNewUser", (req, res) => {
       if (result != 0) {
         auth = false;
       } else {
-        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "')");
+        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',null ,null)");
       }
     }
   );
@@ -161,6 +161,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
+
+
 app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
   const file = req.file
   if (!file) {
@@ -170,10 +172,13 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
     
     res.send({code:500, msg:'Please upload a file'})
     return next({code:500, msg:error})
-
   }
-  res.send({code:200, msg:file})
-
+  
+  con.query("INSERT INTO UPLOADS VALUES (null, '"+ JSON.stringify(req.file.path) +"')", function(err, result, field){
+    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function(err, result, field){
+      console.log("Tot be");
+    });
+  });
 })
 
 app.post("/uploadProductImage", (req, res) => {
