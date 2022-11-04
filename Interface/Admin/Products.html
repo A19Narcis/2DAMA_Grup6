@@ -16,96 +16,42 @@
     <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
 </head>
 <body>
-    <v-app id="app">
-
-        <v-container fill-height>
-            <v-container fill-height>
-                <v-row justify="center" align="center">
-                <v-col cols="14">
-                    <template >
-                        <v-card class="elevation-10" style="border: 1px solid black;" >
-                          <v-card-title center>PRODUCTS</v-card-title>
-                          <v-card-title>
-                            <v-text-field
-                              v-model="search"
-                              append-icon="mdi-magnify"
-                              label="Search"
-                              single-line
-                              hide-details
-                              
-                            ></v-text-field>
-                          </v-card-title>
-                          <v-data-table
-                        
-                            :headers="headers"
-                            :items="products"
-                            :search="search"
-                            >
-    
-                            <template v-slot:item="row">
-                              <tr>
-                                <td>{{row.item.nom}}</td>
-                                <td>{{row.item.preu}}</td>
-                                <td>{{row.item.categoria}}</td>
-                                <td>{{row.item.estado_prod}}</td>
-                                <td>{{row.item.descripcio}}</td>
-                                <td>{{row.item.correu_usu}}</td>
-                                <td>
-                                  <v-dialog
-                                  transition="dialog-top-transition"
-                                  max-width="600"
-                                >
-                                  <template v-slot:activator="{ on, attrs }">
-                                    <v-btn
-                                      color="primary"
-                                      v-bind="attrs"
-                                      v-on="on"
-                                      @click="seeUsers(row.item.email)"
-                                    ><v-icon>mdi-account</v-icon></v-btn>
-                                  </template>
-                                  <template v-slot:default="dialog">
-                                    <v-card>
-                                      <!--<v-toolbar
-                                        color="primary"
-                                        dark
-                                      >Información del usuario: {{seeUs.nom}}</v-toolbar>-->
-                                      <v-container fill-height>
-                                        <v-row justify="center" align="center">
-                                          <v-col cols="14">
-                                      
-                                          <img src="../../Documentació/logo_pr1er.png" style="width: 120px; height: 120px; border: 2px solid black; border-radius: 50%;" ></img>
-                              
-                                    
-                                            <v-card-title class="justify-center">NOM: {{seeUs.nom}}</v-card-title>
-                                              <v-card-title class="justify-center">PREU{{seeUs.cognoms}}:</v-card-title>
-                                              <v-card-title class="justify-center">UBICACIO: {{seeUs.ubicacio}}</v-card-title>
-                                              <v-card-title class="justify-center">UBICACIO: {{seeUs.email}}</v-card-title>
-                                              <v-card-title class="justify-center">EDAD: {{seeUs.edad}}</v-card-title>
-                                              <v-card-title class="justify-center">ROL: {{seeUs.rol}}</v-card-title>
-                                            <v-btn color="primary" @click="ferAdmin()">Admin/User</v-btn>
-                                        </v-col>
-                                        </v-row>
-                                      </v-container>
-                                      <v-card-actions class="justify-end">
-                                        <v-btn
-                                          text
-                                          @click="dialog.value = false"
-                                        >Close</v-btn>
-                                      </v-card-actions>
-                                    </v-card>
-                                  </template>
-                                </v-dialog>
-                                </td>
-                              </tr>
-                          </template>
-                        </v-data-table>
-                        </v-card>
-                      </template>
-                </v-col>
-        </v-container>
-        <script src="index.js"></script>
+  <div id="app">
+    <v-app id="inspire">
+      <v-row>
+        <v-col
+          v-for="n in 9"
+          :key="n"
+          class="d-flex child-flex"
+          cols="4"
+        >
+          <v-img
+            :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+            :aspect-ratio="16/9"
+            :width="width"
+            aspect-ratio="1"
+            class="grey lighten-2"
+          >
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </v-col>
+      </v-row>
     </v-app>
-    <script>app.getProduct()</script>
+  </div>
+    <script src="index.js"></script>
+    <script>app.getProducts()</script>
 
 </body>
 </html>
