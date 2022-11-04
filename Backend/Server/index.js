@@ -70,7 +70,7 @@ app.post("/seeUsers", (req, res) => {
   var dades = [];
   console.log(req.body.values[0]);
   con.query(
-    "SELECT * FROM PERSONA WHERE PERSONA.email = '" + req.body.values[0] + "'",
+    "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
     function (err, result, fields) {
       res.json(result);
     }

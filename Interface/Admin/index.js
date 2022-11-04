@@ -25,6 +25,7 @@ var app = new Vue({
         login: 0,
         users: [ ],
         dial: 0,
+        img: ' ',
         seeUs: [ ],
         dialog: false,
         isadmin: 4,
@@ -176,6 +177,7 @@ var app = new Vue({
 
         seeUsers: function (email) {
             this.info.values.push(email);
+           
             console.log(this.info.values);  
             console.log(email);
             console.log("Get Data");
@@ -198,9 +200,17 @@ var app = new Vue({
                 }
             ).then(
                 (data) => {
-                    
+                    console.log(data);
                     this.seeUs = data[0];
+                    var str = "../../Backend/Server/";
+                    str = str + this.seeUs.path;
+                    str = str.replaceAll('"', '');
+                    this.seeUs.path = str;
+                    this.img = this.seeUs.path;
+                    console.log(this.img);
+                    data = [];
                     this.info.values = [];
+
                     
                 }
             ).catch(
