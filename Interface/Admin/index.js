@@ -262,6 +262,9 @@ var app = new Vue({
             }
             
         },
+        onClickImage() {
+            alert('Clicked image')
+          },
     }
 });
 
