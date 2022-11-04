@@ -17,41 +17,54 @@
 </head>
 <body>
   <div id="app">
-    <v-app id="inspire">
-      <v-row>
-        <v-col
-          v-for="n in 9"
-          :key="n"
-          class="d-flex child-flex"
-          cols="4"
+  <v-app id="inspire">
+    <v-row>
+      <v-col
+        v-for="n in 12"
+        :key="n"
+        class="d-flex child-flex"
+        cols="4"
+      >
+        <v-img
+          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+          aspect-ratio="1"
+          class="grey lighten-2"
+          @click="onClickImage"
         >
-          <v-img
-            :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-            :aspect-ratio="16/9"
-            :width="width"
-            aspect-ratio="1"
-            class="grey lighten-2"
-          >
-            <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
-    </v-app>
-  </div>
+          <template v-slot:placeholder>
+            <v-row
+              class="fill-height ma-0"
+              align="center"
+              justify="center"
+            >
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+      </v-col>
+    </v-row>
+  </v-app>
+</div>
     <script src="index.js"></script>
     <script>app.getProducts()</script>
-
+    <style>
+      #app {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        max-width: 100%;
+        margin: 50px auto;
+        position: relative;
+      }
+      .image {
+        width: 400px;
+        max-width: 100%;
+      }
+      </style>
 </body>
 </html>
