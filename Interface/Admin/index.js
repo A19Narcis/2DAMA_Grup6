@@ -52,6 +52,7 @@ var app = new Vue({
             { text: 'EMAIL', value: 'correu_usu' },
             { text: 'VER'}
           ],
+        
         search: '',
         products: [ ],
         seeUs: [ ],
@@ -161,8 +162,8 @@ var app = new Vue({
                 }
             ).then(
                 (data) => {
-                    console.log(dataProduct);
-                    this.products = dataProduct;
+                    console.log(data);
+                    this.products = data[0];
                      
                 }
             ).catch(

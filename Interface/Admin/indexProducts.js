@@ -1,4 +1,4 @@
-var app = new Vue({
+var app2 = new Vue({
     el: "#app",
     vuetify: new Vuetify(),
     data(){

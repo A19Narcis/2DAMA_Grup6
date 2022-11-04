@@ -60,6 +60,7 @@ app.post("/getAdmins", (req, res) => {
 app.post("/getProducts", (req, res) =>{
     con.query("SELECT * FROM PRODUCTE", function(err, result, fields){
         if (err) throw err;
+        console.log(result);
         res.json(result);
     });
 });
