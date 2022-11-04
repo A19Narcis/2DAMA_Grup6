@@ -1,21 +1,4 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/A19Narcis/2DAMA_Grup6.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/A19Narcis/2DAMA_Grup6/issues"
-  },
-  "homepage": "https://github.com/A19Narcis/2DAMA_Grup6#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",

@@ -4,7 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const mysql = require("mysql2");
 const multer = require('multer');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const e = require("cors");
 
 const app = express();
 const PORT = 3000;
@@ -156,13 +157,22 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/user_images')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now()+'.jpg')
+    con.query("SELECT email FROM `PERSONA` WHERE id_persona = (SELECT MAX(id_persona) FROM PERSONA);", function(err, result, field){
+      console.log("HEY RESULT -> " + JSON.stringify(result));
+      var emailNomFile = JSON.stringify(result);
+      emailNomFile = emailNomFile.replace(/\[/g, "");
+      emailNomFile = emailNomFile.replace(/\{/g, "");
+      emailNomFile = emailNomFile.replace(/\"/g, "");
+      emailNomFile = emailNomFile.replace(/\:/g, "_");
+      emailNomFile = emailNomFile.replace(/\}/g, "_");
+      emailNomFile = emailNomFile.replace(/\]/g, "_");
+      console.log("FINAL TEXT: " + emailNomFile);
+      cb(null, file.fieldname + '-' + emailNomFile +'.jpg')
+    });
   }
 })
 
 var upload = multer({ storage: storage })
-
-
 
 app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
   const file = req.file
@@ -177,7 +187,7 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
   
   con.query("INSERT INTO UPLOADS VALUES (null, '"+ JSON.stringify(req.file.path) +"')", function(err, result, field){
     con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function(err, result, field){
-      console.log("Tot be");
+      res.send({code:200, msg:file});
     });
   });
 })

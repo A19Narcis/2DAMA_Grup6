@@ -251,29 +251,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         try {
             File filesDir = getApplicationContext().getFilesDir();
             Log.d("File img PATH", "PATH: " + filesDir.toString());
-            if (filesDir.toString().equals("/data/user/0/com.example.projecte_2dam_grup6/files")){
-                /*
-                AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(SignUp.this);
-                myAlertBuilder.setTitle("Foto Usuario");
-                myAlertBuilder.setMessage("La teva foto de perfil serà la predeterminada:");
-                myAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "Pressed OK",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-                myAlertBuilder.setNegativeButton("Escollir Foto", new
-                        DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
-                            }
-                        });
-                myAlertBuilder.show();*/
-            } else {
-                File file = new File(filesDir, "image" + ".png");
-                OutputStream os;
+
+            File file = new File(filesDir, "image" + ".png");
+            OutputStream os;
+            if (mBitmap != null){
                 try {
+
                     os = new FileOutputStream(file);
                     mBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
                     os.flush();
@@ -301,10 +284,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 req.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                         Log.e("Upload", String.valueOf(response.body()));
-
-                        Toast.makeText(getApplicationContext(), response.code() + " ", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
