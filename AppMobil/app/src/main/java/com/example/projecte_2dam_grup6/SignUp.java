@@ -367,7 +367,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         //Fer la connexió per afegir l'usuari
         if (valid && validDate){
-            multipartImageUpload();
             String json = "{\"email\":\""
                     + emailRegister.getText()+ "@gmail.com" + "\",\"nom\":\""
                     + nomRegister.getText() + "\",\"cognoms\":\""
@@ -431,6 +430,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 txtErrorRegister.setVisibility(View.VISIBLE);
             } else if (s.equals("true")) {
                 txtErrorRegister.setVisibility(View.INVISIBLE);
+                multipartImageUpload();
                 Toast.makeText(SignUp.this, "Usuari creat correctament", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this, SignIn.class);
                 startActivity(intent);
