@@ -73,47 +73,110 @@
                             <td>{{row.item.rol}}</td>
                             <td>
                               <v-dialog
-                              transition="dialog-top-transition"
-                              max-width="600"
+                              v-model="dialog"
+                              persistent
+                              max-width="600px"
                             >
                               <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   color="primary"
+                                  dark
                                   v-bind="attrs"
-                                  v-on="on"
-                                  @click="seeUsers(row.item.email)"
-                                ><v-icon>mdi-account</v-icon></v-btn>
+                                  v-on="on" @click="seeUsers(row.item.email)"
+                                >
+                                  Open Dialog
+                                </v-btn>
                               </template>
-                              <template v-show="!dialog" v-slot:default="dialog">
-                                <v-card>
-                                  <v-toolbar
-                                    color="primary"
-                                    dark
-                                  >Información del usuario: {{seeUs.nom}}</v-toolbar>
-                                  <v-container fill-height>
-                                    <v-row justify="center" align="center">
-                                      <v-col cols="14">
-                                  
-                                      <v-img :src=img style="width: 120px; height: 120px; border: 2px solid black; border-radius: 50%;" ></v-img>
-                                          <v-card-title class="font-weight-regular" >USER -> {{seeUs.user}} </v-card-title>
-                                          <v-card-title class="font-weight-regular">NOM -> {{seeUs.nom}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">COGNOMS -> {{seeUs.cognoms}}:</v-card-title>
-                                          <v-card-title class="font-weight-regular">UBICACIO -> {{seeUs.ubicacio}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">EMAIL -> {{seeUs.email}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">PASS -> {{seeUs.pass}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">DESCRIPCIO -> {{seeUs.descripcio}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">EDAD -> {{seeUs.data_naixament}}</v-card-title>
-                                          <v-card-title class="font-weight-regular">ROL -> {{seeUs.rol}}</v-card-title>
-                                    </v-col>
+                              <v-card>
+                                <v-card-title>
+                                  <span class="text-h5">Info de: {{seeUs.nom}}</span>
+                                </v-card-title>
+                                <v-card-text>
+                                  <v-img :src=img style="width: 120px; height: 120px; border-radius: 50%;" ></v-img>
+                                  <v-container>
+                                    
+                                    <v-row>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                        <v-text-field
+                                          label="Nom"
+                                          v-model="seeUs.nom"
+                                          readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                        <v-text-field
+                                        label="Cognoms"
+                                        v-model="seeUs.cognoms"
+                                        readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                      >
+                                        <v-text-field
+                                        label="Edad"
+                                        v-model="seeUs.data_naixament"
+                                        readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col cols="12">
+                                        <v-text-field
+                                        label="Email"
+                                        v-model="seeUs.email"
+                                        readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col cols="12">
+                                        <v-text-field
+                                        label="Password"
+                                        v-model="seeUs.pass"
+                                        readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                      >
+                                      <v-text-field
+                                        label="ubicacio"
+                                        v-model="seeUs.ubicacio"
+                                        readonly
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col
+                                        cols="12"
+                                        sm="6"
+                                      >
+                                      <v-text-field
+                                      label="rol"
+                                      v-model="seeUs.rol"
+                                      readonly
+                                      ></v-text-field>
+                                      </v-col>
                                     </v-row>
                                   </v-container>
-                                  <v-card-actions class="justify-end">
-                                    <v-btn
-                                      @click="dialog.value = false"
-                                    >Close</v-btn>
-                                  </v-card-actions>
-                                </v-card>
-                              </template>
+                                </v-card-text>
+                                <v-card-actions>
+                                  <v-spacer></v-spacer>
+                                  <v-btn
+                                    color="blue darken-1"
+                                    text
+                                    @click="dialog = false"
+                                  >
+                                    Close
+                                  </v-btn>
+                                </v-card-actions>
+                              </v-card>
                             </v-dialog>
                             </td>
                             <td>

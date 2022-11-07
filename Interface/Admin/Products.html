@@ -16,7 +16,7 @@
     <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
 </head>
 <body>
-  <div id="app">
+ <!--  <div id="app">
   <v-app id="inspire">
     <v-row>
       <v-col
@@ -48,10 +48,49 @@
       </v-col>
     </v-row>
   </v-app>
-</div>
+</div> -->
+
+<v-app id="app" style=" padding: 20px;">
+  <template >
+    <v-row justify="space-around">
+      <v-col
+        v-for="n in 21"
+        :key="n"
+        class="d-flex child-flex"
+        cols="3"
+      >
+      <v-hover v-model="hoverInit">
+        <template v-slot:default="{ hover }">
+          <v-card>
+        <v-img
+          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+          aspect-ratio="1.8"
+          class="grey lighten-2"
+        >
+    
+          </v-img>
+          
+                <v-fade-transition>
+          <v-overlay
+          v-if="hover"
+          absolute
+          color="#036358"
+          >
+          <v-btn>See more info</v-btn>
+          </v-overlay>
+          </v-fade-transition>
+          </v-card>
+            </template>
+          </v-hover>
+       
+      </v-col>
+    </v-row>
+  </template>
+</v-app>
     <script src="index.js"></script>
     <script>app.getProducts()</script>
-    <style>
+    <!-- <style>
       #app {
         justify-content: center;
         align-items: center;
@@ -65,6 +104,6 @@
         width: 400px;
         max-width: 100%;
       }
-      </style>
+      </style> -->
 </body>
 </html>
