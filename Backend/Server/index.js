@@ -53,7 +53,7 @@ app.post("/getAdmins", (req, res) => {
   con.query("SELECT * FROM PERSONA", function (err, result, fields) {
     dades = result;
     res.json(dades);
-    console.log(dades);
+    //console.log(dades);
   });
 });
 
@@ -61,7 +61,7 @@ app.post("/getAdmins", (req, res) => {
 app.post("/getProducts", (req, res) =>{
     con.query("SELECT * FROM PRODUCTE", function(err, result, fields){
         if (err) throw err;
-        console.log(result);
+        //console.log(result);
         res.json(result);
     });
 });
@@ -69,7 +69,7 @@ app.post("/getProducts", (req, res) =>{
 //Veure tots els usuaris al Servidor
 app.post("/seeUsers", (req, res) => {
   var dades = [];
-  console.log(req.body.values[0]);
+  //console.log(req.body.values[0]);
   con.query(
     "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
     function (err, result, fields) {

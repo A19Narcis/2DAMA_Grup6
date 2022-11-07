@@ -23,6 +23,7 @@ var app = new Vue({
           ],
         search: '',
         login: 0,
+        prod: 0,
         users: [ ],
         dial: 0,
         img: ' ',
@@ -81,12 +82,12 @@ var app = new Vue({
             }
             ).then(
                 (response) =>{
-                   console.log(response);
+                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
+                    //onsole.log(data);
                     this.users = data;
                 }
             ).catch(
@@ -116,12 +117,12 @@ var app = new Vue({
             }
             ).then(
                 (response) =>{
-                   console.log(response);
+                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
+                    //console.log(data);
                     for (let index = 0; index < data.length; index++)
                     if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin")
                     {
@@ -158,12 +159,14 @@ var app = new Vue({
             }
             ).then(
                 (response) =>{
-                   console.log(response);
+                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
                     //console.log(data);
+                    this.login = 0;
+                    this.prod = 1;
                     this.products = data[0];
                      
                 }
@@ -195,19 +198,19 @@ var app = new Vue({
             }
             ).then(
                 (response) =>{
-                   console.log(response);
+                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
+                    //console.log(data);
                     this.seeUs = data[0];
                     var str = "../../Backend/Server/";
                     str = str + this.seeUs.path;
                     str = str.replaceAll('"', '');
                     this.seeUs.path = str;
                     this.img = this.seeUs.path;
-                    console.log(this.img);
+                    //console.log(this.img);
                     data = [];
                     this.info.values = [];
 
@@ -243,12 +246,12 @@ var app = new Vue({
             }
             ).then(
                 (response) =>{
-                   console.log(response);
+                   c//onsole.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
+                    //console.log(data);
                     this.users = data[0];
                     this.info.values = [];
                     app.getUsers();

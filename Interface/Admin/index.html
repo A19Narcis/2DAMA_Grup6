@@ -17,7 +17,7 @@
 </head>
 <body>
     <v-app id="app">
-        <v-container fill-height v-show="!login">
+        <v-container fill-height v-show="!login && !prod">
             <v-row justify="center" align-items="center">
               <v-col cols="10" sm="5">
                 <v-card width="448" height="500" elevation="8" outlined >
@@ -38,8 +38,8 @@
                 </v-col>
             </v-row>
         </v-container>
-
-        <v-container fill-height v-show ="login">
+        
+        <v-container fill-height v-show ="login && !prod">
             <v-row justify="center" align="center">
             <v-col cols="14">
                 <template >
@@ -84,7 +84,7 @@
                                   v-bind="attrs"
                                   v-on="on" @click="seeUsers(row.item.email)"
                                 >
-                                  Open Dialog
+                                <v-icon>mdi-account</v-icon>
                                 </v-btn>
                               </template>
                               <v-card>
@@ -187,10 +187,56 @@
                     </v-data-table>
                     </v-card>
                   </template>
+                  <v-col  class="text-right">
+                  <v-btn @click ="getProducts" class="text-right" color="primary">Products&nbsp;<v-icon>mdi-arrow-expand-right</v-icon></v-btn>
+                </v-col>
             </v-col>
         </v-container>
-        <script src="index.js"></script>
+        <v-col  class="text-left">
+          <v-btn v-show="!login && prod" @click ="prod = 0, login = 1" class="text-left" color="primary"><v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home</v-btn>
+        </v-col>
+      
+        <v-container fill-height v-show="!login && prod">
+        <template>
+            <v-row justify="space-around">
+              <v-col
+                v-for="n in 21"
+                :key="n"
+                class="d-flex child-flex"
+                cols="3"
+              >
+              <v-hover v-model="hoverInit">
+                <template v-slot:default="{ hover }">
+                  <v-card>
+                <v-img
+                  :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+                  :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                  aspect-ratio="1"
+                  class="grey lighten-2"
+                >
+            
+                  </v-img>
+                  
+                        <v-fade-transition>
+                  <v-overlay
+                  v-if="hover"
+                  absolute
+                  color="#81C4FC"
+                  >
+                  <v-btn>See more info</v-btn>
+                  </v-overlay>
+                  </v-fade-transition>
+                  </v-card>
+                    </template>
+                  </v-hover>
+               
+              </v-col>
+            </v-row>
+          </template>
+      </v-container>
+      <script src="index.js"></script>
     </v-app>
     <script>app.getUsers()</script>
+
 </body>
 </html>
