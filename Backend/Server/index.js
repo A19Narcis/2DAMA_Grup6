@@ -162,17 +162,17 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/user_images')
   },
   filename: function (req, file, cb) {
-    con.query("SELECT LAST_INSERT_ID();", function (err, result, field) {
+    con.query("SELECT MAX(id) as valorID FROM PERSONA;", function (err, result, field) {
       console.log("SELECT en PERSONA (MAX id)");
-      var emailNomFile = JSON.stringify(result);
-      emailNomFile = emailNomFile.replace(/\[/g, "");
-      emailNomFile = emailNomFile.replace(/\{/g, "");
-      emailNomFile = emailNomFile.replace(/\"/g, "");
-      emailNomFile = emailNomFile.replace(/\:/g, "_");
-      emailNomFile = emailNomFile.replace(/\}/g, "");
-      emailNomFile = emailNomFile.replace(/\]/g, "");
-      //console.log("Nom IMATGE -> " + emailNomFile);
-      cb(null, file.fieldname + '-' + emailNomFile + '.jpg')
+      var nomFile = JSON.stringify(result);
+       nomFile = nomFile.replace(/\[/g, "");
+      nomFile = nomFile.replace(/\{/g, "");
+      nomFile = nomFile.replace(/\"/g, "");
+      nomFile = nomFile.replace(/\:/g, "_");
+      nomFile = nomFile.replace(/\}/g, "");
+      nomFile = nomFile.replace(/\]/g, ""); 
+      //console.log("Nom IMATGE -> " + nomFile);
+      cb(null, file.fieldname + '-' + nomFile + '.jpg')
     });
   }
 })
@@ -192,7 +192,7 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
 
   con.query("INSERT INTO UPLOADS VALUES (null, '" + JSON.stringify(req.file.path) + "')", function (err, result, field) {
     //console.log("INSERT EN UPLOADS -> OK");
-    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function (err, result, field) {
+    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id = (SELECT MAX(id) FROM PERSONA)", function (err, result, field) {
       //console.log("UPDATE EN PERSONA -> OK");
       res.send({ code: 200, msg: file });
     });
