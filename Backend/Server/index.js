@@ -53,23 +53,23 @@ app.post("/getAdmins", (req, res) => {
   con.query("SELECT * FROM PERSONA", function (err, result, fields) {
     dades = result;
     res.json(dades);
-    console.log(dades);
+    //console.log(dades);
   });
 });
 
 //Agafar els productes
-app.post("/getProducts", (req, res) =>{
-    con.query("SELECT * FROM PRODUCTE", function(err, result, fields){
-        if (err) throw err;
-        console.log(result);
-        res.json(result);
-    });
+app.post("/getProducts", (req, res) => {
+  con.query("SELECT * FROM PRODUCTE", function (err, result, fields) {
+    if (err) throw err;
+    //console.log(result);
+    res.json(result);
+  });
 });
 
 //Veure tots els usuaris al Servidor
 app.post("/seeUsers", (req, res) => {
   var dades = [];
-  console.log(req.body.values[0]);
+  //console.log(req.body.values[0]);
   con.query(
     "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
     function (err, result, fields) {
@@ -98,15 +98,15 @@ app.post("/registerNewUser", (req, res) => {
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   let user = req.params.txtUserSignIn;
   let passwd = req.params.txtPasswordSignIn;
-  console.log("USER: " + user);
-  console.log("PASS: " + passwd);
+  //console.log("USER: " + user);
+  //console.log("PASS: " + passwd);
   let auth = false;
   con.query(
     "SELECT user, pass FROM PERSONA WHERE user = '" +
-      user +
-      "' && pass ='" +
-      passwd +
-      "'",
+    user +
+    "' && pass ='" +
+    passwd +
+    "'",
     function (err, result, fields) {
       console.log(JSON.stringify(result));
       if (result != 0) {
@@ -120,16 +120,15 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 });
 
 app.post("/ferAdmin", (req, res) => {
-    if (req.body.values[1] == "admin")
-    {
-        con.query("UPDATE PERSONA SET PERSONA.rol = 'user' WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, field){
-            res.json(result);
-        });
-    }else{
-        con.query("UPDATE PERSONA SET PERSONA.rol = 'admin' WHERE PERSONA.email = '" + req.body.values[0] + "'", function(err, result, field){
-            res.json(result);
-        });
-    }
+  if (req.body.values[1] == "admin") {
+    con.query("UPDATE PERSONA SET PERSONA.rol = 'user' WHERE PERSONA.email = '" + req.body.values[0] + "'", function (err, result, field) {
+      res.json(result);
+    });
+  } else {
+    con.query("UPDATE PERSONA SET PERSONA.rol = 'admin' WHERE PERSONA.email = '" + req.body.values[0] + "'", function (err, result, field) {
+      res.json(result);
+    });
+  }
 });
 
 
@@ -157,7 +156,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/user_images')
   },
   filename: function (req, file, cb) {
-    con.query("SELECT email FROM `PERSONA` WHERE id_persona = (SELECT MAX(id_persona) FROM PERSONA);", function(err, result, field){
+    con.query("SELECT email FROM `PERSONA` WHERE id_persona = (SELECT MAX(id_persona) FROM PERSONA);", function (err, result, field) {
       console.log("HEY RESULT -> " + JSON.stringify(result));
       var emailNomFile = JSON.stringify(result);
       emailNomFile = emailNomFile.replace(/\[/g, "");
@@ -167,7 +166,7 @@ var storage = multer.diskStorage({
       emailNomFile = emailNomFile.replace(/\}/g, "_");
       emailNomFile = emailNomFile.replace(/\]/g, "_");
       console.log("FINAL TEXT: " + emailNomFile);
-      cb(null, file.fieldname + '-' + emailNomFile +'.jpg')
+      cb(null, file.fieldname + '-' + emailNomFile + '.jpg')
     });
   }
 })
@@ -180,14 +179,14 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     console.log("error", 'Please upload a file');
-    
-    res.send({code:500, msg:'Please upload a file'})
-    return next({code:500, msg:error})
+
+    res.send({ code: 500, msg: 'Please upload a file' })
+    return next({ code: 500, msg: error })
   }
-  
-  con.query("INSERT INTO UPLOADS VALUES (null, '"+ JSON.stringify(req.file.path) +"')", function(err, result, field){
-    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function(err, result, field){
-      res.send({code:200, msg:file});
+
+  con.query("INSERT INTO UPLOADS VALUES (null, '" + JSON.stringify(req.file.path) + "')", function (err, result, field) {
+    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function (err, result, field) {
+      res.send({ code: 200, msg: file });
     });
   });
 })
@@ -195,13 +194,6 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
 app.post("/uploadProductImage", (req, res) => {
   //TO-DO Pujar un fitxer a la carpeta "uploads/product_images"
 })
-
-
-
-
-
-
-
 
 /*Obrir Servidor*/
 app.listen(PORT, () => {
