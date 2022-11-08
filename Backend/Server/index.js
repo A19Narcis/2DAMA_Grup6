@@ -103,6 +103,15 @@ app.post("/registerNewUser", (req, res) => {
   res.json(auth);
 });
 
+//Registre USER nou APP
+app.post("/addNewProduct", (req, res) => {
+  let auth;
+  con.query("INSERT INTO PRODUCTE VALUES (NULL, '" + req.body.nom + "', " + req.body.preu + ", '" + req.body.categoria + "', 'Disponible', '" + req.body.descripcion + "', '" + req.body.idUsuari + "', NULL)",function (err, result, fields) {
+      auth = true;
+  });
+  res.json(auth);
+});
+
 //Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   let user = req.params.txtUserSignIn;

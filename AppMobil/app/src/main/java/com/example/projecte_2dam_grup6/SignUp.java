@@ -75,7 +75,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText locationRegister;
     private Button edatRegister;
     private Button btnRegister;
-    private Button btnAddImage;
     private Button btnStart;
     private TextView autoGmail;
     private TextView txtErrorRegister;
@@ -436,10 +435,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }
-
-
-
     }
+
     private static void writeStringToOutputStream(String json, OutputStream outputStream) throws IOException {
         byte[] bytes = json.getBytes(StandardCharsets.UTF_8); // API 19: StandardCharsets.UTF_8
         outputStream.write(bytes);
