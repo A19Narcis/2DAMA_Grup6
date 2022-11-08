@@ -25,6 +25,8 @@ var app = new Vue({
             login: 0,
             prod: 0,
             users: [],
+            seePr: [ ],
+            img_prod: ' ',
             dial: 0,
             img: ' ',
             seeUs: [],
@@ -58,6 +60,8 @@ var app = new Vue({
 
             search: '',
             products: [],
+            hoverInit: ' ',
+            num_prod: 0,
             seeUs: [],
             dialog: false,
             isadmin: 4,
@@ -168,8 +172,12 @@ var app = new Vue({
                     //console.log(data);
                     this.login = 0;
                     this.prod = 1;
-                    this.products = data[0];
-
+                    this.products = data;
+                    console.log(this.products);
+                    var str = "../../Backend/Server/";
+                    str = str + this.products[1].path;
+                    this.img_prod = str;
+                    
                 }
             ).catch(
                 (error) => {
@@ -178,6 +186,43 @@ var app = new Vue({
                 }
             );
         },
+        seeProduct: function (id) {
+            this.info.values.push(id);
+            console.log(this.info.values);
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/seeProduct/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(this.info),
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    //console.log(data);
+                    this.seePr = data;
+                    console.log(this.seePr);
+                    this.info.values = [];
+                    
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+
 
         seeUsers: function (email) {
             this.info.values.push(email);

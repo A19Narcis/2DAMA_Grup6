@@ -132,19 +132,19 @@
     <v-container fill-height v-show="!login && prod">
       <template>
         <v-row justify="space-around">
-          <v-col v-for="n in 21" :key="n" class="d-flex child-flex" cols="3">
+          <v-col v-for="n in products" :key="n" class="d-flex child-flex" cols="3">
             <v-hover v-model="hoverInit">
               <template v-slot:default="{ hover }">
                 <v-card>
-                  <v-img :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`" aspect-ratio="1"
+                  <v-img  :src="`../../Backend/Server/${n.path}`"
+                     aspect-ratio="1"
                     class="grey lighten-2">
-
                   </v-img>
 
                   <v-fade-transition>
                     <v-overlay v-if="hover" absolute color="#81C4FC">
-                      <v-btn>See more info</v-btn>
+                      <v-btn @click="seeProduct(n.id_producte)">See Info</v-btn>
+                      
                     </v-overlay>
                   </v-fade-transition>
                 </v-card>

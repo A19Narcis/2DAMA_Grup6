@@ -59,7 +59,16 @@ app.post("/getAdmins", (req, res) => {
 
 //Agafar els productes
 app.post("/getProducts", (req, res) => {
-  con.query("SELECT * FROM PRODUCTE", function (err, result, fields) {
+  con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) ", function (err, result, fields) {
+    if (err) throw err;
+    //console.log(result);
+    res.json(result);
+  });
+});
+
+app.post("/seeProduct", (req, res) =>{
+  console.log(req.body.values[0]);
+  con.query("SELECT * FROM PRODUCTE WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
     if (err) throw err;
     //console.log(result);
     res.json(result);
