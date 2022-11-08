@@ -15,10 +15,12 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
   <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 
 <body>
   <v-app id="app">
+    <main class="fill-height" id="particles-js" ></main>
     <v-container fill-height v-show="!login && !prod">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
@@ -200,9 +202,14 @@
       </template>
       </v-bottom-sheet>
     </v-container>
-    <script src="index.js"></script>
   </v-app>
-  <script>app.getUsers()</script>
+  <script src="index.js"></script>
+  <script src="particles.js"></script>
+  <script src="app.js"></script>
+</div>
+
+
+<script>app.getUsers()</script>
 </body>
 
 </html>

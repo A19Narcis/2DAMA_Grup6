@@ -318,4 +318,4 @@ var app = new Vue({
             alert('Clicked image')
         },
     }
-});
+})

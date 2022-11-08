@@ -1,0 +1,19 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+#particles-js{
+	background: rgb(1, 10, 17);
+	position: fixed;
+	width: 100%;
+	height: auto;
+	top: 0;
+	
+}
+
+
+h1{
+	position: absolute;
+	color: white;
+}
