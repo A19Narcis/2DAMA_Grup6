@@ -15,6 +15,55 @@
   <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
 </head>
+<<<<<<< HEAD
+=======
+<body>
+    <v-app id="app">
+        <v-container fill-height v-show="!login && !prod">
+            <v-row justify="center" align-items="center">
+              <v-col cols="10" sm="auto">
+                <v-card width="448" height="500" elevation="8" outlined >
+                    <v-card-text>
+                     <img src="../../Documentació/logo_pr1er.png" style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;" ></img>
+                      <v-text-field id="user" style="margin-top: 35px;" outlined label="User" append-icon="mdi-account"></v-text-field>
+                      <v-text-field 
+                        id ="pass"
+                        outlined 
+                        :type ="showPassword ? 'text' : 'password'" 
+                        label = "Password" 
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" 
+                        @click:append="showPassword = !showPassword">
+                     </v-text-field>
+                     <v-card-text class="mt-n3">{{err}}</v-card-text>
+                    <v-btn @click ="getAdmins" class="" color="primary">Sign In</v-btn>
+                    </v-card-text>
+                </v-col>
+            </v-row>
+        </v-container>
+        
+        <v-container fill-height v-show ="login && !prod">
+            <v-row justify="center" align="center">
+            <v-col cols="14">
+                <template >
+                    <v-card class="elevation-10" style="border: 1px solid black;" >
+                      <v-card-title center>USERS</v-card-title>
+                      <v-card-title>
+                        <v-text-field
+                          v-model="search"
+                          append-icon="mdi-magnify"
+                          label="Search"
+                          single-line
+                          hide-details
+                          
+                        ></v-text-field>
+                      </v-card-title>
+                      <v-data-table
+                    
+                        :headers="headers"
+                        :items="users"
+                        :search="search"
+                        >
+>>>>>>> 846afa07f77a984c5120c4bb868fd744ffbd1c64
 
 <body>
   <v-app id="app">
