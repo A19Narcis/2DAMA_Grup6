@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
-    <link rel="stylesheet" href="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
-    <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
-    <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+  <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+  <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
+  <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
 </head>
+<<<<<<< HEAD
+=======
 <body>
     <v-app id="app">
         <v-container fill-height v-show="!login && !prod">
@@ -61,7 +63,9 @@
                         :items="users"
                         :search="search"
                         >
+>>>>>>> 846afa07f77a984c5120c4bb868fd744ffbd1c64
 
+<<<<<<< HEAD
                         <template v-slot:item="row">
                           <tr>
                             <td>{{row.item.nom}}</td>
@@ -195,49 +199,150 @@
         </v-container>
         <v-col  class="text-left">
           <v-btn v-show="!login && prod" @click ="prod = 0, login = 1" class="text-left" color="primary"><v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home</v-btn>
+=======
+<body>
+  <v-app id="app">
+    <!--LOGIN-->
+    <v-container fill-height v-show="!login && !prod">
+      <v-row justify="center" align-items="center">
+        <v-col cols="10" sm="5">
+          <v-card width="448" height="500" elevation="8" outlined>
+            <v-card-text>
+              <img src="../../Documentació/logo_pr1er.png"
+                style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;"></img>
+              <v-text-field id="user" style="margin-top: 35px;" outlined label="User" append-icon="mdi-account">
+              </v-text-field>
+              <v-text-field id="pass" outlined :type="showPassword ? 'text' : 'password'" label="Password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPassword = !showPassword">
+              </v-text-field>
+              <v-card-text class="mt-n3">{{err}}</v-card-text>
+              <v-btn @click="getAdmins" class="" color="primary">Sign In</v-btn>
+            </v-card-text>
+>>>>>>> 2a12dd0cba6ec48be9d9b7b16b55ff44da81ebe4
         </v-col>
-      
-        <v-container fill-height v-show="!login && prod">
-        <template>
-            <v-row justify="space-around">
-              <v-col
-                v-for="n in 21"
-                :key="n"
-                class="d-flex child-flex"
-                cols="3"
-              >
-              <v-hover v-model="hoverInit">
-                <template v-slot:default="{ hover }">
-                  <v-card>
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                  aspect-ratio="1"
-                  class="grey lighten-2"
-                >
-            
-                  </v-img>
-                  
-                        <v-fade-transition>
-                  <v-overlay
-                  v-if="hover"
-                  absolute
-                  color="#81C4FC"
-                  >
-                  <v-btn>See more info</v-btn>
-                  </v-overlay>
-                  </v-fade-transition>
-                  </v-card>
-                    </template>
-                  </v-hover>
-               
-              </v-col>
-            </v-row>
-          </template>
-      </v-container>
-      <script src="index.js"></script>
-    </v-app>
-    <script>app.getUsers()</script>
+      </v-row>
+    </v-container>
 
+
+    <!--INFO DE USUARIOS-->
+    <v-container fill-height v-show="login && !prod">
+      <v-row justify="center" align="center">
+        <v-col cols="14">
+          <template>
+            <v-card class="elevation-10" style="border: 1px solid black;">
+              <v-card-title center>USERS</v-card-title>
+              <v-card-title>
+                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
+                </v-text-field>
+              </v-card-title>
+              <v-data-table :headers="headers" :items="users" :search="search">
+
+                <template v-slot:item="row">
+                  <tr>
+                    <td>{{row.item.nom}}</td>
+                    <td>{{row.item.cognoms}}</td>
+                    <td>{{row.item.data_naixament}}</td>
+                    <td>{{row.item.email}}</td>
+                    <td>{{row.item.ubicacio}}</td>
+                    <td>{{row.item.pass}}</td>
+                    <td>{{row.item.rol}}</td>
+                    <td>
+                      <v-dialog v-model="dialog" persistent max-width="600px">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn color="primary" dark v-bind="attrs" v-on="on" @click="seeUsers(row.item.email)">
+                            <v-icon>mdi-account</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title>
+                            <span class="text-h5">Info de: {{seeUs.nom}}</span>
+                          </v-card-title>
+                          <v-card-text>
+                            <v-img :src=img style="width: 120px; height: 120px; border-radius: 50%;"></v-img>
+                            <v-container>
+
+                              <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field label="Nom" v-model="seeUs.nom" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field label="Cognoms" v-model="seeUs.cognoms" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field label="Edad" v-model="seeUs.data_naixament" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                  <v-text-field label="Email" v-model="seeUs.email" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                  <v-text-field label="Password" v-model="seeUs.pass" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                  <v-text-field label="ubicacio" v-model="seeUs.ubicacio" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                  <v-text-field label="rol" v-model="seeUs.rol" readonly></v-text-field>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="dialog = false">
+                              Close
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </td>
+                    <td>
+                      <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">Admin/User</v-btn>
+                    </td>
+                  </tr>
+                </template>
+              </v-data-table>
+            </v-card>
+          </template>
+          <v-col class="text-right">
+            <v-btn @click="getProducts" class="text-right" color="primary">Products&nbsp;<v-icon>mdi-arrow-expand-right
+              </v-icon>
+            </v-btn>
+          </v-col>
+        </v-col>
+    </v-container>
+    <v-col class="text-left">
+      <v-btn v-show="!login && prod" @click="prod = 0, login = 1" class="text-left" color="primary">
+        <v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home
+      </v-btn>
+    </v-col>
+    
+
+    <!--PRODUCTOS-->
+    <v-container fill-height v-show="!login && prod">
+      <template>
+        <v-row justify="space-around">
+          <v-col v-for="n in 21" :key="n" class="d-flex child-flex" cols="3">
+            <v-hover v-model="hoverInit">
+              <template v-slot:default="{ hover }">
+                <v-card>
+                  <v-img :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`" aspect-ratio="1"
+                    class="grey lighten-2"></v-img>
+                  <v-fade-transition>
+                    <v-overlay v-if="hover" absolute color="#81C4FC">
+                      <v-btn>See more info</v-btn>
+                    </v-overlay>
+                  </v-fade-transition>
+                </v-card>
+              </template>
+            </v-hover>
+          </v-col>
+        </v-row>
+      </template>
+    </v-container>
+    <script src="index.js"></script>
+  </v-app>
+  <script>app.getUsers()</script>
 </body>
+
 </html>
