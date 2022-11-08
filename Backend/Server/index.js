@@ -47,15 +47,6 @@ app.post("/getUsers", (req, res) => {
   });
 });
 
-//Agafar els admins
-app.post("/getAdmins", (req, res) => {
-  var dades = [];
-  con.query("SELECT * FROM PERSONA", function (err, result, fields) {
-    dades = result;
-    res.json(dades);
-    //console.log(dades);
-  });
-});
 
 //Agafar els productes
 app.post("/getProducts", (req, res) =>{
