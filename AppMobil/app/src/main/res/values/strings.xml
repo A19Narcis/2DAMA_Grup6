@@ -42,6 +42,15 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    
+    
+    //CREATE NEW PRODUCT
+    <string-array name="cat_prod">
+        <item>Joguina</item>
+        <item>Roba</item>
+        <item>Eina</item>
+        <item>Moble</item>
+    </string-array>
 
 
 </resources>
