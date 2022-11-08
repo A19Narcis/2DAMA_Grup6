@@ -13,11 +13,11 @@
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_in.xml" value="0.4077201447527141" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sing_up.xml" value="0.33697916666666666" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.16995947315096252" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.25" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/content_pantalla_principal.xml" value="0.16995947315096252" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_gallery.xml" value="0.35208333333333336" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_slideshow.xml" value="0.16995947315096252" />
-        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.16995947315096252" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.33" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.35208333333333336" />
         <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/menu/pantalla_principal.xml" value="0.3494791666666667" />
         <entry key="../../../../../../dades/dades/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2155" />
@@ -36,6 +36,8 @@
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.2866847826086957" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/xml/provider_paths.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1865" />
+        <entry key="app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.30092592592592593" />
       </map>
     </option>
   </component>

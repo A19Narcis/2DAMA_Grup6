@@ -153,8 +153,8 @@ public class SignIn extends AppCompatActivity {
             } else if (s.equals("true")){
                 Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
                 textErrorDades.setVisibility(View.INVISIBLE);
-                //Intent intent = new Intent(this, PantallaPrincipal.class);
-                //startActivity(intent);
+                Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
+                startActivity(intent);
             }
         }
     }
