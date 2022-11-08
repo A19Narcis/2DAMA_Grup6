@@ -22,8 +22,10 @@ var app = new Vue({
                 { text: 'ADMIN/USER' }
             ],
             search: '',
+            isLock: false,
             login: 0,
             prod: 0,
+            sheet: false,
             users: [],
             seePr: [ ],
             img_prod: ' ',
@@ -177,6 +179,7 @@ var app = new Vue({
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
+              
                     
                 }
             ).catch(
@@ -210,10 +213,10 @@ var app = new Vue({
             ).then(
                 (data) => {
                     //console.log(data);
-                    this.seePr = data;
+                    this.seePr = data[0];
                     console.log(this.seePr);
                     this.info.values = [];
-                    
+                    this.sheet = true; 
                 }
             ).catch(
                 (error) => {

@@ -32,7 +32,7 @@
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPassword = !showPassword">
               </v-text-field>
               <v-card-text class="mt-n3">{{err}}</v-card-text>
-              <v-btn @click="getAdmins" class="" color="primary">Sign In</v-btn>
+              <v-btn @click="getAdmins" @click="getUsers" class="" color="primary">Sign In</v-btn>
             </v-card-text>
         </v-col>
       </v-row>
@@ -60,7 +60,7 @@
                     <td>{{row.item.pass}}</td>
                     <td>{{row.item.rol}}</td>
                     <td>
-                      <v-dialog v-model="dialog" persistent max-width="600px" :retain-focus="false">
+                      <v-dialog v-model="dialog" max-width="600px" :retain-focus="false">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn color="primary" dark v-bind="attrs" v-on="on" @click="seeUsers(row.item.email)">
                             <v-icon>mdi-account</v-icon>
@@ -76,32 +76,38 @@
 
                               <v-row>
                                 <v-col cols="12" sm="6" md="4">
-                                  <v-text-field label="Nom" v-model="seeUs.nom" readonly></v-text-field>
+                                  <v-text-field label="Nom" outlined v-model="seeUs.nom" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                  <v-text-field label="Cognoms" v-model="seeUs.cognoms" readonly></v-text-field>
+                                  <v-text-field label="Cognoms"outlined v-model="seeUs.cognoms" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                  <v-text-field label="Edad" v-model="seeUs.data_naixament" readonly></v-text-field>
+                                  <v-text-field label="Edad" outlined v-model="seeUs.data_naixament" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                  <v-text-field label="Email" v-model="seeUs.email" readonly></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                  <v-text-field label="Password" v-model="seeUs.pass" readonly></v-text-field>
+                                  <v-text-field label="Email" outlined v-model="seeUs.email" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6">
-                                  <v-text-field label="ubicacio" v-model="seeUs.ubicacio" readonly></v-text-field>
+                                  <v-text-field label="User" outlined v-model="seeUs.user" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6">
-                                  <v-text-field label="rol" v-model="seeUs.rol" readonly></v-text-field>
+                                  <v-text-field label="Password" outlined v-model="seeUs.pass" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                  <v-text-field label="ubicacio"outlined v-model="seeUs.ubicacio" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                  <v-text-field label="rol"outlined v-model="seeUs.rol" readonly></v-text-field>
+                                </v-col>
+                                <v-col cols="12" >
+                                  <v-text-field label="descripcio"outlined v-model="seeUs.descripcio" readonly></v-text-field>
                                 </v-col>
                               </v-row>
                             </v-container>
                           </v-card-text>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="dialog = false">
+                            <v-btn class="mt-n9" color="blue darken-1" text @click="dialog = false">
                               Close
                             </v-btn>
                           </v-card-actions>
@@ -117,7 +123,7 @@
             </v-card>
           </template>
           <v-col class="text-right">
-            <v-btn @click="getProducts" class="text-right" color="primary">Products&nbsp;<v-icon>mdi-arrow-expand-right
+            <v-btn @click="getProducts" @click="seeProduct" class="text-right" color="primary">Products&nbsp;<v-icon>mdi-arrow-expand-right
               </v-icon>
             </v-btn>
           </v-col>
@@ -135,30 +141,68 @@
           <v-col v-for="n in products" :key="n" class="d-flex child-flex" cols="3">
             <v-hover v-model="hoverInit">
               <template v-slot:default="{ hover }">
-                <v-card>
-                  <v-img  :src="`../../Backend/Server/${n.path}`"
-                     aspect-ratio="1"
-                    class="grey lighten-2">
-                  </v-img>
-
-                  <v-fade-transition>
-                    <v-overlay v-if="hover" absolute color="#81C4FC">
-                      <v-btn @click="seeProduct(n.id_producte)">See Info</v-btn>
-                      
-                    </v-overlay>
-                  </v-fade-transition>
-                </v-card>
+                <v-badge bordered color="error" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" >
+                  <v-card>
+                    <v-img :src="`../../Backend/Server/${n.path}`" aspect-ratio="1" class="grey lighten-2">
+                    </v-img>
+                    <v-fade-transition>
+                      <v-overlay v-if="hover" absolute color="#81C4FC">
+                        <v-btn @click="seeProduct(n.id_producte)" color="primary">See
+                          Info</v-btn>
+                      </v-overlay>
+                    </v-fade-transition>
+                  </v-card>
+                </v-badge>
               </template>
             </v-hover>
+            <v-bottom-sheet v-model="sheet">
+              <v-sheet class="text-center" height="auto">
+                <v-btn class="mt-6" text color="red" @click="sheet = !sheet">
+                  close
+                </v-btn>
+                 
+                  <div style="padding: 40px;">
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field label="ID" outlined v-model="seePr.id_producte" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field label="nom" outlined v-model ="seePr.nom" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field label="preu" outlined v-model ="seePr.preu"readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field label="categoria" outlined v-model ="seePr.categoria" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field label="estado_prod" outlined v-model ="seePr.estado_prod" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field label="descripcio" outlined v-model ="seePr.descripcion" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field label="id Usu" outlined v-model ="seePr.id_usu"readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field label="id image" outlined v-model ="seePr.id_image" readonly></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field label="Path Imatge" outlined v-model="seePr.path" readonly></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </div>
+              </v-sheet>
+            </v-bottom-sheet>
 
           </v-col>
         </v-row>
       </template>
+      </v-bottom-sheet>
     </v-container>
     <script src="index.js"></script>
   </v-app>
   <script>app.getUsers()</script>
-
 </body>
 
 </html>
