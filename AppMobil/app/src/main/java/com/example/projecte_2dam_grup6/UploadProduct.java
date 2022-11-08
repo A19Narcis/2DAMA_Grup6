@@ -202,7 +202,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         multipartImageUpload();
         //CAP TEXT SENSE VALOR
         if (titolProd.getText().length() == 0
-                || preuProd.getText().length() == 0
+                || (preuProd.getText().length() == 0 || preuProd.getText().toString().startsWith("."))
                 || (catProd.getText().length() == 0 || catProd.getText().equals("Categoria"))
                 || descProd.getText().length() == 0){
             valid = false;
@@ -217,7 +217,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        if (valid && prodImageExists && prodImageExists){
+        if (valid && prodImageExists){
             String json = "{\"nom\":\""
                     + titolProd.getText() + "\",\"preu\":"
                     + preuProd.getText() + ",\"categoria\":\""

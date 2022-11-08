@@ -61,6 +61,7 @@
                     android:id="@+id/fab_image"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="#eeeeee"
                     app:layout_constraintTop_toBottomOf="@id/productImage"
                     app:srcCompat="@android:drawable/ic_menu_camera"
