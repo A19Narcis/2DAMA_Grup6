@@ -20,18 +20,20 @@
 
 <body>
   <v-app id="app">
-    <main class="fill-height" id="particles-js" ></main>
-    <v-container fill-height v-show="!login && !prod">
+    <main class="fill-height" id="particles-js"></main>
+    <v-container fill-height v-show="!login && !prod && !logout">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
           <v-card width="448" height="500" elevation="8" outlined>
             <v-card-text>
               <img src="../../Documentació/logo_pr1er.png"
                 style="width: 160px; height: 160px; border: 2px solid black; border-radius: 50%; display: block; margin: auto;"></img>
-              <v-text-field id="user" style="margin-top: 35px;" outlined label="User" append-icon="mdi-account">
+              <v-text-field clearable ref="inputRef2" id="user" style="margin-top: 35px;" outlined label="User"
+                append-icon="mdi-account">
               </v-text-field>
-              <v-text-field id="pass" outlined :type="showPassword ? 'text' : 'password'" label="Password"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPassword = !showPassword">
+              <v-text-field clearable ref="inputRef" id="pass" outlined :type="showPassword ? 'text' : 'password'"
+                label="Password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword">
               </v-text-field>
               <v-card-text class="mt-n3">{{err}}</v-card-text>
               <v-btn @click="getAdmins" @click="getUsers" class="" color="primary">Sign In</v-btn>
@@ -40,7 +42,41 @@
       </v-row>
     </v-container>
 
-    <v-container fill-height v-show="login && !prod">
+    <v-col v-show="(!login && prod && logout) || (login && !prod && logout)" class="text-right">
+      <v-menu min-width="200px" rounded offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn icon x-large v-on="on">
+            <v-avatar color="brown" size="48">
+              <v-img :src=img_usu></v-img>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-list-item-content class="justify-center">
+            <div class="mx-auto text-center">
+              <v-avatar>
+                <v-img :src=img_usu></v-img>
+              </v-avatar>
+              <h3>{{usuinfo.nom}} {{usuinfo.cognoms}}</h3>
+              <p class="text-caption mt-1">
+                {{usuinfo.email}}
+              </p>
+              <v-divider class="my-3"></v-divider>
+              <v-btn depressed rounded text>
+                Edit Account
+              </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn depressed rounded text @click="login = 0, logout=0, prod=0">
+                Disconnect
+              </v-btn>
+            </div>
+          </v-list-item-content>
+        </v-card>
+      </v-menu>
+    </v-col>
+
+
+    <v-container fill-height v-show="login && !prod ">
       <v-row justify="center" align="center">
         <v-col cols="14">
           <template>
@@ -61,6 +97,7 @@
                     <td>{{row.item.ubicacio}}</td>
                     <td>{{row.item.pass}}</td>
                     <td>{{row.item.rol}}</td>
+                    <td>{{row.item.ban}}</td>
                     <td>
                       <v-dialog v-model="dialog" max-width="600px" :retain-focus="false">
                         <template v-slot:activator="{ on, attrs }">
@@ -81,10 +118,12 @@
                                   <v-text-field label="Nom" outlined v-model="seeUs.nom" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                  <v-text-field label="Cognoms"outlined v-model="seeUs.cognoms" readonly></v-text-field>
+                                  <v-text-field label="Cognoms" outlined v-model="seeUs.cognoms" readonly>
+                                  </v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                  <v-text-field label="Edad" outlined v-model="seeUs.data_naixament" readonly></v-text-field>
+                                  <v-text-field label="Edad" outlined v-model="seeUs.data_naixament" readonly>
+                                  </v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                   <v-text-field label="Email" outlined v-model="seeUs.email" readonly></v-text-field>
@@ -96,13 +135,15 @@
                                   <v-text-field label="Password" outlined v-model="seeUs.pass" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6">
-                                  <v-text-field label="ubicacio"outlined v-model="seeUs.ubicacio" readonly></v-text-field>
+                                  <v-text-field label="ubicacio" outlined v-model="seeUs.ubicacio" readonly>
+                                  </v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6">
-                                  <v-text-field label="rol"outlined v-model="seeUs.rol" readonly></v-text-field>
+                                  <v-text-field label="rol" outlined v-model="seeUs.rol" readonly></v-text-field>
                                 </v-col>
-                                <v-col cols="12" >
-                                  <v-text-field label="descripcio"outlined v-model="seeUs.descripcio" readonly></v-text-field>
+                                <v-col cols="12">
+                                  <v-text-field label="descripcio" outlined v-model="seeUs.descripcio" readonly>
+                                  </v-text-field>
                                 </v-col>
                               </v-row>
                             </v-container>
@@ -119,13 +160,17 @@
                     <td>
                       <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">Admin/User</v-btn>
                     </td>
+                    <td>
+                      <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">BAN</v-btn>
+                    </td>
                   </tr>
                 </template>
               </v-data-table>
             </v-card>
           </template>
           <v-col class="text-right">
-            <v-btn @click="getProducts" @click="seeProduct" class="text-right" color="primary">Products&nbsp;<v-icon>mdi-arrow-expand-right
+            <v-btn @click="getProducts" @click="seeProduct" class="text-right" color="primary">Products&nbsp;<v-icon>
+                mdi-arrow-expand-right
               </v-icon>
             </v-btn>
           </v-col>
@@ -143,7 +188,7 @@
           <v-col v-for="n in products" :key="n" class="d-flex child-flex" cols="3">
             <v-hover v-model="hoverInit">
               <template v-slot:default="{ hover }">
-                <v-badge bordered color="error" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" >
+                <v-badge bordered color="error" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'">
                   <v-card>
                     <v-img :src="`../../Backend/Server/${n.path}`" aspect-ratio="1" class="grey lighten-2">
                     </v-img>
@@ -162,38 +207,38 @@
                 <v-btn class="mt-6" text color="red" @click="sheet = !sheet">
                   close
                 </v-btn>
-                 
-                  <div style="padding: 40px;">
-                    <v-row>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field label="ID" outlined v-model="seePr.id_producte" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field label="nom" outlined v-model ="seePr.nom" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field label="preu" outlined v-model ="seePr.preu"readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field label="categoria" outlined v-model ="seePr.categoria" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field label="estado_prod" outlined v-model ="seePr.estado_prod" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field label="descripcio" outlined v-model ="seePr.descripcion" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field label="id Usu" outlined v-model ="seePr.id_usu"readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field label="id image" outlined v-model ="seePr.id_image" readonly></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field label="Path Imatge" outlined v-model="seePr.path" readonly></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </div>
+
+                <div style="padding: 40px;">
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field label="ID" outlined v-model="seePr.id_producte" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field label="nom" outlined v-model="seePr.nom" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field label="preu" outlined v-model="seePr.preu" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="categoria" outlined v-model="seePr.categoria" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="estado_prod" outlined v-model="seePr.estado_prod" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="descripcio" outlined v-model="seePr.descripcion" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="id Usu" outlined v-model="seePr.id_usu" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="id image" outlined v-model="seePr.id_image" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Path Imatge" outlined v-model="seePr.path" readonly></v-text-field>
+                    </v-col>
+                  </v-row>
+                </div>
               </v-sheet>
             </v-bottom-sheet>
 
@@ -206,10 +251,10 @@
   <script src="index.js"></script>
   <script src="particles.js"></script>
   <script src="app.js"></script>
-</div>
+  </div>
 
 
-<script>app.getUsers()</script>
+  <script>app.getUsers()</script>
 </body>
 
 </html>
