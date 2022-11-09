@@ -3,6 +3,8 @@ package com.example.projecte_2dam_grup6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -156,6 +158,7 @@ public class SignIn extends AppCompatActivity {
                 //Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
                 textErrorDades.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
+                Toast.makeText(SignIn.this, "Benvingut " + txtUserSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
                 String dadesUser = txtUserSignIn.getText().toString();
                 intent.putExtra(EXTRA_MESSAGE, dadesUser);
                 startActivity(intent);

@@ -16,12 +16,14 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#4BF1EC"
             app:popupTheme="@style/Theme.Projecte_2DAM_Grup6.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_pantalla_principal" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_pantalla_principal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -31,6 +33,6 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#4BF1EC"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+        app:srcCompat="@drawable/ic_publish_black_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

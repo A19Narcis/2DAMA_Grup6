@@ -96,7 +96,7 @@ app.post("/registerNewUser", (req, res) => {
       if (result != 0) {
         auth = false;
       } else {
-        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',NULL ,NULL)");
+        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',NULL ,NULL, 0)");
       }
     }
   );
@@ -112,10 +112,47 @@ app.post("/addNewProduct", (req, res) => {
   res.json(auth);
 });
 
-app.get("/dadesUserLogin/txtUserSignIn", (req, res) => {
-  res.send("HOLA")
+//Dades generals user per la PANTALLA PRINCIPAL APP
+app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
+  let user = req.params.dadesUserLogIn;
+  con.query("SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.user = '" + user + "'", function (err, result, fields) {
+    res.send(result);
+  });
 })
 
+app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
+  var user = req.params.dadesUserLogIn;
+  var options = {
+      root: path.join(__dirname)
+  };
+
+  var filename = "";
+  var fileName = "";
+  con.query("SELECT UPLOADS.path FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.user = '" + user +"';", function (err, result, fields) {
+    filename = JSON.stringify(result);
+    console.log(filename);
+    filename = filename.replace(/\[/g, "");
+    filename = filename.replace(/\{/g, "");
+    filename = filename.replace(/\}/g, "");
+    filename = filename.replace(/\]/g, "");
+    filename = filename.replace(/\"/g, "");
+    filename = filename.replace(/path/, "");
+    filename = filename.replace(/\:/g, "");
+    filename = filename.replace(/.$/, "");
+    var array = filename.split("\\".concat("\\"));
+    fileName = "/uploads/user_images/".concat(array[2]);
+    console.log("FileName: " + fileName);
+
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            //next(err);
+            console.log(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
+  });
+});
 
 
 //Validació LOGIN a l'APP
@@ -215,7 +252,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/user_images')
   },
   filename: function (req, file, cb) {
-    con.query("SELECT email FROM `PERSONA` WHERE id_persona = (SELECT MAX(id_persona) FROM PERSONA);", function (err, result, field) {
+    con.query("SELECT email FROM `PERSONA` WHERE id = (SELECT MAX(id) FROM PERSONA);", function (err, result, field) {
       console.log("HEY RESULT -> " + JSON.stringify(result));
       var emailNomFile = JSON.stringify(result);
       emailNomFile = emailNomFile.replace(/\[/g, "");
@@ -244,7 +281,7 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
   }
 
   con.query("INSERT INTO UPLOADS VALUES (null, '" + JSON.stringify(req.file.path) + "')", function (err, result, field) {
-    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where id_persona = (SELECT MAX(id_persona) FROM PERSONA)", function (err, result, field) {
+    con.query("UPDATE PERSONA SET id_image = (SELECT max(id_upload) FROM UPLOADS) where PERSONA.id = (SELECT MAX(id) FROM PERSONA)", function (err, result, field) {
       res.send({ code: 200, msg: file });
     });
   });

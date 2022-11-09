@@ -6,15 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Inici" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_personal_products"
+            android:icon="@drawable/ic_inventory_2_black_24dp"
+            android:title="Els meus productes"
+            />
+        <item android:title="Categories">
+            <menu>
+                <item
+                    android:id="@+id/nav_cat_Eina"
+                    android:icon="@drawable/ic_handyman_black_24dp"
+                    android:title="Eines" />
+                <item
+                    android:id="@+id/nav_cat_Moble"
+                    android:icon="@drawable/ic_chair_black_24dp"
+                    android:title="Mobles" />
+                <item
+                    android:id="@+id/nav_cat_Joguina"
+                    android:icon="@drawable/ic_toys_black_24dp"
+                    android:title="Joguines" />
+                <item
+                    android:id="@+id/nav_cat_Roba"
+                    android:icon="@drawable/ic_checkroom_black_24dp"
+                    android:title="Roba" />
+            </menu>
+        </item>
+        <item android:title="Log Out">
+            <menu>
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout_black_24dp"
+                    android:title="Log out" />
+            </menu>
+        </item>
     </group>
+
 </menu>

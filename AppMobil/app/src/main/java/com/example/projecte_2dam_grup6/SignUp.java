@@ -83,6 +83,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton fabCamera;
     Uri picUri;
     private final static int IMAGE_RESULT = 200;
+    private byte[] bitmapdata;
 
     private String server_path;
     private String register_path;
@@ -264,7 +265,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                byte[] bitmapdata = bos.toByteArray();
+                bitmapdata = bos.toByteArray();
 
 
                 FileOutputStream fos = new FileOutputStream(file);
