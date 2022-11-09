@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Reciclatge</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
@@ -21,7 +21,8 @@
 <body>
   <v-app id="app">
     <main class="fill-height" id="particles-js"></main>
-    <v-container fill-height v-show="!login && !prod && !logout">
+    <!--LOGIN-->
+    <v-container fill-height v-show="!login && !prod && !logout && !edit">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
           <v-card width="448" height="500" elevation="8" outlined>
@@ -42,7 +43,10 @@
       </v-row>
     </v-container>
 
-    <v-col v-show="(!login && prod && logout) || (login && !prod && logout)" class="text-right">
+    <!--LOGOUT/EDIT-->
+    <v-col v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)"
+    
+      class="text-right">
       <v-menu min-width="200px" rounded offset-y>
         <template v-slot:activator="{ on }">
           <v-btn icon x-large v-on="on">
@@ -52,6 +56,7 @@
           </v-btn>
         </template>
         <v-card>
+          <script ></script>
           <v-list-item-content class="justify-center">
             <div class="mx-auto text-center">
               <v-avatar>
@@ -62,7 +67,7 @@
                 {{usuinfo.email}}
               </p>
               <v-divider class="my-3"></v-divider>
-              <v-btn depressed rounded text>
+              <v-btn depressed rounded text @click="login=0, logout=0, prod=0, edit=1, seeUsers(usuinfo.email)">
                 Edit Account
               </v-btn>
               <v-divider class="my-3"></v-divider>
@@ -75,8 +80,8 @@
       </v-menu>
     </v-col>
 
-
-    <v-container fill-height v-show="login && !prod ">
+    <!--TAULA USERS-->
+    <v-container fill-height v-show="login && !prod && !edit ">
       <v-row justify="center" align="center">
         <v-col cols="14">
           <template>
@@ -157,11 +162,48 @@
                         </v-card>
                       </v-dialog>
                     </td>
-                    <td>
+                    <!--  <td>
                       <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">Admin/User</v-btn>
-                    </td>
+                    </td> -->
+
+
+
                     <td>
-                      <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">BAN</v-btn>
+                      <v-dialog v-model="dialog2" width="500" :retain-focus="false">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn color="primary" @click="seeUsers(row.item.email)" dark v-bind="attrs" v-on="on">
+                            Banear
+                          </v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-card-title class="text-h5 grey lighten-2">
+                            Baneado
+                          </v-card-title>
+                          <v-card-text v-if="seeUs.rol == 'admin'">
+                            Este usuario tiene rol de administrador, así que no puedes banearlo.
+                          </v-card-text>
+                          <v-card-text v-else>
+                            Estas a punto de banear a un usuario o artista,
+                            Seguro que quieres banear al usuario?? <b>{{seeUs.user}}</b>
+                            Si tu decision es sí, acepta y el usuario seleccionado será baneado.
+                            En caso de que no quieras banearlo cancela y se quedará como está.
+                          </v-card-text>
+
+                          <v-divider></v-divider>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" text @click="dialog2 = false">
+                              Cancelar
+                            </v-btn>
+                            <v-btn @click="banear(seeUs.email, seeUs.ban, seeUs.rol, dialog2 = false)" color="primary"
+                              text>
+                              Banear
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
                     </td>
                   </tr>
                 </template>
@@ -176,12 +218,16 @@
           </v-col>
         </v-col>
     </v-container>
+
+    <!--Boton al Home-->
     <v-col class="text-left">
       <v-btn v-show="!login && prod" @click="prod = 0, login = 1" class="text-left" color="primary">
         <v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home
       </v-btn>
     </v-col>
 
+
+    <!--Productes-->
     <v-container fill-height v-show="!login && prod">
       <template>
         <v-row justify="space-around">
@@ -246,6 +292,56 @@
         </v-row>
       </template>
       </v-bottom-sheet>
+    </v-container>
+
+    <!--Edit account-->
+    <v-container fill-height v-show="!login && !prod && !logout && edit">
+      <v-row justify="center" align-items="center">
+        <v-col cols="10" sm="auto">
+          <v-card width="auto" height="auto" elevation="8" outlined>
+            <v-card-text>
+              <v-card-title>Edit account: {{seeUs.user}}</v-card-title>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field label="Nom" outlined v-model="seeUs.nom" ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field label="Cognoms" outlined v-model="seeUs.cognoms" >
+                    </v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field label="Edad" outlined v-model="seeUs.data_naixament" >
+                    </v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field label="Email" outlined v-model="seeUs.email" ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="User" outlined v-model="seeUs.user" ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Password" outlined v-model="seeUs.pass" ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="ubicacio" outlined v-model="seeUs.ubicacio" >
+                    </v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="rol" outlined v-model="seeUs.rol" readonly ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field label="descripcio" outlined v-model="seeUs.descripcio" >
+                    </v-text-field>
+                  </v-col>
+                </v-row>
+                <v-col class="text-left">
+                  <v-btn @click="editUser(seeUs.email, seeUs.nom, seeUs.cognoms, seeUs.data_naixament, seeUs.ubicacio, seeUs.user, seeUs.pass, seeUs.descripcio,  seeUs.rol,  seeUs.id, seeUs.id_image, seeUs.ban), prod = 0, login = 1, logout = 1, edit = 0" color="primary">Save Data</v-btn>
+                </v-col>
+              </v-container>
+            </v-card-text>
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
   <script src="index.js"></script>

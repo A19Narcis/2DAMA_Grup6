@@ -20,14 +20,17 @@ var app = new Vue({
                 { text: 'ROL', value: 'rol' },
                 { text: 'BAN', value: 'ban'},
                 { text: 'INFO' },
-                { text: 'ADMIN/USER' }
+                { text: 'BAN' }
                 
             ],
             search: '',
+            edit: 0,
             img_usu: '',
             isLock: false,
             login: 0,
             prod: 0,
+            isUser: 0,
+            isArtista: 0,
             usuinfo: [],
             logout: 0,
             sheet: false,
@@ -38,7 +41,8 @@ var app = new Vue({
             img: ' ',
             seeUs: [],
             dialog: false,
-            isadmin: 4,
+            dialog2: false,
+            isAdmin: 0,
             showPassword: false,
             password: null,
             info: { values: [] },
@@ -140,7 +144,6 @@ var app = new Vue({
                     for (let index = 0; index < data.length; index++)
                         if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin") {
                             console.log("hola");
-                            this.isadmin = 1;
                             this.logout = 1;
                             this.info.values = [];
                             this.usuinfo = data[index];
@@ -155,7 +158,6 @@ var app = new Vue({
                             return;
                         }
                     this.info.values = [];
-                    this.isadmin = 0;
                     this.err = "Correo y/o contraseña incorrectos"
                 }
             ).catch(
@@ -240,6 +242,118 @@ var app = new Vue({
                 }
             );
         },
+        checkRol: function(rol)
+        {
+            if (rol== 'admin'){
+                this.isUser=1;
+                this.isArtista =1;
+            }
+            if (rol == 'artista'){
+                this.isUser=1;
+                this.isAdmin =1;
+            }
+            if (rol == 'user'){
+                this.isArtista=1;
+                this.isAdmin =1;
+            }
+        },
+        checkBan: function(rol)
+        {
+            if (rol== 'admin'){
+                this.isUser=1;
+                this.isArtista =1;
+            }
+        },
+
+        editUser: function(email,nom, cognoms, data_naixament, ubicacio, user, pass, descripcio, rol, id, id_image, ban)
+        {
+            this.info.values.push(email); 
+            this.info.values.push(nom);
+            this.info.values.push(cognoms); 
+            this.info.values.push(data_naixament);
+            this.info.values.push(ubicacio); 
+            this.info.values.push(user); 
+            this.info.values.push(pass); 
+            this.info.values.push(descripcio);
+            this.info.values.push(rol); 
+            this.info.values.push(id);
+            this.info.values.push(id_image);
+            this.info.values.push(ban);
+            console.log(this.info.values);
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/editUser/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: "cors",
+                    body: JSON.stringify(this.info),
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    console.log(data);
+                    this.info.values = [];
+                    app.getUsers();
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+        banear: function (email, ban, rol) {
+            if (rol == 'admin')
+            {
+                return ;
+            }
+            this.info.values.push(email);
+            this.info.values.push(ban);
+            console.log(this.info.values);
+            
+            console.log("Get Data");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/banear/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: "cors",
+                    body: JSON.stringify(this.info),
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    console.log(data);
+                    this.usuinfo = data[0];
+                    this,info.values = [];
+                    app.getUsers();
+                
+                    
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
 
 
         seeUsers: function (email) {
@@ -275,7 +389,7 @@ var app = new Vue({
                     this.seeUs.path = str;
                     this.img = this.seeUs.path;
                     //console.log(this.img);
-                    data = [];
+                    console.log("SeeUs" +this.seeUs.path);
                     this.info.values = [];
 
 

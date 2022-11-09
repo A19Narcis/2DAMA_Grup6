@@ -149,6 +149,18 @@ app.post("/ferAdmin", (req, res) => {
   }
 });
 
+app.post("/banear", (req, res) =>{
+  if (req.body.values[1] == 1) {
+    con.query("UPDATE PERSONA SET PERSONA.ban = '0' WHERE PERSONA.email = '" + req.body.values[0] + "'", function (err, result, field) {
+      res.json(result);
+    });
+  } else {
+    con.query("UPDATE PERSONA SET PERSONA.ban = '1' WHERE PERSONA.email = '" + req.body.values[0] + "'", function (err, result, field) {
+      res.json(result);
+    });
+  }
+});
+
 
 
 
@@ -164,6 +176,28 @@ app.post("/getProductUser", (req, res) => {
       res.json(data);
     }
   );
+});
+
+app.post("/editUser", (req, res)=>{
+  var email = req.body.values[0]; 
+  var nom =  req.body.values[1];
+  var cognoms = req.body.values[2]; 
+  var data_naixament = req.body.values[3]; 
+  var ubicacio = req.body.values[4];
+  var user = req.body.values[5]; 
+  var pass = req.body.values[6]; 
+  var descripcio = req.body.values[7];
+  var rol = req.body.values[8];
+  var id = req.body.values[9];
+  var id_image = req.body.values[10];
+  var ban = req.body.values[11];
+  con.query("UPDATE `PERSONA` SET `email`='" + email +"',`nom`='"+ nom +"',`cognoms`='"+cognoms+"',`data_naixament`='"+data_naixament+"',`ubicacio`='"+ubicacio+"',`user`='"+user+"',`pass`='"+pass+"',`descripcio`='"+descripcio+"',`rol`='"+rol+"',`id`='"+id+"',`id_image`='"+id_image+"',`ban`='"+ban+"'WHERE PERSONA.id = '" + id + "'", function (err, result, field) {
+    con.query(
+      "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
+      function (err, result, fields) {
+        res.json(result);
+      });
+});
 });
 
 
