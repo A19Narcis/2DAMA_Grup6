@@ -18,13 +18,18 @@ var app = new Vue({
                 { text: 'UBICACIO', value: 'ubicacio' },
                 { text: 'PASSWORD', value: 'pass' },
                 { text: 'ROL', value: 'rol' },
+                { text: 'BAN', value: 'ban'},
                 { text: 'INFO' },
                 { text: 'ADMIN/USER' }
+                
             ],
             search: '',
+            img_usu: '',
             isLock: false,
             login: 0,
             prod: 0,
+            usuinfo: [],
+            logout: 0,
             sheet: false,
             users: [],
             seePr: [ ],
@@ -62,6 +67,7 @@ var app = new Vue({
 
             search: '',
             products: [],
+            
             hoverInit: ' ',
             num_prod: 0,
             seeUs: [],
@@ -135,8 +141,17 @@ var app = new Vue({
                         if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin") {
                             console.log("hola");
                             this.isadmin = 1;
+                            this.logout = 1;
                             this.info.values = [];
+                            this.usuinfo = data[index];
+                            var str = "../../Backend/Server/";
+                            str = str + this.usuinfo.path;
+                            str = str.replaceAll('"', '');
+                            this.usuinfo.path = str;
+                            this.img_usu = this.usuinfo.path;
                             this.login = 1;
+                            this.$refs.inputRef.reset();
+                            this.$refs.inputRef2.reset();
                             return;
                         }
                     this.info.values = [];

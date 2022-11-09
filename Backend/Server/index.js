@@ -50,7 +50,7 @@ app.post("/getUsers", (req, res) => {
 //Agafar els admins
 app.post("/getAdmins", (req, res) => {
   var dades = [];
-  con.query("SELECT * FROM PERSONA", function (err, result, fields) {
+  con.query("SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload)", function (err, result, fields) {
     dades = result;
     res.json(dades);
     //console.log(dades);
