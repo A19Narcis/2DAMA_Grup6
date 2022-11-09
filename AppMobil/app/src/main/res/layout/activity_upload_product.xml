@@ -52,7 +52,7 @@
                 <ImageView
                     android:id="@+id/productImage"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="175dp"
                     android:backgroundTint="#eeeeee"
                     app:srcCompat="@drawable/img_default_product_cat"
                     tools:ignore="MissingConstraints" />

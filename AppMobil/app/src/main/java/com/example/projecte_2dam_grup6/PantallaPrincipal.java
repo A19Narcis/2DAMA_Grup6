@@ -2,8 +2,12 @@ package com.example.projecte_2dam_grup6;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -14,8 +18,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.projecte_2dam_grup6.databinding.ActivityPantallaPrincipalBinding;
+
+import org.w3c.dom.Text;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
@@ -25,6 +32,12 @@ public class PantallaPrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //GET DADES USER LOGIN
+        Intent intent = getIntent();
+        String dadesUserLogin = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
+        Toast.makeText(this, "Hola " + dadesUserLogin, Toast.LENGTH_SHORT).show();
+
 
         binding = ActivityPantallaPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -39,6 +52,10 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+        Log.d("USER_LOGIN", "USER: " + binding.navView.);
+        System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(

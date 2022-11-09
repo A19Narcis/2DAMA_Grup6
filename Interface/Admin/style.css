@@ -4,10 +4,10 @@
 	box-sizing: border-box;
 }
 #particles-js{
-	background: rgb(1, 10, 17);
+	background: rgb(19, 63, 97);
 	position: fixed;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	top: 0;
 	
 }

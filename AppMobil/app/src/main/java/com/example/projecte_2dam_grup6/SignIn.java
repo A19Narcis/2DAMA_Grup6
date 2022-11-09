@@ -27,6 +27,8 @@ import java.net.URL;
 
 public class SignIn extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE = "com.example.projecte_2dam_grup6.extra.MESSAGE";
+
     private EditText txtUserSignIn;
     private EditText txtPasswordSignIn;
     private TextView textErrorDades;
@@ -151,9 +153,11 @@ public class SignIn extends AppCompatActivity {
             if (s.equals("false")){
                 textErrorDades.setVisibility(View.VISIBLE);
             } else if (s.equals("true")){
-                Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
                 textErrorDades.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
+                String dadesUser = txtUserSignIn.getText().toString();
+                intent.putExtra(EXTRA_MESSAGE, dadesUser);
                 startActivity(intent);
             }
         }
