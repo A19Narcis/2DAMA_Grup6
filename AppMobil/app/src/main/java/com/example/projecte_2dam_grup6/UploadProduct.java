@@ -199,7 +199,6 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
 
     public void validacioAddProducte(View view){
         boolean valid = true;
-        multipartImageUpload();
         //CAP TEXT SENSE VALOR
         if (titolProd.getText().length() == 0
                 || (preuProd.getText().length() == 0 || preuProd.getText().toString().startsWith("."))
@@ -217,18 +216,27 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        if (valid && prodImageExists){
-            String json = "{\"nom\":\""
-                    + titolProd.getText() + "\",\"preu\":"
-                    + preuProd.getText() + ",\"categoria\":\""
-                    + catProd.getText() + "\",\"descripcion\":\""
-                    + descProd.getText() + "\"}";
-            Log.d("JSON", "Prodcute: " + json);
+        if (valid){
+            multipartImageUpload();
+            Log.d("IMAGE_PROD", "image exists? -> " + prodImageExists);
+            if (!prodImageExists){
+                Toast.makeText(this, "Imatge necessaria", Toast.LENGTH_LONG).show();
+                //Reinici activity if there is no IMAGE
+                finish();
+                startActivity(getIntent());
+            } else {
+                String json = "{\"nom\":\""
+                        + titolProd.getText() + "\",\"preu\":"
+                        + preuProd.getText() + ",\"categoria\":\""
+                        + catProd.getText() + "\",\"descripcion\":\""
+                        + descProd.getText() + "\"}";
+                Log.d("JSON", "Prodcute: " + json);
 
-            //CONNEXIO SERVER
-            final String HOST = server_path + addProduct_path;
-            Toast.makeText(this, "TODO BIEN DE MOMENTO", Toast.LENGTH_LONG).show();
-            //new connexioAddProducte().execute(HOST, json);
+                //CONNEXIO SERVER
+                final String HOST = server_path + addProduct_path;
+                Toast.makeText(this, "TODO BIEN DE MOMENTO", Toast.LENGTH_LONG).show();
+                //new connexioAddProducte().execute(HOST, json);
+            }
         } else {
             Toast.makeText(this, R.string.omplirCamps, Toast.LENGTH_LONG).show();
         }

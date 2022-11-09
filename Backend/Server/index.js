@@ -103,7 +103,7 @@ app.post("/registerNewUser", (req, res) => {
   res.json(auth);
 });
 
-//Registre USER nou APP
+//Registre PRODUCTE nou APP
 app.post("/addNewProduct", (req, res) => {
   let auth;
   con.query("INSERT INTO PRODUCTE VALUES (NULL, '" + req.body.nom + "', " + req.body.preu + ", '" + req.body.categoria + "', 'Disponible', '" + req.body.descripcion + "', '" + req.body.idUsuari + "', NULL)",function (err, result, fields) {
@@ -111,6 +111,12 @@ app.post("/addNewProduct", (req, res) => {
   });
   res.json(auth);
 });
+
+app.get("/dadesUserLogin/txtUserSignIn", (req, res) => {
+  res.send("HOLA")
+})
+
+
 
 //Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
@@ -136,6 +142,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
     }
   );
 });
+
 
 app.post("/ferAdmin", (req, res) => {
   if (req.body.values[1] == "admin") {
