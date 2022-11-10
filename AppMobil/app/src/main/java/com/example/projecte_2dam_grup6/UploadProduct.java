@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,6 +81,9 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     ApiService apiService;
     private final static int IMAGE_RESULT = 200;
 
+    Boolean ready = false;
+    int id_user_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,14 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         //GET DADES USER LOGIN
         Intent intent = getIntent();
         dadesUserLogIn = intent.getStringExtra(PantallaPrincipal.EXTRA_MESSAGE);
+
+        try {
+            JSONArray jsonArray = new JSONArray(dadesUserLogIn);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            id_user_login = jsonObject.optInt("id");
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
 
         //Hide title bar
         if (getSupportActionBar() != null) {
@@ -151,42 +163,44 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             File file = new File(filesDir, "image" + ".png");
             OutputStream os;
             if (mBitmap != null){
-                try {
-                    os = new FileOutputStream(file);
-                    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-                    os.flush();
-                    os.close();
-                } catch (Exception e) {
-                    Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+                if (ready){
+                    try {
+                        os = new FileOutputStream(file);
+                        mBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+                        os.flush();
+                        os.close();
+                    } catch (Exception e) {
+                        Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+                    }
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                    byte[] bitmapdata = bos.toByteArray();
+
+
+                    FileOutputStream fos = new FileOutputStream(file);
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+
+                    RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("myFile", file.getName(), reqFile);
+                    RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "myFile");
+
+                    Call<ResponseBody> req = apiService.postImageProd(body, name);
+                    req.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.e("Upload", String.valueOf(response.body()));
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("Error onFailure", "Error onFailure: ");
+                        }
+
+                    });
                 }
-
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                mBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                byte[] bitmapdata = bos.toByteArray();
-
-
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-
-                RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("myFile", file.getName(), reqFile);
-                RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "myFile");
-
-                Call<ResponseBody> req = apiService.postImageProd(body, name);
-                req.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Log.e("Upload", String.valueOf(response.body()));
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.d("Error onFailure", "Error onFailure: ");
-                    }
-
-                });
             } else {
                 prodImageExists = false;
             }
@@ -234,17 +248,16 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
                 finish();
                 startActivity(getIntent());
             } else {
-                String json = "{\"nom\":\""
-                        + titolProd.getText() + "\",\"preu\":"
-                        + preuProd.getText() + ",\"categoria\":\""
-                        + catProd.getText() + "\",\"descripcion\":\""
-                        + descProd.getText() + "\"}";
+                String json = "{\"id_usu\":" + id_user_login
+                        + ",\"nom\":\"" + titolProd.getText()
+                        + "\",\"preu\":" + preuProd.getText()
+                        + ",\"categoria\":\"" + catProd.getText()
+                        + "\",\"descripcion\":\"" + descProd.getText() + "\"}";
                 Log.d("JSON", "Prodcute: " + json);
 
                 //CONNEXIO SERVER
                 final String HOST = server_path + addProduct_path;
-                Toast.makeText(this, "TODO BIEN DE MOMENTO", Toast.LENGTH_LONG).show();
-                //new connexioAddProducte().execute(HOST, json);
+                new connexioAddProducte().execute(HOST, json);
             }
         } else {
             Toast.makeText(this, R.string.omplirCamps, Toast.LENGTH_LONG).show();
@@ -257,10 +270,10 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         public String doInBackground(String... strings) {
             String urlString = strings[0];
             String jsonInfo = strings[1];
-            return validacioCreateUser(urlString, jsonInfo);
+            return validacioNewProduct(urlString, jsonInfo);
         }
 
-        public String validacioCreateUser(String urlString, String json) {
+        public String validacioNewProduct(String urlString, String json) {
             String result = "";
             try {
                 URL myUrl = new URL(urlString);
@@ -288,6 +301,8 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String s){
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
+            ready = true;
+            multipartImageUpload();
             Toast.makeText(UploadProduct.this, "Producte afegit correctament", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
             startActivity(intent);

@@ -160,8 +160,9 @@ app.post("/registerNewUser", (req, res) => {
 
 //Registre PRODUCTE nou APP
 app.post("/addNewProduct", (req, res) => {
-  let auth;
-  con.query("INSERT INTO PRODUCTE VALUES (NULL, '" + req.body.nom + "', " + req.body.preu + ", '" + req.body.categoria + "', 'Disponible', '" + req.body.descripcion + "', '" + req.body.idUsuari + "', NULL)",function (err, result, fields) {
+  let auth = true;
+  //console.log("Producte: " + req.body.id_usu + ", " + req.body.nom + ", " + req.body.preu + ", " + req.body.categoria + ", " + req.body.descripcion);
+  con.query("INSERT INTO PRODUCTE VALUES (NULL, '" + req.body.nom + "', " + req.body.preu + ", '" + req.body.categoria + "', 'Disponible', '" + req.body.descripcion + "', '" + req.body.id_usu + "', NULL)",function (err, result, fields) {
       auth = true;
   });
   res.json(auth);
@@ -186,7 +187,7 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
   var fileName = "";
   con.query("SELECT UPLOADS.path FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.user = '" + user +"';", function (err, result, fields) {
     filename = JSON.stringify(result);
-    console.log(filename);
+    //console.log(filename);
     filename = filename.replace(/\[/g, "");
     filename = filename.replace(/\{/g, "");
     filename = filename.replace(/\}/g, "");
@@ -197,11 +198,11 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     filename = filename.replace(/.$/, "");
     var array = filename.split("\\".concat("\\"));
     fileName = "/uploads/user_images/".concat(array[2]);
-    console.log("FileName: " + fileName);
+    //console.log("FileName: " + fileName);
     if (array[2] == null){
-      res.send("http://192.168.157.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+      res.send("http://192.168.47.15:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
     } else {
-      res.send("http://192.168.157.66:5501/Backend/Server" + fileName);
+      res.send("http://192.168.47.15:5501/Backend/Server" + fileName);
     }    
   });
 });
@@ -214,7 +215,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   //console.log("PASS: " + passwd);
   let auth = false;
   con.query(
-    "SELECT user, pass, rol, ban  FROM PERSONA WHERE user = '" +
+    "SELECT user, pass, rol, ban, id  FROM PERSONA WHERE user = '" +
     user +
     "' && pass ='" +
     passwd +
@@ -291,7 +292,7 @@ app.post("/editUser", (req, res)=>{
 });
 
 
-/* ---------------------- ENVIAR FITXERS A LA CARPETA ---------------------- */
+/* ---------------------- ENVIAR FITXERS A LA CARPETA USER ---------------------- */
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -333,8 +334,48 @@ app.post("/uploadUserImage", upload.single('myFile'), (req, res, next) => {
   });
 })
 
-app.post("/uploadProductImage", (req, res) => {
-  //TO-DO Pujar un fitxer a la carpeta "uploads/product_images"
+
+/* ---------------------- ENVIAR FITXERS A LA CARPETA PRODUCTE ---------------------- */
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/product_images')
+  },
+  filename: function (req, file, cb) {
+    con.query("SELECT id_producte FROM `PRODUCTE` WHERE id_producte = (SELECT MAX(id_producte) FROM PRODUCTE);", function (err, result, field) {
+      //console.log("HEY RESULT -> " + JSON.stringify(result));
+      var productName = JSON.stringify(result);
+      productName = productName.replace(/\[/g, "");
+      productName = productName.replace(/\{/g, "");
+      productName = productName.replace(/\"/g, "");
+      productName = productName.replace(/\:/g, "_");
+      productName = productName.replace(/\}/g, "_");
+      productName = productName.replace(/\]/g, "_");
+      //console.log("FINAL TEXT: " + productName);
+      cb(null, file.fieldname + '_' + productName + '.jpg')
+    });
+  }
+})
+
+var upload2 = multer({ storage: storage })
+
+app.post("/uploadProductImage", upload2.single('myFile'), (req, res) => {
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    console.log("error", 'Please upload a file');
+
+    res.send({ code: 500, msg: 'Please upload a file' })
+    return next({ code: 500, msg: error })
+  }
+
+  req.file.path.replace(/\"/g, "");
+  con.query("INSERT INTO UPLOADS_PRODUCT VALUES (null, " + JSON.stringify(req.file.path) + ")", function (err, result, field) {
+    con.query("UPDATE PRODUCTE SET PRODUCTE.id_image = (SELECT max(id_upload) FROM UPLOADS_PRODUCT) where PRODUCTE.id_producte = (SELECT MAX(id_producte) FROM PRODUCTE)", function (err, result, field) {
+      res.send({ code: 200, msg: file });
+    });
+  });
 })
 
 /*Obrir Servidor*/
