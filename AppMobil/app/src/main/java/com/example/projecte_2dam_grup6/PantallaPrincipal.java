@@ -3,13 +3,16 @@ package com.example.projecte_2dam_grup6;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -39,6 +43,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
@@ -60,6 +65,9 @@ public class PantallaPrincipal extends AppCompatActivity {
     private String dataN;
 
     Bitmap bitmapImage;
+    String path_decodeImage;
+    ImageView navUserImage;
+    CardView card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +94,10 @@ public class PantallaPrincipal extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.userLogIn);
-        ImageView navImageView = (ImageView) headerView.findViewById(R.id.imageUserLogIn);
+        navUserImage = (ImageView) headerView.findViewById(R.id.imageUserLogIn);
+        card = (CardView) headerView.findViewById(R.id.view2);
+        card.setBackgroundColor(Color.TRANSPARENT);
+        card.setCardElevation(0);
         //navImageView.setImageBitmap(bitmapImage);
         navUsername.setText(dadesUserLogIn);
 
@@ -270,16 +281,35 @@ public class PantallaPrincipal extends AppCompatActivity {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             Log.d("INFO", "Image USER: " + s);
-            /*
-            try {
-                byte[] encodeByte = Base64.decode(s, Base64.DEFAULT);
-                bitmapImage = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
+            StrictMode.ThreadPolicy gfgPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(gfgPolicy);
+            path_decodeImage = s;
+            InputStream in =null;
+            Bitmap bmp = null;
+            ImageView iv = navUserImage;
+            int responseCode = -1;
+            try{
+                URL url = new URL(path_decodeImage);//LINK IMG SERVER
+                Log.d("PATH", "URL: " + url);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setDoInput(true);
+                con.connect();
+                responseCode = con.getResponseCode();
+                if(responseCode == HttpURLConnection.HTTP_OK)
+                {
+                    //download
+                    in = con.getInputStream();
+                    bmp = BitmapFactory.decodeStream(in);
+                    in.close();
+                    iv.setImageBitmap(bmp);
+                }
+
+            }
+            catch(Exception ex){
+                Log.e("Exception",ex.toString());
+            }
         }
     }
-
 
 
     public String loadJSONFromAsset() {

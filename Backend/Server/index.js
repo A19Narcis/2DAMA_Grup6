@@ -198,6 +198,11 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     fileName = "/uploads/user_images/".concat(array[2]);
     console.log("FileName: " + fileName);
 
+    
+    res.send("http://192.168.157.66:5501/Backend/Server" + fileName);
+
+
+/*
     res.sendFile(fileName, options, function (err) {
         if (err) {
             //next(err);
@@ -206,9 +211,18 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
             console.log('Sent:', fileName);
         }
     });
+*/
   });
 });
 
+/*
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+*/
 
 //Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
