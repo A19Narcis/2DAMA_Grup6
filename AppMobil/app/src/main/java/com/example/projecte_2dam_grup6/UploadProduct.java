@@ -56,6 +56,8 @@ import retrofit2.Retrofit;
 
 public class UploadProduct extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String EXTRA_MESSAGE = "com.example.projecte_2dam_grup6.extra.MESSAGE";
+
     private Button btnBack;
     String[] cat_prod = {"Joguina", "Eina", "Roba", "Moble"};
     AutoCompleteTextView autoCompleteProduteCat;
@@ -69,6 +71,8 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     private String server_path;
     private String addProduct_path;
 
+    private String dadesUserLogIn;
+
     private boolean prodImageExists = true;
     Bitmap mBitmap;
     FloatingActionButton fabCamera;
@@ -80,6 +84,10 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_product);
+
+        //GET DADES USER LOGIN
+        Intent intent = getIntent();
+        dadesUserLogIn = intent.getStringExtra(PantallaPrincipal.EXTRA_MESSAGE);
 
         //Hide title bar
         if (getSupportActionBar() != null) {
@@ -191,7 +199,8 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
 
 
     public void backToStart(View view){
-        Intent intent = new Intent(this, PantallaPrincipal.class);
+        Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
+        intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
         startActivity(intent);
     }
 

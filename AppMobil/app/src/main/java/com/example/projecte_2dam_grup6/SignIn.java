@@ -150,18 +150,31 @@ public class SignIn extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s){
-            System.out.println("VALOR S ---> " + s);
+            System.out.println("VALOR S +----> " + s);
             super.onPostExecute(s);
             if (s.equals("false")){
                 textErrorDades.setVisibility(View.VISIBLE);
-            } else if (s.equals("true")){
-                //Toast.makeText(SignIn.this, "Welcome " + txtUserSignIn.getText(), Toast.LENGTH_LONG).show();
-                textErrorDades.setVisibility(View.INVISIBLE);
-                Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
-                Toast.makeText(SignIn.this, "Benvingut " + txtUserSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
-                String dadesUser = txtUserSignIn.getText().toString();
-                intent.putExtra(EXTRA_MESSAGE, dadesUser);
-                startActivity(intent);
+            } else {
+                Log.d("USER", "user: " + s);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                    int banUser = jsonObject.getInt("ban");
+
+                    if (banUser == 1){
+                        textErrorDades.setVisibility(View.VISIBLE);
+                    } else {
+                        textErrorDades.setVisibility(View.INVISIBLE);
+                        Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
+                        Toast.makeText(SignIn.this, "Benvingut " + txtUserSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
+                        intent.putExtra(EXTRA_MESSAGE, s);
+                        startActivity(intent);
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -120,6 +120,7 @@ app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
   });
 })
 
+//GET IMAGE NAV BAR USER LOGIN
 app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
   var user = req.params.dadesUserLogIn;
   var options = {
@@ -142,32 +143,13 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     var array = filename.split("\\".concat("\\"));
     fileName = "/uploads/user_images/".concat(array[2]);
     console.log("FileName: " + fileName);
-
-    
-    res.send("http://192.168.157.66:5501/Backend/Server" + fileName);
-
-
-/*
-    res.sendFile(fileName, options, function (err) {
-        if (err) {
-            //next(err);
-            console.log(err);
-        } else {
-            console.log('Sent:', fileName);
-        }
-    });
-*/
+    if (array[2] == null){
+      res.send("http://192.168.157.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+    } else {
+      res.send("http://192.168.157.66:5501/Backend/Server" + fileName);
+    }    
   });
 });
-
-/*
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
-*/
 
 //Validació LOGIN a l'APP
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
@@ -177,7 +159,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   //console.log("PASS: " + passwd);
   let auth = false;
   con.query(
-    "SELECT user, pass FROM PERSONA WHERE user = '" +
+    "SELECT user, pass, rol, ban  FROM PERSONA WHERE user = '" +
     user +
     "' && pass ='" +
     passwd +
@@ -185,8 +167,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
     function (err, result, fields) {
       console.log(JSON.stringify(result));
       if (result != 0) {
-        auth = true;
-        res.send(auth);
+        res.send(JSON.stringify(result));
       } else {
         res.send(auth);
       }

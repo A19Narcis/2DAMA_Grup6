@@ -47,6 +47,8 @@ import java.nio.charset.StandardCharsets;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE = "com.example.projecte_2dam_grup6.extra.MESSAGE";
+
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityPantallaPrincipalBinding binding;
 
@@ -54,6 +56,7 @@ public class PantallaPrincipal extends AppCompatActivity {
     private String loginValidate_path;
 
     private String dadesUserLogIn;
+    private String rolUser;
 
     //Valors DADES USER
     private String email;
@@ -64,7 +67,10 @@ public class PantallaPrincipal extends AppCompatActivity {
     private String desc;
     private String dataN;
 
-    Bitmap bitmapImage;
+    private int vegadesRol = 0;
+
+    private String arrLogIn;
+
     String path_decodeImage;
     ImageView navUserImage;
     CardView card;
@@ -73,11 +79,20 @@ public class PantallaPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getinfoUser();
-
         //GET DADES USER LOGIN
         Intent intent = getIntent();
-        dadesUserLogIn = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
+        arrLogIn = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
+
+        try {
+            JSONArray jsonArray = new JSONArray(arrLogIn);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            dadesUserLogIn = jsonObject.optString("user");
+            rolUser = jsonObject.optString("rol");
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        getinfoUser();
 
         binding = ActivityPantallaPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -86,8 +101,13 @@ public class PantallaPrincipal extends AppCompatActivity {
         binding.appBarPantallaPrincipal.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PantallaPrincipal.this, UploadProduct.class);
-                startActivity(intent);
+                if (rolUser.equals("artista")){
+                    Intent intent = new Intent(PantallaPrincipal.this, UploadProduct.class);
+                    intent.putExtra(EXTRA_MESSAGE, arrLogIn);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(PantallaPrincipal.this, "No ets ARTISTA", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
@@ -105,7 +125,15 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home).setOpenableLayout(drawer).build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home,
+                R.id.nav_personal_products,
+                R.id.nav_cat_Eina,
+                R.id.nav_cat_Moble,
+                R.id.nav_cat_Joguina,
+                R.id.nav_cat_Roba,
+                R.id.nav_cat_Eina
+        ).setOpenableLayout(drawer).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
