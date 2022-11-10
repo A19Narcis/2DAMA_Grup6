@@ -18,14 +18,16 @@ var app = new Vue({
                 { text: 'UBICACIO', value: 'ubicacio' },
                 { text: 'PASSWORD', value: 'pass' },
                 { text: 'ROL', value: 'rol' },
-                { text: 'BAN', value: 'ban'},
+                { text: 'BAN', value: 'ban' },
                 { text: 'INFO' },
                 { text: 'BAN' }
-                
+
             ],
             search: '',
             edit: 0,
             img_usu: '',
+            arrEdit: [],
+            arrPet: [],
             isLock: false,
             login: 0,
             prod: 0,
@@ -35,7 +37,7 @@ var app = new Vue({
             logout: 0,
             sheet: false,
             users: [],
-            seePr: [ ],
+            seePr: [],
             img_prod: ' ',
             dial: 0,
             img: ' ',
@@ -71,7 +73,7 @@ var app = new Vue({
 
             search: '',
             products: [],
-            
+
             hoverInit: ' ',
             num_prod: 0,
             seeUs: [],
@@ -196,8 +198,8 @@ var app = new Vue({
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
-              
-                    
+
+
                 }
             ).catch(
                 (error) => {
@@ -233,7 +235,7 @@ var app = new Vue({
                     this.seePr = data[0];
                     console.log(this.seePr);
                     this.info.values = [];
-                    this.sheet = true; 
+                    this.sheet = true;
                 }
             ).catch(
                 (error) => {
@@ -242,40 +244,37 @@ var app = new Vue({
                 }
             );
         },
-        checkRol: function(rol)
-        {
-            if (rol== 'admin'){
-                this.isUser=1;
-                this.isArtista =1;
+        checkRol: function (rol) {
+            if (rol == 'admin') {
+                this.isUser = 1;
+                this.isArtista = 1;
             }
-            if (rol == 'artista'){
-                this.isUser=1;
-                this.isAdmin =1;
+            if (rol == 'artista') {
+                this.isUser = 1;
+                this.isAdmin = 1;
             }
-            if (rol == 'user'){
-                this.isArtista=1;
-                this.isAdmin =1;
+            if (rol == 'user') {
+                this.isArtista = 1;
+                this.isAdmin = 1;
             }
         },
-        checkBan: function(rol)
-        {
-            if (rol== 'admin'){
-                this.isUser=1;
-                this.isArtista =1;
+        checkBan: function (rol) {
+            if (rol == 'admin') {
+                this.isUser = 1;
+                this.isArtista = 1;
             }
         },
 
-        editUser: function(email,nom, cognoms, data_naixament, ubicacio, user, pass, descripcio, rol, id, id_image, ban)
-        {
-            this.info.values.push(email); 
+        editUser: function (email, nom, cognoms, data_naixament, ubicacio, user, pass, descripcio, rol, id, id_image, ban) {
+            this.info.values.push(email);
             this.info.values.push(nom);
-            this.info.values.push(cognoms); 
+            this.info.values.push(cognoms);
             this.info.values.push(data_naixament);
-            this.info.values.push(ubicacio); 
-            this.info.values.push(user); 
-            this.info.values.push(pass); 
+            this.info.values.push(ubicacio);
+            this.info.values.push(user);
+            this.info.values.push(pass);
             this.info.values.push(descripcio);
-            this.info.values.push(rol); 
+            this.info.values.push(rol);
             this.info.values.push(id);
             this.info.values.push(id_image);
             this.info.values.push(ban);
@@ -312,14 +311,13 @@ var app = new Vue({
             );
         },
         banear: function (email, ban, rol) {
-            if (rol == 'admin')
-            {
-                return ;
+            if (rol == 'admin') {
+                return;
             }
             this.info.values.push(email);
             this.info.values.push(ban);
             console.log(this.info.values);
-            
+
             console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/banear/",
@@ -340,12 +338,10 @@ var app = new Vue({
                 }
             ).then(
                 (data) => {
-                    console.log(data);
-                    this.usuinfo = data[0];
-                    this,info.values = [];
+                    console.log("ban" + data);
+                    this.info.values = [];
                     app.getUsers();
-                
-                    
+
                 }
             ).catch(
                 (error) => {
@@ -389,10 +385,123 @@ var app = new Vue({
                     this.seeUs.path = str;
                     this.img = this.seeUs.path;
                     //console.log(this.img);
-                    console.log("SeeUs" +this.seeUs.path);
+                    console.log("SeeUs" + this.seeUs.path);
                     this.info.values = [];
 
 
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+        decidirPeticion: function (user, decision, id) {
+            this.info.values.push(user);
+            this.info.values.push(decision);
+            this.info.values.push(id);
+            console.log(this.info.values);
+
+            console.log("decidirPeticion");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/decidirPeticion/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: "cors",
+                    body: JSON.stringify(this.info),
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    //console.log(data);
+                    this.info.values = [];
+                    app.getUsers();
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+        seeEdit: function (id) {
+            this.info.values.push(id);
+
+            console.log(this.info.values);
+
+            console.log("SeeEdit");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/seeEdit/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: "cors",
+                    body: JSON.stringify(this.info),
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    //console.log(data);
+                    this.arrEdit = data[0];
+                    var str = "../../Backend/Server/";
+                    str = str + this.arrEdit.path;
+                    str = str.replaceAll('"', '');
+                    this.arrEdit.path = str;
+                    this.img = this.arrEdit.path;
+                    //console.log(this.img);
+                    console.log("arrEdit" + this.arrEdit.path);
+                    this.info.values = [];
+
+
+                }
+            ).catch(
+                (error) => {
+                    console.log("Error. ");
+                    console.log(error);
+                }
+            );
+        },
+        seePeticiones: function () {
+            
+            console.log("seePeticiones");
+            const myHeaders = new Headers();
+            fetch("http://localhost:3000/seePeticiones/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    //console.log(response);
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    //console.log(data);
+                    this.arrPet = data;
                 }
             ).catch(
                 (error) => {
@@ -443,6 +552,7 @@ var app = new Vue({
             }
 
         },
+
         onClickImage() {
             alert('Clicked image')
         },

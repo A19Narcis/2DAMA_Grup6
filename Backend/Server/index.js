@@ -86,6 +86,61 @@ app.post("/seeUsers", (req, res) => {
     }
   );
 });
+app.post("/seePeticiones", (req, res) => {
+  var dades = [];
+  //console.log(req.body.values[0]);
+  con.query(
+    "SELECT PERSONA.user, PETICIONES.peticion, PETICIONES.id_usu FROM PETICIONES JOIN PERSONA ON (PETICIONES.id_usu = PERSONA.id)",
+    function (err, result, fields) {
+      res.json(result);
+    }
+  );
+});
+
+app.post("/decidirPeticion", (req, res) => {
+  var decision = req.body.values[1];
+  var user = req.body.values[0];
+  var id = req.body.values[2];
+  
+  if (decision == 1)
+  {
+    console.log("solo borro");
+    con.query(
+      "DELETE FROM PETICIONES WHERE id_usu = " + id + "",
+      function (err, result, fields) {
+        res.json(result);
+      }
+    );
+  }
+  if (decision == 0)
+  {
+    console.log("borro y update");
+
+    con.query(
+      "DELETE FROM PETICIONES WHERE id_usu = " + id + "",
+      function (err, result, fields) {
+        con.query(
+          "UPDATE PERSONA SET PERSONA.rol = 'artista' WHERE PERSONA.id = '" + id + "'",
+          function (err, result, fields) {
+             res.json(result)
+          }
+        );
+      }
+    );
+
+  }
+});
+
+app.post("/seeEdit", (req, res) => {
+  var dades = [];
+  //console.log(req.body.values[0]);
+  con.query(
+    "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.id = '" + req.body.values[0] + "'",
+    function (err, result, fields) {
+      res.json(result);
+    }
+  );
+});
 
 //Registre USER nou APP
 app.post("/registerNewUser", (req, res) => {
@@ -231,11 +286,7 @@ app.post("/editUser", (req, res)=>{
   var id_image = req.body.values[10];
   var ban = req.body.values[11];
   con.query("UPDATE `PERSONA` SET `email`='" + email +"',`nom`='"+ nom +"',`cognoms`='"+cognoms+"',`data_naixament`='"+data_naixament+"',`ubicacio`='"+ubicacio+"',`user`='"+user+"',`pass`='"+pass+"',`descripcio`='"+descripcio+"',`rol`='"+rol+"',`id`='"+id+"',`id_image`='"+id_image+"',`ban`='"+ban+"'WHERE PERSONA.id = '" + id + "'", function (err, result, field) {
-    con.query(
-      "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
-      function (err, result, fields) {
-        res.json(result);
-      });
+      res.json(result);
 });
 });
 
