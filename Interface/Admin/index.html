@@ -16,6 +16,7 @@
   <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.9.0/dist/js-confetti.browser.js"></script>
 </head>
 
 <body>
@@ -37,49 +38,74 @@
                 @click:append="showPassword = !showPassword">
               </v-text-field>
               <v-card-text class="mt-n3">{{err}}</v-card-text>
-              <v-btn @click="getAdmins" @click="getUsers" class="" color="primary">Sign In</v-btn>
+              <v-btn @click="getAdmins(), getUsers()" class="" color="primary">Sign In</v-btn>
             </v-card-text>
         </v-col>
       </v-row>
     </v-container>
 
-    <!--LOGOUT/EDIT-->
-    <v-col v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)"
-    
-      class="text-right">
-      <v-menu min-width="200px" rounded offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn icon x-large v-on="on">
-            <v-avatar color="brown" size="48">
-              <v-img :src=img_usu></v-img>
-            </v-avatar>
-          </v-btn>
-        </template>
-        <v-card>
-          <script ></script>
-          <v-list-item-content class="justify-center">
-            <div class="mx-auto text-center">
-              <v-avatar>
+
+    <!--Peticiones-->
+    <div class="text-right pr-6" v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)">    
+        <v-menu min-width="300px" rounded offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon color="white" @click="seePeticiones" x-large v-on="on">
+              <v-icon>mdi-message-text</v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center ">
+                <h3>Peticiones</h3>
+                  <v-divider class="my-3"></v-divider>
+                <p v-for="n in arrPet" :key="n" >
+                  {{n.user}} <br>
+                  {{n.peticion}}
+                <br>
+                <br>
+                <v-chip @click="decidirPeticion(n.user, 1, n.id_usu)" color="red">Cancelar</v-chip>
+                <v-chip @click="decidirPeticion(n.user, 0, n.id_usu)" color="success">Aceptar</v-chip>
+                <v-divider class="my-3"></v-divider>
+              </p>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+     
+      <!--LOGOUT/EDIT-->
+      
+        <v-menu min-width="200px" rounded offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon x-large v-on="on">
+              <v-avatar color="brown" size="48">
                 <v-img :src=img_usu></v-img>
               </v-avatar>
-              <h3>{{usuinfo.nom}} {{usuinfo.cognoms}}</h3>
-              <p class="text-caption mt-1">
-                {{usuinfo.email}}
-              </p>
-              <v-divider class="my-3"></v-divider>
-              <v-btn depressed rounded text @click="login=0, logout=0, prod=0, edit=1, seeUsers(usuinfo.email)">
-                Edit Account
-              </v-btn>
-              <v-divider class="my-3"></v-divider>
-              <v-btn depressed rounded text @click="login = 0, logout=0, prod=0">
-                Disconnect
-              </v-btn>
-            </div>
-          </v-list-item-content>
-        </v-card>
-      </v-menu>
-    </v-col>
-
+            </v-btn>
+          </template>
+          <v-card>
+            <script></script>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center">
+                <v-avatar>
+                  <v-img :src=img_usu></v-img>
+                </v-avatar>
+                <h3>{{usuinfo.nom}} {{usuinfo.cognoms}}</h3>
+                <p class="text-caption mt-1">
+                  {{usuinfo.id}}
+                </p>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text @click="login=0, logout=0, prod=0, edit=1, seeEdit(usuinfo.id)">
+                  Edit Account
+                </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text @click="login = 0, logout=0, prod=0">
+                  Disconnect
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+    </div>
     <!--TAULA USERS-->
     <v-container fill-height v-show="login && !prod && !edit ">
       <v-row justify="center" align="center">
@@ -197,8 +223,8 @@
                             <v-btn color="primary" text @click="dialog2 = false">
                               Cancelar
                             </v-btn>
-                            <v-btn @click="banear(seeUs.email, seeUs.ban, seeUs.rol, dialog2 = false)" color="primary"
-                              text>
+                            <v-btn id="ban" @click="banear(seeUs.email, seeUs.ban, seeUs.rol, dialog2 = false)"
+                              color="primary">
                               Banear
                             </v-btn>
                           </v-card-actions>
@@ -300,53 +326,58 @@
         <v-col cols="10" sm="auto">
           <v-card width="auto" height="auto" elevation="8" outlined>
             <v-card-text>
-              <v-card-title>Edit account: {{seeUs.user}}</v-card-title>
+              <v-card-title>Edit account: {{arrEdit.user}}</v-card-title>
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Nom" outlined v-model="seeUs.nom" ></v-text-field>
+                    <v-text-field label="Nom" outlined v-model="arrEdit.nom"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Cognoms" outlined v-model="seeUs.cognoms" >
+                    <v-text-field label="Cognoms" outlined v-model="arrEdit.cognoms">
                     </v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Edad" outlined v-model="seeUs.data_naixament" >
+                    <v-text-field label="Edad" outlined v-model="arrEdit.data_naixament">
                     </v-text-field>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field label="Email" outlined v-model="seeUs.email" ></v-text-field>
+                    <v-text-field label="Email" outlined v-model="arrEdit.email"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
-                    <v-text-field label="User" outlined v-model="seeUs.user" ></v-text-field>
+                    <v-text-field label="User" outlined v-model="arrEdit.user"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
-                    <v-text-field label="Password" outlined v-model="seeUs.pass" ></v-text-field>
+                    <v-text-field label="Password" outlined v-model="arrEdit.pass"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
-                    <v-text-field label="ubicacio" outlined v-model="seeUs.ubicacio" >
+                    <v-text-field label="ubicacio" outlined v-model="arrEdit.ubicacio">
                     </v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6">
-                    <v-text-field label="rol" outlined v-model="seeUs.rol" readonly ></v-text-field>
+                    <v-text-field label="rol" outlined v-model="arrEdit.rol" readonly></v-text-field>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field label="descripcio" outlined v-model="seeUs.descripcio" >
+                    <v-text-field label="descripcio" outlined v-model="arrEdit.descripcio">
                     </v-text-field>
                   </v-col>
                 </v-row>
                 <v-col class="text-left">
-                  <v-btn @click="editUser(seeUs.email, seeUs.nom, seeUs.cognoms, seeUs.data_naixament, seeUs.ubicacio, seeUs.user, seeUs.pass, seeUs.descripcio,  seeUs.rol,  seeUs.id, seeUs.id_image, seeUs.ban), prod = 0, login = 1, logout = 1, edit = 0" color="primary">Save Data</v-btn>
+                  <v-btn id="confetti"
+                    @click="editUser(arrEdit.email, arrEdit.nom, arrEdit.cognoms, arrEdit.data_naixament, arrEdit.ubicacio, arrEdit.user, arrEdit.pass, arrEdit.descripcio,  arrEdit.rol,  arrEdit.id, arrEdit.id_image, arrEdit.ban), prod = 0, login = 1, logout = 1, edit = 0"
+                    color="primary">Save Data</v-btn>
                 </v-col>
               </v-container>
             </v-card-text>
         </v-col>
       </v-row>
     </v-container>
+
   </v-app>
   <script src="index.js"></script>
   <script src="particles.js"></script>
   <script src="app.js"></script>
+  <script src="confetti.js" type="module"></script>
+
   </div>
 
 

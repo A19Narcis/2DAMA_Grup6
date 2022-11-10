@@ -17,3 +17,7 @@ h1{
 	position: absolute;
 	color: white;
 }
+
+.text-right{
+	white-space: nowrap;
+}
