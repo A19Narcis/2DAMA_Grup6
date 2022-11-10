@@ -43,6 +43,12 @@
         </v-col>
       </v-row>
     </v-container>
+    <!--Boton al Home-->
+  
+      <v-btn v-show="!login && prod" @click="prod = 0, login = 1" class="text-left" color="primary">
+        <v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home
+      </v-btn>
+    
 
 
     <!--Peticiones-->
@@ -245,12 +251,6 @@
         </v-col>
     </v-container>
 
-    <!--Boton al Home-->
-    <v-col class="text-left">
-      <v-btn v-show="!login && prod" @click="prod = 0, login = 1" class="text-left" color="primary">
-        <v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home
-      </v-btn>
-    </v-col>
 
 
     <!--Productes-->
@@ -274,8 +274,8 @@
                 </v-badge>
               </template>
             </v-hover>
-            <v-bottom-sheet v-model="sheet">
-              <v-sheet class="text-center" height="auto">
+            <v-bottom-sheet v-model="sheet" :retain-focus="false">
+              <v-sheet class="text-center" height="auto" >
                 <v-btn class="mt-6" text color="red" @click="sheet = !sheet">
                   close
                 </v-btn>
