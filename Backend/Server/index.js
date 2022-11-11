@@ -203,9 +203,9 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     fileName = "/uploads/user_images/".concat(array[2]);
     //console.log("FileName: " + fileName);
     if (array[2] == null){
-      res.send("http://192.168.47.15:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+      res.send("http://192.168.157.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
     } else {
-      res.send("http://192.168.47.15:5501/Backend/Server" + fileName);
+      res.send("http://192.168.157.66:5501/Backend/Server" + fileName);
     }    
   });
 });

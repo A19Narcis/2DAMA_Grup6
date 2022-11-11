@@ -305,6 +305,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             multipartImageUpload();
             Toast.makeText(UploadProduct.this, "Producte afegit correctament", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
+            intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
             startActivity(intent);
         }
     }
