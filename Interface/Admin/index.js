@@ -25,6 +25,9 @@ var app = new Vue({
             ],
             search: '',
             edit: 0,
+            snackbar: false,
+            teo: "Hola fumo porros",
+            timeout: 2000,
             img_usu: '',
             arrEdit: [],
             arrPet: [],
@@ -170,7 +173,8 @@ var app = new Vue({
             );
         },
 
-        getProducts: function (data) {
+        getProducts: function () {
+  
             console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getProducts/",
@@ -194,11 +198,11 @@ var app = new Vue({
                     this.login = 0;
                     this.prod = 1;
                     this.products = data;
-                    console.log(this.products);
+                    console.log(this.products[0]);
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
-
+                    this.info.values = []
 
                 }
             ).catch(

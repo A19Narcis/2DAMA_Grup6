@@ -44,13 +44,10 @@
       </v-row>
     </v-container>
     <!--Boton al Home-->
-  
       <v-btn v-show="!login && prod" @click="prod = 0, login = 1" class="text-left" color="primary">
         <v-icon>mdi-arrow-expand-left</v-icon>&nbsp;Home
       </v-btn>
     
-
-
     <!--Peticiones-->
     <div class="text-right pr-6" v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)">    
         <v-menu min-width="300px" rounded offset-y>
@@ -243,7 +240,7 @@
             </v-card>
           </template>
           <v-col class="text-right">
-            <v-btn @click="getProducts" @click="seeProduct" class="text-right" color="primary">Products&nbsp;<v-icon>
+            <v-btn @click="getProducts(), seeProduct()" class="text-right" color="primary">Products&nbsp;<v-icon>
                 mdi-arrow-expand-right
               </v-icon>
             </v-btn>
@@ -256,11 +253,13 @@
     <!--Productes-->
     <v-container fill-height v-show="!login && prod">
       <template>
+
         <v-row justify="space-around">
+
           <v-col v-for="n in products" :key="n" class="d-flex child-flex" cols="3">
             <v-hover v-model="hoverInit">
               <template v-slot:default="{ hover }">
-                <v-badge bordered color="error" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'">
+                
                   <v-card>
                     <v-img :src="`../../Backend/Server/${n.path}`" aspect-ratio="1" class="grey lighten-2">
                     </v-img>
@@ -271,12 +270,11 @@
                       </v-overlay>
                     </v-fade-transition>
                   </v-card>
-                </v-badge>
               </template>
             </v-hover>
-            <v-bottom-sheet v-model="sheet" :retain-focus="false">
+            <v-bottom-sheet scrollable v-model="sheet" :retain-focus="false">
               <v-sheet class="text-center" height="auto" >
-                <v-btn class="mt-6" text color="red" @click="sheet = !sheet">
+                <v-btn class="mt-6" text color="primary" @click="sheet = !sheet">
                   close
                 </v-btn>
 
