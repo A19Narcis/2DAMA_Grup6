@@ -6,31 +6,31 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Inici" />
+            android:icon="@drawable/house"
+            android:title="Productes" />
 
         <item
             android:id="@+id/nav_personal_products"
-            android:icon="@drawable/ic_inventory_2_black_24dp"
+            android:icon="@drawable/box"
             android:title="Els meus productes"
             />
         <item android:title="Categories">
             <menu>
                 <item
-                    android:id="@+id/nav_cat_Eina"
-                    android:icon="@drawable/ic_handyman_black_24dp"
+                    android:id="@+id/nav_eina"
+                    android:icon="@drawable/tools"
                     android:title="Eines" />
                 <item
                     android:id="@+id/nav_cat_Moble"
-                    android:icon="@drawable/ic_chair_black_24dp"
+                    android:icon="@drawable/furniture"
                     android:title="Mobles" />
                 <item
                     android:id="@+id/nav_cat_Joguina"
-                    android:icon="@drawable/ic_toys_black_24dp"
+                    android:icon="@drawable/toy"
                     android:title="Joguines" />
                 <item
                     android:id="@+id/nav_cat_Roba"
-                    android:icon="@drawable/ic_checkroom_black_24dp"
+                    android:icon="@drawable/laundry"
                     android:title="Roba" />
             </menu>
         </item>
@@ -38,7 +38,7 @@
             <menu>
                 <item
                     android:id="@+id/nav_logout"
-                    android:icon="@drawable/ic_logout_black_24dp"
+                    android:icon="@drawable/logout"
                     android:title="Log out" />
             </menu>
         </item>

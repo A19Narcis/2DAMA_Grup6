@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/edit_text_background.xml" value="0.2195" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_add_circle_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_chair_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_checkroom_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_handyman_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_inventory_2_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_logout.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_logout_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_megusta.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_menu_camera.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_pant_inici.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_password.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_person.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_publish_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_toys_black_24dp.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/image_border.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/side_nav_bar.xml" value="0.27" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/content_pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_eines.xml" value="0.321875" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_user_products.xml" value="0.14285714285714285" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/list_cat_prod.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/list_producte.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/pantalla_principal.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

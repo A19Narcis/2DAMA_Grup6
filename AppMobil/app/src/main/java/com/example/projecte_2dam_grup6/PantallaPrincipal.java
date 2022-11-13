@@ -106,12 +106,13 @@ public class PantallaPrincipal extends AppCompatActivity {
                     intent.putExtra(EXTRA_MESSAGE, arrLogIn);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PantallaPrincipal.this, "No ets ARTISTA", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PantallaPrincipal.this, "No ets artista", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        binding.navView.setItemIconTintList(null);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.userLogIn);
         navUserImage = (ImageView) headerView.findViewById(R.id.imageUserLogIn);
@@ -128,11 +129,11 @@ public class PantallaPrincipal extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home,
                 R.id.nav_personal_products,
-                R.id.nav_cat_Eina,
+                R.id.nav_eina,
                 R.id.nav_cat_Moble,
                 R.id.nav_cat_Joguina,
                 R.id.nav_cat_Roba,
-                R.id.nav_cat_Eina
+                R.id.nav_logout
         ).setOpenableLayout(drawer).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
