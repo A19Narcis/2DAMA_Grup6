@@ -1,12 +1,7 @@
-package com.example.projecte_2dam_grup6.ui.home;
+package com.example.projecte_2dam_grup6.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,11 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.projecte_2dam_grup6.MyAdapter;
-import com.example.projecte_2dam_grup6.PantallaPrincipal;
+import com.example.projecte_2dam_grup6.ui.Adapter.MyAdapter;
 import com.example.projecte_2dam_grup6.Producte;
 import com.example.projecte_2dam_grup6.R;
 import com.example.projecte_2dam_grup6.databinding.FragmentHomeBinding;
+import com.example.projecte_2dam_grup6.ui.viewModel.MyViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class EinesFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
@@ -47,12 +46,11 @@ public class HomeFragment extends Fragment {
     private static final String URL_DATA = "http://192.168.65.15:3000/dadesProductsJSON";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -81,6 +79,7 @@ public class HomeFragment extends Fragment {
                     JSONArray jsonArray = new JSONArray(response);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
+                        String categoria;
                         JSONObject o = jsonArray.getJSONObject(i);
                         Producte item = new Producte(
                                 o.getString("nom"),
@@ -89,7 +88,10 @@ public class HomeFragment extends Fragment {
                                 o.getString("preu"),
                                 o.getString("id_producte")
                         );
-                        listItems.add(item);
+                        categoria = o.getString("categoria");
+                        if (categoria.equals("Eina")){
+                            listItems.add(item);
+                        }
                     }
 
                     adapter = new MyAdapter(listItems, getContext());
@@ -111,10 +113,6 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
-
-
-
-
 
 
     @Override

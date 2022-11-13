@@ -1,5 +1,6 @@
 package com.example.projecte_2dam_grup6;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.CursorAdapter;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -68,7 +72,6 @@ public class PantallaPrincipal extends AppCompatActivity {
     private String dataN;
 
     private int vegadesRol = 0;
-
     private String arrLogIn;
 
     String path_decodeImage;
@@ -110,18 +113,61 @@ public class PantallaPrincipal extends AppCompatActivity {
                 }
             }
         });
+
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+        binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
+            Toast.makeText(this, "HEEEEEEEEY", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(PantallaPrincipal.this);
+            alertaLogOut.setTitle("Log out");
+            alertaLogOut.setMessage("¿Quieres cerrar sesión en la aplicación?");
+            alertaLogOut.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(PantallaPrincipal.this, SignIn.class);
+                    startActivity(intent);
+                }
+            });
+            alertaLogOut.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //Es queda a la pantalla
+                }
+            });
+            alertaLogOut.show();
+            return true;
+        });
+
         binding.navView.setItemIconTintList(null);
+
+        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
+        });
+
+
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.userLogIn);
         navUserImage = (ImageView) headerView.findViewById(R.id.imageUserLogIn);
+        
+        navUserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PantallaPrincipal.this, SignIn.class);
+                startActivity(intent);
+            }
+        });
+        
         card = (CardView) headerView.findViewById(R.id.view2);
         card.setBackgroundColor(Color.TRANSPARENT);
         card.setCardElevation(0);
         //navImageView.setImageBitmap(bitmapImage);
         navUsername.setText(dadesUserLogIn);
-
 
 
         // Passing each menu ID as a set of Ids because each
