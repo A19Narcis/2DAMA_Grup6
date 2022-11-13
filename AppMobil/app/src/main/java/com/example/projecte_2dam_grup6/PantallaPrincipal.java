@@ -127,14 +127,9 @@ public class PantallaPrincipal extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home,
-                R.id.nav_personal_products,
-                R.id.nav_eina,
-                R.id.nav_cat_Moble,
-                R.id.nav_cat_Joguina,
-                R.id.nav_cat_Roba,
-                R.id.nav_logout
-        ).setOpenableLayout(drawer).build();
+                R.id.nav_home, R.id.nav_eina)
+                .setOpenableLayout(drawer)
+                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
