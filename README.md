@@ -1,0 +1,2 @@
+# 2DAMA_Grup6
+Projecte M06-M07-M08-M09
