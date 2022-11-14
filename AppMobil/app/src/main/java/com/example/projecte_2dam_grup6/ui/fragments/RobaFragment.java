@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.projecte_2dam_grup6.PantallaPrincipal;
 import com.example.projecte_2dam_grup6.Producte;
 import com.example.projecte_2dam_grup6.R;
 import com.example.projecte_2dam_grup6.databinding.FragmentHomeBinding;
@@ -43,13 +44,17 @@ public class RobaFragment extends Fragment {
 
     private List<Producte> listItems;
 
-    private static final String URL_DATA = "http://192.168.224.66:3000/dadesProductsJSON";
-
+    private static String url_data;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        PantallaPrincipal pantallaPrincipal = (PantallaPrincipal) getActivity();
+
+        url_data = pantallaPrincipal.getServerPathFragment() + pantallaPrincipal.getDadesJSONPathFragment();
+
         return root;
     }
 
@@ -74,7 +79,7 @@ public class RobaFragment extends Fragment {
         progressDialog.setMessage("Loading productes");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url_data, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();

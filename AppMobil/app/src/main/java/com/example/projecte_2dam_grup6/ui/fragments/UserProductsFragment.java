@@ -47,7 +47,7 @@ public class UserProductsFragment extends Fragment {
 
     private String username;
 
-    private static final String URL_DATA = "http://192.168.224.66:3000/dadesProductsJSON";
+    private static String url_data;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);
@@ -57,6 +57,8 @@ public class UserProductsFragment extends Fragment {
         PantallaPrincipal pantallaPrincipal = (PantallaPrincipal) getActivity();
 
         username = pantallaPrincipal.getUserIDinFragment(); //Agafa la id de l'usuari actual
+        url_data = pantallaPrincipal.getServerPathFragment() + pantallaPrincipal.getDadesJSONPathFragment(); //http:xxx.xxx.xxx.xxx:3000/veureDadesJSON
+
         Log.d("ID", "id_user actual: " + username);
 
         return root;
@@ -81,7 +83,7 @@ public class UserProductsFragment extends Fragment {
         progressDialog.setMessage("Loading productes");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url_data, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();

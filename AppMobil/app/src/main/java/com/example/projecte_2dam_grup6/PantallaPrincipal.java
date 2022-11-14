@@ -57,6 +57,7 @@ public class PantallaPrincipal extends AppCompatActivity {
     private ActivityPantallaPrincipalBinding binding;
 
     private String server_path;
+    private String dades_json_path;
     private String loginValidate_path;
 
     private String dadesUserLogIn;
@@ -86,6 +87,15 @@ public class PantallaPrincipal extends AppCompatActivity {
         //GET DADES USER LOGIN
         Intent intent = getIntent();
         arrLogIn = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
+
+        //Llegir les dades del fitxer JSON en ASSETS
+        try {
+            JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
+            server_path = obj_settings.getString("server");
+            dades_json_path = obj_settings.getString("dadesJSON");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         try {
             JSONArray jsonArray = new JSONArray(arrLogIn);
@@ -117,8 +127,6 @@ public class PantallaPrincipal extends AppCompatActivity {
                 }
             }
         });
-
-
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -198,7 +206,6 @@ public class PantallaPrincipal extends AppCompatActivity {
             //Llegir les dades del fitxer JSON en ASSETS
             try {
                 JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
-                server_path = obj_settings.getString("server");
                 loginValidate_path = obj_settings.getString("dadesUserLogIn");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -291,7 +298,6 @@ public class PantallaPrincipal extends AppCompatActivity {
             //Llegir les dades del fitxer JSON en ASSETS
             try {
                 JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
-                server_path = obj_settings.getString("server");
                 loginValidate_path = obj_settings.getString("imageUserLogin");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -416,5 +422,13 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     public String getUserIDinFragment(){
         return dadesUserLogIn;
+    }
+
+    public String getServerPathFragment(){
+        return server_path;
+    }
+
+    public String getDadesJSONPathFragment(){
+        return dades_json_path;
     }
 }
