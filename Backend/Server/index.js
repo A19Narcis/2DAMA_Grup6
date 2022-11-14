@@ -203,9 +203,9 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     fileName = "/uploads/user_images/".concat(array[2]);
     //console.log("FileName: " + fileName);
     if (array[2] == null){
-      res.send("http://192.168.65.15:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+      res.send("http://192.168.224.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
     } else {
-      res.send("http://192.168.65.15:5501/Backend/Server" + fileName);
+      res.send("http://192.168.224.66:5501/Backend/Server" + fileName);
     }    
   });
 });
@@ -237,7 +237,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 
 //GET dades products per RECYCLE VIEW
 app.get("/dadesProductsJSON", (req, res) => {
-  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://192.168.65.15:5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://192.168.224.66:5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
     res.send(result);
   });
 });

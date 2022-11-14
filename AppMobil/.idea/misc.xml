@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_pantalla_principal.xml" value="0.30027173913043476" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_eines.xml" value="0.35208333333333336" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_joguina.xml" value="0.35208333333333336" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_moble.xml" value="0.35208333333333336" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_roba.xml" value="0.35208333333333336" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_user_products.xml" value="0.2115036231884058" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.2115036231884058" />
+        <entry key="../../../../../../../dades/dades/A19Narcis/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.35208333333333336" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/edit_text_background.xml" value="0.2195" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/drawable/ic_add_circle_black_24dp.xml" value="0.27" />

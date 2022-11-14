@@ -43,7 +43,7 @@ public class EinesFragment extends Fragment {
 
     private List<Producte> listItems;
 
-    private static final String URL_DATA = "http://192.168.65.15:3000/dadesProductsJSON";
+    private static final String URL_DATA = "http://192.168.224.66:3000/dadesProductsJSON";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);

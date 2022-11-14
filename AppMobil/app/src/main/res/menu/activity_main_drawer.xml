@@ -11,7 +11,7 @@
             android:title="Productes" />
 
         <item
-            android:id="@+id/nav_personal_products"
+            android:id="@+id/nav_self_products"
             android:icon="@drawable/box"
             android:title="Els meus productes"
             />
@@ -23,15 +23,15 @@
                         android:icon="@drawable/tools"
                         android:title="Eines" />
                     <item
-                        android:id="@+id/nav_cat_Moble"
+                        android:id="@+id/nav_moble"
                         android:icon="@drawable/furniture"
                         android:title="Mobles" />
                     <item
-                        android:id="@+id/nav_cat_Joguina"
+                        android:id="@+id/nav_joguina"
                         android:icon="@drawable/toy"
                         android:title="Joguines" />
                     <item
-                        android:id="@+id/nav_cat_Roba"
+                        android:id="@+id/nav_roba"
                         android:icon="@drawable/laundry"
                         android:title="Roba" />
                 </group>

@@ -61,6 +61,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     private String dadesUserLogIn;
     private String rolUser;
+    private String id_user;
 
     //Valors DADES USER
     private String email;
@@ -89,8 +90,11 @@ public class PantallaPrincipal extends AppCompatActivity {
         try {
             JSONArray jsonArray = new JSONArray(arrLogIn);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
+            Log.d("Usuari", "DADES: " + jsonObject);
             dadesUserLogIn = jsonObject.optString("user");
             rolUser = jsonObject.optString("rol");
+            id_user = jsonObject.optString("id");
+
         } catch (JSONException e){
             e.printStackTrace();
         }
@@ -120,7 +124,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
 
         binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
-            Toast.makeText(this, "HEEEEEEEEY", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(PantallaPrincipal.this);
             alertaLogOut.setTitle("Log out");
             alertaLogOut.setMessage("¿Quieres cerrar sesión en la aplicación?");
@@ -158,8 +161,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         navUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PantallaPrincipal.this, SignIn.class);
-                startActivity(intent);
+                //NEW intent per veure la informació de l'usuari actiu
             }
         });
         
@@ -173,7 +175,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_eina)
+                R.id.nav_home, R.id.nav_eina, R.id.nav_roba, R.id.nav_joguina, R.id.nav_moble, R.id.nav_self_products)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
@@ -410,5 +412,9 @@ public class PantallaPrincipal extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public String getUserIDinFragment(){
+        return dadesUserLogIn;
     }
 }

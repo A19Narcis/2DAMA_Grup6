@@ -16,4 +16,30 @@
         android:name="com.example.projecte_2dam_grup6.ui.fragments.EinesFragment"
         android:label="Eines"
         tools:layout="@layout/fragment_eines" />
+
+    <fragment
+        android:id="@+id/nav_roba"
+        android:name="com.example.projecte_2dam_grup6.ui.fragments.RobaFragment"
+        android:label="Roba"
+        tools:layout="@layout/fragment_roba" />
+
+    <fragment
+        android:id="@+id/nav_joguina"
+        android:name="com.example.projecte_2dam_grup6.ui.fragments.JoguinaFragment"
+        android:label="Joguines"
+        tools:layout="@layout/fragment_joguina" />
+
+    <fragment
+        android:id="@+id/nav_moble"
+        android:name="com.example.projecte_2dam_grup6.ui.fragments.MobleFragment"
+        android:label="Mobles"
+        tools:layout="@layout/fragment_moble" />
+
+    <fragment
+        android:id="@+id/nav_self_products"
+        android:name="com.example.projecte_2dam_grup6.ui.fragments.UserProductsFragment"
+        android:label="Els teus productes"
+        tools:layout="@layout/fragment_user_products" />
+
+
 </navigation>
