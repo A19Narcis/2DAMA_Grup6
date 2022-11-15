@@ -298,7 +298,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
                 new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
-                        locationRegister.setText("Latitude: " + marker.getPosition().latitude + " " + "Longitude: " + marker.getPosition().longitude);
+                        locationRegister.setText("" + marker.getPosition().latitude + " " + "" + marker.getPosition().longitude);
                         // Check the tag
                         if (marker.getTag() == "poi") {
 

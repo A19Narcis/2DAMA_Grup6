@@ -154,7 +154,7 @@ app.post("/registerNewUser", (req, res) => {
       if (result != 0) {
         auth = false;
       } else {
-        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',NULL ,NULL, 0)");
+        con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',NULL ,1, 0)");
       }
     }
   );
@@ -200,10 +200,22 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     filename = filename.replace(/\:/g, "");
     filename = filename.replace(/.$/, "");
     var array = filename.split("\\".concat("\\"));
+    console.log("Filename: " + filename);
+    
+    console.log("ARRAY[2]: " + array[2]);
+    
     fileName = "/uploads/user_images/".concat(array[2]);
-    //console.log("FileName: " + fileName);
+    
     if (array[2] == null){
-      res.send("http://192.168.224.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+      //AQUI TORNEM A FER SPLIT perque la ruta a vegades es puja amb '\' i d'altres es puja amb '/'
+      //i amb aixó fem test de la segona manera en cas que la primera no serveixi
+      array = filename.split("\/");
+      fileName = "/uploads/user_images/".concat(array[2]);
+      if (array[2] == "normal_user_img.jp"){
+        res.send("http://192.168.224.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+      } else {
+        res.send("http://192.168.224.66:5501/Backend/Server" + fileName);
+      }
     } else {
       res.send("http://192.168.224.66:5501/Backend/Server" + fileName);
     }    
