@@ -128,7 +128,7 @@
                     <td>{{row.item.cognoms}}</td>
                     <td>{{row.item.data_naixament}}</td>
                     <td>{{row.item.email}}</td>
-                    <td>{{row.item.ubicacio}}</td>
+                    <td>{{row.item.users}}</td>
                     <td>{{row.item.pass}}</td>
                     <td>{{row.item.rol}}</td>
                     <td>{{row.item.ban}}</td>
@@ -169,10 +169,12 @@
                                   <v-text-field label="Password" outlined v-model="seeUs.pass" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6">
-                                  <v-text-field label="ubicacio" outlined v-model="seeUs.ubicacio" readonly>
-                                  </v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6">
+                                  <!-- <v-text-field label="ubicacio" outlined v-model="seeUs.ubicacio" readonly>
+                                  </v-text-field> -->
+                                  <iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" id="map" marginwidth="0" src="https://maps.google.com/maps?q=+LAT+,+MYL+&hl=es;z=14&amp;output=embed"></iframe>                                </v-col>
+                                  <button @click='changeloc'>Change loc</button>
+
+                                  <v-col cols="12" sm="6">
                                   <v-text-field label="rol" outlined v-model="seeUs.rol" readonly></v-text-field>
                                 </v-col>
                                 <v-col cols="12">

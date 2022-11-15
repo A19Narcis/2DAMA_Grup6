@@ -15,7 +15,7 @@ var app = new Vue({
                 { text: 'COGNOMS', value: 'cognoms' },
                 { text: 'EDAD', value: 'data_naixament' },
                 { text: 'EMAIL', value: 'email' },
-                { text: 'UBICACIO', value: 'ubicacio' },
+                { text: 'USERS', value: 'users' },
                 { text: 'PASSWORD', value: 'pass' },
                 { text: 'ROL', value: 'rol' },
                 { text: 'BAN', value: 'ban' },
@@ -32,7 +32,10 @@ var app = new Vue({
             arrEdit: [],
             arrPet: [],
             isLock: false,
+            lat: "",
+            long: "",
             login: 0,
+            s2rc: "",
             prod: 0,
             isUser: 0,
             isArtista: 0,
@@ -355,7 +358,11 @@ var app = new Vue({
             );
         },
 
-
+        changeloc: function()
+        {
+            this.s2rc = "https://maps.google.com/maps?q=+41.38591728341789+,+2.107479013502598+&hl=es;z=14&amp;output=embed";
+            console.log(document.getElementById('map').src =  this.s2rc);
+        },
         seeUsers: function (email) {
             this.info.values.push(email);
 
@@ -390,6 +397,15 @@ var app = new Vue({
                     this.img = this.seeUs.path;
                     //console.log(this.img);
                     console.log("SeeUs" + this.seeUs.path);
+                    var str = [];
+                    str = this.seeUs.ubicacio.split(' ');
+                    this.lat = str[0];
+                    this.long = str[1];
+                    console.log( this.lat);
+                    console.log( this.long);
+                    //this.src =  "https://maps.google.com/maps/embed?pb="+lat+","+long+"";
+
+                    console.log(this.s2rc);
                     this.info.values = [];
 
 

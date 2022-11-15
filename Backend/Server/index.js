@@ -6,11 +6,13 @@ const mysql = require("mysql2");
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const e = require("cors");
+const helmet = require('helmet');
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -21,6 +23,8 @@ app.use(
 
 //Creacío connextió al LABS
 //Llegir els valors del fitxer JSON
+//<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" id="map" marginwidth="0" src="https://maps.google.com/maps?q=+41.38591728341789+,+2.107479013502598+&hl=es;z=14&amp;output=embed"></iframe>                                </v-col>
+
 var rutaFitxer = path.join(__dirname + '/server_settings.json');
 var dadesServer = JSON.parse(fs.readFileSync(rutaFitxer, 'utf-8'));
 
