@@ -182,15 +182,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <EditText
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_height="250dp" />
+
+            <TextView
                 android:id="@+id/newLocationtxt"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/alturaEditText"
+                android:layout_height="90dp"
                 android:background="@drawable/edit_text_background"
+                android:paddingRight="20dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/black"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
-                android:layout_marginStart="@dimen/marginEditTextScreen"
-                android:layout_marginEnd="@dimen/marginEditTextScreen"
-                android:inputType="textPostalAddress"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:inputType="textMultiLine"
                 android:hint="@string/hint_register_location"/>
 
             <Button

@@ -46,6 +46,11 @@
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_location_user.xml" value="0.2671875" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2671875" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.2671875" />
+        <entry key="app/src/main/res/menu/map_options.xml" value="0.26614583333333336" />
+        <entry key="app/src/main/res/menu/pantalla_principal.xml" value="0.2671875" />
       </map>
     </option>
   </component>
