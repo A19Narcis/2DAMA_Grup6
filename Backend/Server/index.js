@@ -179,6 +179,17 @@ app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
   });
 })
 
+
+
+app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
+  let id_producte = req.params.id_producte;
+  con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, UPLOADS_PRODUCT.path FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
+    res.send(result);
+  });
+})
+
+
+
 //GET IMAGE NAV BAR USER LOGIN
 app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
   var user = req.params.dadesUserLogIn;
