@@ -45,7 +45,10 @@
     </v-container>
     <!--Boton al Home-->
 
-
+    <v-btn v-show = "!login && prod" @click ="login = 0, logout = 0, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
+      mdi-arrow-expand-right
+    </v-icon>
+  </v-btn>
     <!--Peticiones-->
     <div class="text-right pr-6"
       v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)">
@@ -239,24 +242,17 @@
             </v-card>
           </template>
           <v-col class="text-right">
-            <v-btn @click="getProducts(), seeProduct()" class="text-right" color="primary">Products&nbsp;<v-icon>
+            <v-btn @click="getProducts()" class="text-right" color="primary">Products&nbsp;<v-icon>
                 mdi-arrow-expand-right
               </v-icon>
             </v-btn>
           </v-col>
         </v-col>
     </v-container>
-
-
-
+    
     <!--Productes-->
     <v-container fill-height v-show="!login && prod">
-      <v-col class="text-right">
-        <v-btn @click ="login = 0, logout = 0, edit = 0, prod = 0" color="red">pr&nbsp;<v-icon>
-            mdi-arrow-expand-right
-          </v-icon>
-        </v-btn>
-      </v-col>
+
       <template>
 
         <v-row justify="space-around">

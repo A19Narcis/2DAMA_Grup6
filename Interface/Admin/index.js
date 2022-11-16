@@ -203,7 +203,7 @@ var app = new Vue({
                     this.login = 0;
                     this.prod = 1;
                     this.products = data;
-                    console.log(this.products[0]);
+                    console.log("PROD" + this.products[0]);
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
@@ -242,7 +242,7 @@ var app = new Vue({
                 (data) => {
                     //console.log(data);
                     this.seePr = data[0];
-                    console.log(this.seePr);
+                    console.log("PR" + this.seePr);
                     this.info.values = [];
                     this.sheet = true;
                 }
