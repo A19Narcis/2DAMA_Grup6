@@ -55,7 +55,9 @@ var app = new Vue({
             password: null,
             info: { values: [] },
             error: ' ',
-            err: ' '
+            err: ' ',
+            products: [],
+            
         }
     },
     dataProduct() {
@@ -403,7 +405,7 @@ var app = new Vue({
                     this.long = str[1];
                     console.log( this.lat);
                     console.log( this.long);
-                    //this.src =  "https://maps.google.com/maps/embed?pb="+lat+","+long+"";
+                    this.s2rc =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCGBVNGL-01rb2enDljAeYFQE-elNlu2RI &q="+this.lat+','+this.long+"&zoom=18";
 
                     console.log(this.s2rc);
                     this.info.values = [];

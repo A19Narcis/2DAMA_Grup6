@@ -5,9 +5,9 @@ const jsConfetti = new JSConfetti()
 
  button.addEventListener('click', () => {
   jsConfetti.addConfetti({
-    emojis: ['🥵'],
-  emojiSize: 100,
-  confettiNumber: 30,
+
+  emojiSize: 70,
+  confettiNumber: 305,
   });
   return;
 });
