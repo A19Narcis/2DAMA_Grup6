@@ -11,6 +11,8 @@ const helmet = require('helmet');
 const app = express();
 const PORT = 3000;
 
+const IP = "192.168.1.34"
+
 app.use(express.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 app.use(
@@ -187,7 +189,7 @@ app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
 
 app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
   let id_producte = req.params.id_producte;
-  con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, UPLOADS_PRODUCT.path FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
+  con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path_prod FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
     res.send(result);
   });
 })
@@ -227,12 +229,12 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
       array = filename.split("\/");
       fileName = "/uploads/user_images/".concat(array[2]);
       if (array[2] == "normal_user_img.jp"){
-        res.send("http://192.168.224.66:5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+        res.send("http://" + IP + ":5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
       } else {
-        res.send("http://192.168.224.66:5501/Backend/Server" + fileName);
+        res.send("http://" + IP + ":5501/Backend/Server" + fileName);
       }
     } else {
-      res.send("http://192.168.224.66:5501/Backend/Server" + fileName);
+      res.send("http://" + IP + ":5501/Backend/Server" + fileName);
     }    
   });
 });
@@ -264,7 +266,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 
 //GET dades products per RECYCLE VIEW
 app.get("/dadesProductsJSON", (req, res) => {
-  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://192.168.224.66:5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
     res.send(result);
   });
 });
