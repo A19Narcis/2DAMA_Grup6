@@ -46,6 +46,24 @@
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_full_product.xml" value="0.2" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_info_user.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_inici_app.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_pantalla_principal.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_in.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_sign_up.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/activity_upload_product.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/content_pantalla_principal.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_eines.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_joguina.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/fragment_user_products.xml" value="0.67" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/list_cat_prod.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/list_producte.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/log_out.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.25" />
+        <entry key="..\:/Users/pedro/Documents/GitHub/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/layout/activity_full_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_info_user.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_location_user.xml" value="0.2671875" />
