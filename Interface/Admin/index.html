@@ -45,7 +45,7 @@
     </v-container>
     <!--Boton al Home-->
 
-    <v-btn v-show = "!login && prod" @click ="login = 0, logout = 0, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
+    <v-btn v-show = "!login && prod" @click ="login = 1, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
       mdi-arrow-expand-right
     </v-icon>
   </v-btn>
@@ -129,7 +129,7 @@
                     <td>{{row.item.cognoms}}</td>
                     <td>{{row.item.data_naixament}}</td>
                     <td>{{row.item.email}}</td>
-                    <td>{{row.item.users}}</td>
+                    <td>{{row.item.user}}</td>
                     <td>{{row.item.pass}}</td>
                     <td>{{row.item.rol}}</td>
                     <td>{{row.item.ban}}</td>
