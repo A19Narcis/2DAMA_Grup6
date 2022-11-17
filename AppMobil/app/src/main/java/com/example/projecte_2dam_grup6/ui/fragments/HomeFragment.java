@@ -2,6 +2,7 @@ package com.example.projecte_2dam_grup6.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,7 @@ public class HomeFragment extends Fragment {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject o = jsonArray.getJSONObject(i);
+                        Log.d("TAG", o.getString("path"));
                         Producte item = new Producte(
                                 o.getString("nom"),
                                 o.getString("user"),

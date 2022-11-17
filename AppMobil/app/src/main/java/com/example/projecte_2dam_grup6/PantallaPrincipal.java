@@ -58,6 +58,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     private String server_path;
     private String dades_json_path;
+    private String dades_likes_path;
     private String loginValidate_path;
 
     private String dadesUserLogIn;
@@ -93,6 +94,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
             server_path = obj_settings.getString("server");
             dades_json_path = obj_settings.getString("dadesJSON");
+            dades_likes_path = obj_settings.getString("dadesProductesMeGusta");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -104,7 +106,6 @@ public class PantallaPrincipal extends AppCompatActivity {
             dadesUserLogIn = jsonObject.optString("user");
             rolUser = jsonObject.optString("rol");
             id_user = jsonObject.optString("id");
-
         } catch (JSONException e){
             e.printStackTrace();
         }
@@ -170,6 +171,9 @@ public class PantallaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //NEW intent per veure la informació de l'usuari actiu
+                Intent intent = new Intent(PantallaPrincipal.this, InfoUser.class);
+                intent.putExtra(EXTRA_MESSAGE, arrLogIn);
+                startActivity(intent);
             }
         });
         
@@ -183,7 +187,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_eina, R.id.nav_roba, R.id.nav_joguina, R.id.nav_moble, R.id.nav_self_products)
+                R.id.nav_home, R.id.nav_eina, R.id.nav_roba, R.id.nav_joguina, R.id.nav_moble, R.id.nav_self_products, R.id.nav_like_products)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
@@ -431,4 +435,13 @@ public class PantallaPrincipal extends AppCompatActivity {
     public String getDadesJSONPathFragment(){
         return dades_json_path;
     }
+
+    public String getDadesMeGustaJSONPathFragment(){
+        return  dades_likes_path;
+    }
+
+    public String getIdUserLoggedIn(){
+        return id_user;
+    }
+
 }

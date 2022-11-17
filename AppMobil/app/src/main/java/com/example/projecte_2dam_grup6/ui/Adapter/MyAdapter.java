@@ -51,13 +51,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Info: " + listItem.getId_producte(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, FullProduct.class);
                 intent.putExtra("INFO_PROD", listItem.getId_producte());
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

@@ -178,6 +178,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
 
         mMap.addGroundOverlay(homeOverlay);
 
+        mMap.getUiSettings().setRotateGesturesEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
         setMapLongClick(mMap); // Set a long click listener for the map;
         setPoiClick(mMap); // Set a click listener for points of interest.
         setMapStyle(mMap); // Set the custom map style.

@@ -41,5 +41,11 @@
         android:label="Els teus productes"
         tools:layout="@layout/fragment_user_products" />
 
+    <fragment
+        android:id="@+id/nav_like_products"
+        android:name="com.example.projecte_2dam_grup6.ui.fragments.LikesFragment"
+        android:label="M'agraden"
+        tools:layout="@layout/fragment_likes" />
+
 
 </navigation>

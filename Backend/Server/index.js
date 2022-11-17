@@ -11,7 +11,7 @@ const helmet = require('helmet');
 const app = express();
 const PORT = 3000;
 
-const IP = "192.168.1.34"
+const IP = "192.168.224.66"
 
 app.use(express.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
@@ -196,6 +196,10 @@ app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
 
 
 
+
+
+
+
 //GET IMAGE NAV BAR USER LOGIN
 app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
   var user = req.params.dadesUserLogIn;
@@ -217,9 +221,9 @@ app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
     filename = filename.replace(/\:/g, "");
     filename = filename.replace(/.$/, "");
     var array = filename.split("\\".concat("\\"));
-    console.log("Filename: " + filename);
+    //console.log("Filename: " + filename);
     
-    console.log("ARRAY[2]: " + array[2]);
+    //console.log("ARRAY[2]: " + array[2]);
     
     fileName = "/uploads/user_images/".concat(array[2]);
     
@@ -267,6 +271,15 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 //GET dades products per RECYCLE VIEW
 app.get("/dadesProductsJSON", (req, res) => {
   con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
+    res.send(result);
+  });
+});
+
+
+//GET dades dels products que te ME GUSTA de l'usuari
+app.get("/getMeGustaProducts/:id_usuari", (req, res) => {
+  let id_usuari = req.params.id_usuari;
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://192.168.224.66:5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM MEGUSTA JOIN UPLOADS_PRODUCT ON (MEGUSTA.id_image_prod = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (MEGUSTA.id_usuari = PERSONA.id) JOIN PRODUCTE ON (MEGUSTA.id_producte = PRODUCTE.id_producte) WHERE MEGUSTA.id_usuari = " + id_usuari +" ORDER BY PRODUCTE.id_producte", function(err, result, field){
     res.send(result);
   });
 });
