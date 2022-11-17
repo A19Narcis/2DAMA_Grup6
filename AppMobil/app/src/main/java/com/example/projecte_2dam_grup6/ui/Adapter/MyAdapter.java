@@ -1,6 +1,7 @@
 package com.example.projecte_2dam_grup6.ui.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projecte_2dam_grup6.FullProduct;
 import com.example.projecte_2dam_grup6.Producte;
 import com.example.projecte_2dam_grup6.R;
 import com.squareup.picasso.Picasso;
@@ -50,6 +52,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "Info: " + listItem.getId_producte(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, FullProduct.class);
+                intent.putExtra("INFO_PROD", listItem.getId_producte());
+                context.startActivity(intent);
             }
         });
 

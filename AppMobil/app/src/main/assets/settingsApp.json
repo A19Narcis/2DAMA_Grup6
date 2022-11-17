@@ -5,5 +5,6 @@
     "addNewProduct": "/addNewProduct",
     "dadesUserLogIn": "/dadesUserLogin",
     "imageUserLogin": "/imageUserLogin",
-    "dadesJSON": "/dadesProductsJSON"
+    "dadesJSON": "/dadesProductsJSON",
+    "dadesSingleProducte": "/singleProductInfo"
 }
