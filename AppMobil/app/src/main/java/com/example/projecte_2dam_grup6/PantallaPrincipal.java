@@ -63,7 +63,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     private String dadesUserLogIn;
     private String rolUser;
-    public static String id_user;
+    private String id_user;
 
     //Valors DADES USER
     private String email;
@@ -88,8 +88,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         //GET DADES USER LOGIN
         Intent intent = getIntent();
         arrLogIn = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
-
-
 
         //Llegir les dades del fitxer JSON en ASSETS
         try {
