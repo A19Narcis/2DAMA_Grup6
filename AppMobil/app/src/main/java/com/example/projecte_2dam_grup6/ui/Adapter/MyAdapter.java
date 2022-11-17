@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projecte_2dam_grup6.FullProduct;
+import com.example.projecte_2dam_grup6.PantallaPrincipal;
 import com.example.projecte_2dam_grup6.Producte;
 import com.example.projecte_2dam_grup6.R;
 import com.squareup.picasso.Picasso;
@@ -53,6 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, FullProduct.class);
                 intent.putExtra("INFO_PROD", listItem.getId_producte());
+                intent.putExtra("ID_USUARI_LOGIN", PantallaPrincipal.id_user);
                 context.startActivity(intent);
             }
         });
