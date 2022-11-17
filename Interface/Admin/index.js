@@ -55,7 +55,9 @@ var app = new Vue({
             password: null,
             info: { values: [] },
             error: ' ',
-            err: ' '
+            err: ' ',
+            products: [],
+            
         }
     },
     dataProduct() {
@@ -201,7 +203,7 @@ var app = new Vue({
                     this.login = 0;
                     this.prod = 1;
                     this.products = data;
-                    console.log(this.products[0]);
+                    console.log("PROD" + this.products[0]);
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
@@ -240,7 +242,7 @@ var app = new Vue({
                 (data) => {
                     //console.log(data);
                     this.seePr = data[0];
-                    console.log(this.seePr);
+                    console.log("PR" + this.seePr);
                     this.info.values = [];
                     this.sheet = true;
                 }
@@ -403,7 +405,7 @@ var app = new Vue({
                     this.long = str[1];
                     console.log( this.lat);
                     console.log( this.long);
-                    //this.src =  "https://maps.google.com/maps/embed?pb="+lat+","+long+"";
+                    this.s2rc =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCGBVNGL-01rb2enDljAeYFQE-elNlu2RI &q="+this.lat+','+this.long+"&zoom=18";
 
                     console.log(this.s2rc);
                     this.info.values = [];
