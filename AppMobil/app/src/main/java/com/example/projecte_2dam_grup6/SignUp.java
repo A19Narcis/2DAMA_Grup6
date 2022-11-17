@@ -85,7 +85,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
     public static final float INITIAL_ZOOM = 12f;
     private GoogleMap mMap;
 
-    private int coutadorTheGrefg = 0;
+    private int contadorFlags = 0;
 
     ApiService apiService;
     private EditText nomRegister;
@@ -258,13 +258,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                Log.d("FLAGS", "cotadorTheGrefg: " + coutadorTheGrefg);
+                Log.d("FLAGS", "cotadorTheGrefg: " + contadorFlags);
                 String snippet = String.format(Locale.getDefault(),
                         getString(R.string.lat_long_snippet),
                         latLng.latitude,
                         latLng.longitude);
 
-                if (coutadorTheGrefg == 0){
+                if (contadorFlags == 0){
                     map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(getString(R.string.dropped_pin))
@@ -272,18 +272,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
                             .icon(BitmapDescriptorFactory.defaultMarker
                                     (BitmapDescriptorFactory.HUE_BLUE)));
 
-                    coutadorTheGrefg++;
-                } else if (coutadorTheGrefg == 1){
+                    contadorFlags++;
+                } else if (contadorFlags == 1){
                     map.clear();
-                    coutadorTheGrefg--;
+                    contadorFlags--;
                     map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(getString(R.string.dropped_pin))
                             .snippet(snippet)
                             .icon(BitmapDescriptorFactory.defaultMarker
                                     (BitmapDescriptorFactory.HUE_BLUE)));
-                    coutadorTheGrefg++;
-                    Log.d("FLAGS", "estamos aqui: " + coutadorTheGrefg);
+                    contadorFlags++;
+                    Log.d("FLAGS", "estamos aqui: " + contadorFlags);
                 }
 
             }

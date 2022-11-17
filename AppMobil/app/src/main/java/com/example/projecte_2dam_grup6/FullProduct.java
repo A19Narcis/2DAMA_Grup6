@@ -24,16 +24,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class FullProduct extends AppCompatActivity {
 
     private String server_path;
     private String getSingleProductPath;
+    private String addLikePath;
+    private String remLikePath;
 
-    private Button btnBack;
     private String id_prod_selec;
+    private String id_usuari;
+    private String id_image_producte;
 
     private TextView titleProd;
     private String path_decodeProd;
@@ -47,6 +52,11 @@ public class FullProduct extends AppCompatActivity {
     private ImageView userImageInProduct;
     private ImageView imageViewProduct;
 
+    private Button likeBtn;
+    private Button dislikeBtn;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +67,20 @@ public class FullProduct extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        try {
+            JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
+            server_path = obj_settings.getString("server");
+            getSingleProductPath = obj_settings.getString("dadesSingleProducte");
+            url_imageUser = obj_settings.getString("imageUserLogin");
+            addLikePath = obj_settings.getString("addNewLike");
+            remLikePath = obj_settings.getString("removeLike");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Intent intent = getIntent();
         id_prod_selec = intent.getStringExtra("INFO_PROD");
+        id_usuari = intent.getStringExtra("ID_USUARI_LOGIN");
 
 
         titleProd = findViewById(R.id.textViewNomProducte);
@@ -67,9 +89,142 @@ public class FullProduct extends AppCompatActivity {
         preuProd = findViewById(R.id.preuProducte);
         userImageInProduct = findViewById(R.id.cardViewUserImageProducte);
         imageViewProduct = findViewById(R.id.imageViewProducte);
+        likeBtn = findViewById(R.id.btn_like);
+        dislikeBtn = findViewById(R.id.btn_dontLike);
 
         getInfoProducte(); //Agafar les dades del producte
 
+    }
+
+
+    public void afegirMeGusta (View view){
+        String json = "{\"id_usuari\":\"" + id_usuari +
+                "\",\"id_producte\":\"" + id_prod_selec +
+                "\",\"id_image_prod\":\"" + id_image_producte + "\"}";
+        Log.d("PRODUTCTE LIKE", json);
+
+        final String HOST = server_path + addLikePath;
+        new connectionAddLikeProduct().execute(HOST, json);
+    }
+
+    public void removeMeGusta(View view) {
+        String json = "{\"id_usuari\":\"" + id_usuari +
+                "\",\"id_producte\":\"" + id_prod_selec +
+                "\",\"id_image_prod\":\"" + id_image_producte + "\"}";
+        Log.d("PRODUTCTE DISLIKE", json);
+
+        final String HOST = server_path + remLikePath;
+        new connectionRemLikeProduct().execute(HOST, json);
+    }
+
+    private class connectionRemLikeProduct extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String urlString = strings[0];
+            String jsonInfo = strings[1];
+            return validacioRemLikeProduct(urlString, jsonInfo);
+        }
+
+        public String validacioRemLikeProduct(String urlString, String json) {
+            String result = "";
+            try {
+                URL myUrl = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+
+                writeStringToOutputStream(json, connection.getOutputStream());
+                result = getStringFromInputStream(connection.getInputStream());
+                Log.d("RESULT: ", result);
+                int statusCode = connection.getResponseCode();
+                connection.disconnect();
+
+                Log.i("POST", "POST result: " + statusCode + " " + result);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            System.out.println("VALOR S ---> " + s);
+            super.onPostExecute(s);
+            if (s.equals("false")) {
+                Toast.makeText(FullProduct.this, "Aquest producte no el tens a la llista", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(FullProduct.this, "Prodcute esborrat correctament!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+    private class connectionAddLikeProduct extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String urlString = strings[0];
+            String jsonInfo = strings[1];
+            return validacioAddLikeProduct(urlString, jsonInfo);
+        }
+
+        public String validacioAddLikeProduct(String urlString, String json) {
+            String result = "";
+            try {
+                URL myUrl = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+
+                writeStringToOutputStream(json, connection.getOutputStream());
+                result = getStringFromInputStream(connection.getInputStream());
+                Log.d("RESULT: ", result);
+                int statusCode = connection.getResponseCode();
+                connection.disconnect();
+
+                Log.i("POST", "POST result: " + statusCode + " " + result);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            System.out.println("VALOR S ---> " + s);
+            super.onPostExecute(s);
+            if (s.equals("false")) {
+                Toast.makeText(FullProduct.this, "Aquest producte ja el tens a la llista", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(FullProduct.this, "Prodcute afegit correctament!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private static void writeStringToOutputStream(String json, OutputStream outputStream) throws IOException {
+        byte[] bytes = json.getBytes(StandardCharsets.UTF_8); // API 19: StandardCharsets.UTF_8
+        outputStream.write(bytes);
+        outputStream.close();
+    }
+
+    private static String getStringFromInputStream(InputStream stream) throws IOException {
+        InputStreamReader streamReader = new InputStreamReader(stream);
+        BufferedReader reader = new BufferedReader(streamReader);
+        StringBuilder stringBuilder = new StringBuilder();
+        String inputLine;
+        while((inputLine = reader.readLine()) != null){
+            stringBuilder.append(inputLine);
+        }
+        reader.close();
+        streamReader.close();
+        return stringBuilder.toString();
     }
 
     private void getInfoProducte() {
@@ -85,13 +240,7 @@ public class FullProduct extends AppCompatActivity {
 
         private String veureResultatProducte() {
             //Llegir les dades del fitxer JSON en ASSETS
-            try {
-                JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
-                server_path = obj_settings.getString("server");
-                getSingleProductPath = obj_settings.getString("dadesSingleProducte");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
             String url_server = server_path + getSingleProductPath + "/" + id_prod_selec;
             Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
@@ -157,6 +306,7 @@ public class FullProduct extends AppCompatActivity {
                 descProd.setText(jsonObject.optString("descripcion"));
                 nomUserProd.setText(jsonObject.optString("user"));
                 path_decodeProd = jsonObject.optString("path_prod");
+                id_image_producte = jsonObject.optString("id_image");
 
                 StrictMode.ThreadPolicy gfgPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(gfgPolicy);
@@ -193,8 +343,6 @@ public class FullProduct extends AppCompatActivity {
         }
     }
 
-
-
     private void accessImageUser() {
         new getImageUser().execute();
     }
@@ -207,13 +355,6 @@ public class FullProduct extends AppCompatActivity {
         }
 
         private String getPathImageUser(){
-            //Llegir les dades del fitxer JSON en ASSETS
-            try {
-                JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
-                url_imageUser = obj_settings.getString("imageUserLogin");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             String url_server = server_path + url_imageUser + "/" + nomUserProd.getText().toString();
             Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
@@ -298,11 +439,6 @@ public class FullProduct extends AppCompatActivity {
             }
 
         }
-    }
-
-    public void goBack(View v){
-        Intent intent = new Intent(this, PantallaPrincipal.class);
-        startActivity(intent);
     }
 
     public String loadJSONFromAsset() {

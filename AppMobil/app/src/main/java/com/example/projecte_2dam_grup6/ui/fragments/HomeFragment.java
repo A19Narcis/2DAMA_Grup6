@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
 
         listItems = new ArrayList<>();
 
+
         loadRecycleViewData();
 
     }
@@ -88,7 +90,6 @@ public class HomeFragment extends Fragment {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject o = jsonArray.getJSONObject(i);
-                        Log.d("TAG", o.getString("path"));
                         Producte item = new Producte(
                                 o.getString("nom"),
                                 o.getString("user"),
