@@ -2,6 +2,7 @@ package com.example.projecte_2dam_grup6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +15,11 @@ import org.json.JSONObject;
 public class InfoUser extends AppCompatActivity {
 
     private String infoUserFromMainPage;
-   // private String userId, userName;
+    private String userName, userRol, idUser;
+    JSONArray jsonArray = null;
 
 
-
-    private TextView test;
+    private TextView nomUserText, rolUserText, idUserText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,17 @@ public class InfoUser extends AppCompatActivity {
 
         infoUserFromMainPage = intent.getStringExtra(PantallaPrincipal.EXTRA_MESSAGE);
 
-        //Que usuario esta consultando
+        //Separa json
+        try {
+            //Que usuario esta consultando
+            jsonArray = new JSONArray(infoUserFromMainPage);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            userName = jsonObject.optString("user");
+            userRol = jsonObject.optString("rol");
+            idUser = jsonObject.optString("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         //Consultar Id del Perfil en base de Datos
 
@@ -43,9 +54,19 @@ public class InfoUser extends AppCompatActivity {
 
         //Monstrar esos datos
 
-        test = findViewById(R.id.textView);
+        nomUserText = findViewById(R.id.nomUser);
 
-        test.setText(infoUserFromMainPage);
+        nomUserText.setText(userName);
+
+        rolUserText = findViewById(R.id.rolUserMod);
+
+        rolUserText.setText(userRol);
+
+        idUserText = findViewById(R.id.idUserMod);
+
+        idUserText.setText(idUser);
+
+
 
     }
 }
