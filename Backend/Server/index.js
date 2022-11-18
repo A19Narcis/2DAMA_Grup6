@@ -77,11 +77,17 @@ app.post("/getProducts", (req, res) => {
 
 app.post("/seeProduct", (req, res) =>{
   console.log(req.body.values[0]);
-  con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
+/*   con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
     if (err) throw err;
     //console.log(result);
     res.json(result);
-  });
+  }); */
+    con.query("SELECT *, COUNT(MEGUSTA.id_producte) as likes FROM PRODUCTE JOIN MEGUSTA USING (id_producte) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
+    if (err) throw err;
+    //console.log(result);
+    res.json(result);
+  }); 
+
 });
 
 //Veure tots els usuaris al Servidor

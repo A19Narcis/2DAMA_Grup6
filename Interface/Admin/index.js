@@ -242,7 +242,7 @@ var app = new Vue({
                 (data) => {
                     //console.log(data);
                     this.seePr = data[0];
-                    console.log("PR" + this.seePr);
+                    console.log(this.seePr.path);
                     this.info.values = [];
                     this.sheet = true;
                 }

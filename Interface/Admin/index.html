@@ -273,8 +273,8 @@
                 </v-card>
               </template>
             </v-hover>
-            <v-bottom-sheet scrollable v-model="sheet" :retain-focus="false">
-              <v-sheet class="text-center" height="auto">
+            <v-bottom-sheet  v-model="sheet" :retain-focus="false">
+              <v-sheet scrollable class="text-center" height="auto">
                 <v-btn class="mt-6" text color="primary" @click="sheet = !sheet">
                   close
                 </v-btn>
@@ -307,6 +307,9 @@
                     </v-col>
                     <v-col cols="12">
                       <v-text-field label="Path Imatge" outlined  :value="seePr.path" readonly></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="0">
+                    <p style="font-size: 20px;">{{seePr.likes}}&nbsp;<v-icon large color="red">mdi-heart</v-icon></p>
                     </v-col>
                   </v-row>
                 </div>
