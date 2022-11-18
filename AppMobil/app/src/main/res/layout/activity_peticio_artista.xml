@@ -46,7 +46,7 @@
         android:paddingTop="10dp"
         android:inputType="textMultiLine"
         android:gravity="top"
-        android:hint="@string/hint_register_desc"/>
+        android:hint="Petició"/>
 
     <Button
         android:id="@+id/btnPeticio"
@@ -55,6 +55,4 @@
         android:layout_gravity="center"
         android:onClick="startPeticio"
         android:text="Send" />
-
-
 </LinearLayout>
