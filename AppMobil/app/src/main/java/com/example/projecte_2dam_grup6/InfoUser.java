@@ -15,11 +15,11 @@ import org.json.JSONObject;
 public class InfoUser extends AppCompatActivity {
 
     private String infoUserFromMainPage;
-    private String userName, userRol, idUser;
+    private String nickNameUserStr, userRolStr, idUserStr, emailUserStr, dataUserStr, ubicacioUserStr, descripcioUserStr, imageUserStr;
     JSONArray jsonArray = null;
 
 
-    private TextView nomUserText, rolUserText, idUserText;
+    private TextView nomUserText, rolUserText, idUserText, emailUserText, dataUserText, ubicacioUserText, descripcioUserText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +41,15 @@ public class InfoUser extends AppCompatActivity {
             //Que usuario esta consultando
             jsonArray = new JSONArray(infoUserFromMainPage);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            userName = jsonObject.optString("user");
-            userRol = jsonObject.optString("rol");
-            idUser = jsonObject.optString("id");
+            imageUserStr = jsonObject.optString("id_image");
+            nickNameUserStr = jsonObject.optString("user");
+            userRolStr = jsonObject.optString("rol");
+            idUserStr = jsonObject.optString("id");
+            emailUserStr = jsonObject.optString("email");
+            dataUserStr = jsonObject.optString("data_naixament");
+            ubicacioUserStr = jsonObject.optString("ubicacio");
+            descripcioUserStr = jsonObject.optString("descripcio");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,17 +62,31 @@ public class InfoUser extends AppCompatActivity {
 
         nomUserText = findViewById(R.id.nomUser);
 
-        nomUserText.setText(userName);
+        nomUserText.setText(nickNameUserStr);
 
         rolUserText = findViewById(R.id.rolUserMod);
 
-        rolUserText.setText(userRol);
+        rolUserText.setText(userRolStr);
 
         idUserText = findViewById(R.id.idUserMod);
 
-        idUserText.setText(idUser);
+        idUserText.setText(idUserStr);
 
+        emailUserText = findViewById(R.id.emailUserMod);
 
+        emailUserText.setText(emailUserStr);
+
+        dataUserText = findViewById(R.id.dataUserMod);
+
+        dataUserText.setText(dataUserStr);
+
+        dataUserText = findViewById(R.id.dataUserMod);
+
+        dataUserText.setText(dataUserStr);
+
+        ubicacioUserText = findViewById(R.id.ubicacioUserMod);
+
+        ubicacioUserText.setText(ubicacioUserStr);
 
     }
 }

@@ -33,6 +33,7 @@
             />
 
         <TableRow
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_shadow_start_color"
@@ -58,6 +59,7 @@
         </TableRow>
 
         <TableRow
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_shadow_start_color"
@@ -82,6 +84,83 @@
                 android:textSize="15dp" />
         </TableRow>
 
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_shadow_start_color"
+            >
+
+            <TextView
+                android:id="@+id/emailUserText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Email: "
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/emailUserMod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quin email "
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_shadow_start_color"
+
+            >
+
+            <TextView
+                android:id="@+id/dataUserText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Data: "
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/dataUserMod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_shadow_start_color"
+
+            >
+
+            <TextView
+                android:id="@+id/ubicacioUserText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Ubicacio: "
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/ubicacioUserMod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ubicacio"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </TableRow>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
