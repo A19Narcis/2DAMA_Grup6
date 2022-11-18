@@ -215,7 +215,7 @@ app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
 })
 
 
-
+//Informacio del producte seleccionat
 app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
   let id_producte = req.params.id_producte;
   con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path_prod, PERSONA.id, PRODUCTE.id_image FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
@@ -224,6 +224,13 @@ app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
 })
 
 
+//POST Afegir una peticio
+app.post("/addNewPeticio", (req, res) => {
+  con.query("INSERT INTO PETICIONES VALUES(" + req.body.id_usu + ", '" + req.body.peticion + "')", function (err, result, fields) {
+    res.send(result);
+    console.log("INERTADA");
+  });
+});
 
 
 

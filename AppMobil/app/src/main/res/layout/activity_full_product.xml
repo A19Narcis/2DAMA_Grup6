@@ -26,8 +26,7 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/black"
-                android:textSize="40sp"
-                android:text="Producte NOM" />
+                android:textSize="40sp" />
 
             <ImageView
                 android:id="@+id/imageViewProducte"
@@ -37,7 +36,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="70dp"
-                app:srcCompat="@drawable/img_default_product_cat" />
+                app:srcCompat="@drawable/default_landscape" />
 
             <TextView
                 android:id="@+id/textViewDescripcioProducte"
@@ -50,7 +49,6 @@
                 android:textColor="@color/black"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:paddingTop="10dp"
-                android:text="Descripcio producte"
                 android:inputType="textMultiLine"
                 android:gravity="top"/>
 
@@ -63,8 +61,7 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/edit_text_background"
-                android:text="Preu"/>
+                android:background="@drawable/edit_text_background"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cardViewUserImageProducte"
@@ -93,7 +90,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:textSize="20dp"
-                android:text="NOM USER"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="50dp"

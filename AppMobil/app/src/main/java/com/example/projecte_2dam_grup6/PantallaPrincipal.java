@@ -173,7 +173,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //NEW intent per veure la informació de l'usuari actiu
-                Intent intent = new Intent(PantallaPrincipal.this, InfoUser.class);
+                Intent intent = new Intent(PantallaPrincipal.this, PeticioArtista.class);
                 intent.putExtra(EXTRA_MESSAGE, arrLogIn);
                 startActivity(intent);
             }

@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
                     android:backgroundTint="#eeeeee"
-                    app:srcCompat="@drawable/img_default_product_cat"
+                    app:srcCompat="@drawable/default_landscape"
                     tools:ignore="MissingConstraints" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

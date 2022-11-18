@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".PeticioArtista">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="Enviar petició" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:text="Afegeix una petició per demanar ser un artista i poder pujar productes per que la getn vegi les teves propostes" />
+
+
+    <EditText
+        android:id="@+id/peticioUsuari"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altura_editText_descripcio"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="@dimen/maringEditText_Register"
+        android:layout_marginStart="@dimen/marginEditTextScreen"
+        android:layout_marginEnd="@dimen/marginEditTextScreen"
+        android:layout_marginTop="35dp"
+        android:paddingTop="10dp"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:hint="@string/hint_register_desc"/>
+
+    <Button
+        android:id="@+id/btnPeticio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="startPeticio"
+        android:text="Send" />
+
+
+</LinearLayout>

@@ -52,12 +52,17 @@
         <entry key="app/src/main/res/layout/activity_info_user.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_location_user.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_pantalla_principal.xml" value="0.171225937183384" />
+        <entry key="app/src/main/res/layout/activity_peticio_artista.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_upload_product.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/app_bar_pantalla_principal.xml" value="0.35208333333333336" />
+        <entry key="app/src/main/res/layout/content_pantalla_principal.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/fragment_likes.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/fragment_moble.xml" value="0.35208333333333336" />
+        <entry key="app/src/main/res/layout/fragment_roba.xml" value="0.35208333333333336" />
+        <entry key="app/src/main/res/layout/fragment_user_products.xml" value="0.35208333333333336" />
+        <entry key="app/src/main/res/layout/list_producte.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/nav_header_pantalla_principal.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.2671875" />
         <entry key="app/src/main/res/menu/map_options.xml" value="0.26614583333333336" />

@@ -9,5 +9,6 @@
     "dadesSingleProducte": "/getInfoSelectedProduct",
     "dadesProductesMeGusta": "/getMeGustaProducts",
     "addNewLike": "/addMeGustaProduct",
-    "removeLike": "/deleteMeGustaProduct"
+    "removeLike": "/deleteMeGustaProduct",
+    "addNewPeticio": "/addNewPeticio"
 }
