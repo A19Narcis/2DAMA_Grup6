@@ -351,6 +351,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
             allIntents.add(intent);
         }
 
+
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
@@ -360,6 +361,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
             intent.setPackage(res.activityInfo.packageName);
             allIntents.add(intent);
         }
+
+
 
         Intent mainIntent = allIntents.get(allIntents.size() - 1);
         for (Intent intent : allIntents) {

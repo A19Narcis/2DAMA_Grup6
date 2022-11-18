@@ -213,7 +213,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
-                android:layout_height="350dp" />
+                android:layout_height="450dp" />
 
             <TextView
                 android:id="@+id/newLocationtxt"
