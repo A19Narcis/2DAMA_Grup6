@@ -14,7 +14,6 @@
         <!-- Customize your theme here. -->
 
         <item name="android:textColor">@color/black</item>
-
         <item name="cardBackgroundColor">@color/cv_nv_ColorLight</item>
     </style>
 

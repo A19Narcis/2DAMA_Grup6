@@ -543,9 +543,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         return cal;
     }
 
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     public void backToStart(View view){
         Intent intent = new Intent(this, IniciApp.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void validarRegisterUser(View view){

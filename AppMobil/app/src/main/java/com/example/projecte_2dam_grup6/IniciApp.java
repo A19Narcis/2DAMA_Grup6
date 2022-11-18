@@ -38,11 +38,13 @@ public class IniciApp extends AppCompatActivity {
     public void launchSignIn(View view) {
         Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public void launchSignUp(View view) {
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 }

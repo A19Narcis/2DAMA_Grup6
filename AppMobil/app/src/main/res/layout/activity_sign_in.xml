@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginTitle_Image"
+                android:layout_marginTop="50dp"
                 android:textSize="@dimen/titleTextSize"
                 android:textAlignment="center"
                 android:text="@string/txt_benvingut_da" />
@@ -90,7 +91,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/errorDadesTextSize"
                 android:textAlignment="center"
-                android:layout_marginBottom="@dimen/marginBottomScreen"
+                android:layout_marginBottom="@dimen/margin_btm_signIN"
                 android:text="@string/txtDadesNoValides_login" />
 
         </LinearLayout>
