@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -116,6 +118,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         // Obtain the SupportMapFragment and get notified when the map is ready
         // to be used.
@@ -633,7 +641,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
             } else if (s.equals("true")) {
                 txtErrorRegister.setVisibility(View.INVISIBLE);
                 multipartImageUpload();
-                Toast.makeText(SignUp.this, "Usuari creat correctament", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUp.this, R.string.msg_addUser, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this, SignIn.class);
                 startActivity(intent);
             }

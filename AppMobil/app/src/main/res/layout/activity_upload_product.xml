@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="bottom"
     android:orientation="vertical"
+    android:theme="@style/Theme.Projecte_2DAM_Grup6"
     tools:context=".UploadProduct">
 
     <ScrollView
@@ -26,15 +27,12 @@
                 android:onClick="backToStart"
                 android:text="@string/btnBackInici" />
 
-
             <TextView
                 android:id="@+id/titleIniciApp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginTitle_Image"
-                android:text="New product"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="@dimen/titleTextSize" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +51,6 @@
                     android:id="@+id/productImage"
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:backgroundTint="#eeeeee"
                     app:srcCompat="@drawable/default_landscape"
                     tools:ignore="MissingConstraints" />
 
@@ -62,7 +59,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="#eeeeee"
                     app:layout_constraintTop_toBottomOf="@id/productImage"
                     app:srcCompat="@android:drawable/ic_menu_camera"
                     tools:ignore="MissingConstraints" />
@@ -76,8 +72,8 @@
                 android:layout_marginStart="@dimen/marginEditTextScreen"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
-                android:background="@drawable/edit_text_background"
-                android:hint="Titol"
+                style="@style/Theme.Projecte_2DAM_Grup6.editBox"
+                android:hint="@string/hint_titol_addPr"
                 android:inputType="text" />
 
             <EditText
@@ -87,7 +83,7 @@
                 android:layout_marginStart="@dimen/marginEditTextScreen"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
-                android:background="@drawable/edit_text_background"
+                style="@style/Theme.Projecte_2DAM_Grup6.editBox"
                 android:gravity="top"
                 android:hint="@string/hint_register_desc"
                 android:inputType="textMultiLine"
@@ -112,8 +108,8 @@
                     android:layout_height="@dimen/alturaEditText"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/edit_text_background"
-                    android:hint="Preu"
+                    style="@style/Theme.Projecte_2DAM_Grup6.editBox"
+                    android:hint="@string/preu_addPr"
                     android:inputType="numberDecimal"
                     tools:ignore="MissingConstraints" />
 
@@ -123,9 +119,8 @@
                     android:layout_height="@dimen/alturaEditText"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
-                    android:text="€"
+                    android:text="@string/euro_sym"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/newProductPreu"
                     tools:ignore="MissingConstraints" />
@@ -150,7 +145,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="Categoria" />
+                    android:text="@string/defaultText_selectType" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,7 +158,7 @@
                 android:layout_marginEnd="@dimen/screenMargin"
                 android:layout_marginBottom="@dimen/marginBottomScreen"
                 android:onClick="validacioAddProducte"
-                android:text="Afegir" />
+                android:text="@string/btn_addPR_text" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

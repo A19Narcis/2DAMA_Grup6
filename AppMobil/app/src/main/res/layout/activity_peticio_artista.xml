@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/linearLayout"
     tools:context=".PeticioArtista">
 
 
@@ -18,7 +20,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:text="Enviar petició" />
+        android:text="@string/title_peticio" />
 
     <TextView
         android:id="@+id/textView3"
@@ -31,7 +33,7 @@
         android:gravity="center"
         android:textSize="18dp"
         android:textColor="@color/black"
-        android:text="Afegeix una petició per demanar ser un artista i poder pujar productes per que la getn vegi les teves propostes" />
+        android:text="@string/explicacio_peticio" />
 
 
     <EditText
@@ -46,7 +48,7 @@
         android:paddingTop="10dp"
         android:inputType="textMultiLine"
         android:gravity="top"
-        android:hint="Petició"/>
+        android:hint="@string/hint_peticio"/>
 
     <Button
         android:id="@+id/btnPeticio"
@@ -54,5 +56,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="startPeticio"
-        android:text="Send" />
+        android:text="@string/btn_peticio" />
 </LinearLayout>

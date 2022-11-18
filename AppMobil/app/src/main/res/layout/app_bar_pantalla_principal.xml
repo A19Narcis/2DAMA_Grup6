@@ -32,7 +32,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#4BF1EC"
+        android:backgroundTint="#2196F3"
         app:srcCompat="@drawable/ic_publish_black_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

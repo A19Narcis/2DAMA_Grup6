@@ -17,10 +17,9 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
+        style="@style/Theme.Projecte_2DAM_Grup6.navItemsStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:backgroundTint="#B7F9FF"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_pantalla_principal"
         app:menu="@menu/activity_main_drawer" />

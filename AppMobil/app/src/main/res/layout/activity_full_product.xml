@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.Projecte_2DAM_Grup6"
     tools:context=".FullProduct">
 
     <ScrollView
@@ -25,7 +26,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginTop="25dp"
-                android:textColor="@color/black"
                 android:textSize="40sp" />
 
             <ImageView
@@ -42,11 +42,10 @@
                 android:id="@+id/textViewDescripcioProducte"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/edit_text_background"
+                style="@style/Theme.Projecte_2DAM_Grup6.editBox"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
                 android:layout_marginStart="@dimen/marginEditTextScreen"
-                android:textColor="@color/black"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:paddingTop="10dp"
                 android:inputType="textMultiLine"
@@ -58,17 +57,15 @@
                 android:layout_height="@dimen/alturaEditText"
                 android:gravity="center_vertical"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/edit_text_background"/>
+                style="@style/Theme.Projecte_2DAM_Grup6.editBox"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cardViewUserImageProducte"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
-                android:backgroundTint="@color/black"
                 android:elevation="12dp"
                 android:innerRadius="0dp"
                 android:shape="ring"
@@ -90,7 +87,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:textSize="20dp"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="50dp"
                 tools:ignore="MissingConstraints" />
@@ -105,7 +101,7 @@
                 android:layout_marginBottom="10dp"
                 android:onClick="afegirMeGusta"
                 android:textSize="10dp"
-                android:text="M'Agrada" />
+                android:text="@string/text_like" />
 
             <Button
                 android:id="@+id/btn_dontLike"
@@ -117,7 +113,7 @@
                 android:layout_marginBottom="50dp"
                 android:onClick="removeMeGusta"
                 android:textSize="10dp"
-                android:text="Treure de la llista" />
+                android:text="@string/text_dislike" />
 
         </LinearLayout>
     </ScrollView>

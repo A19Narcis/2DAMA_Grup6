@@ -3,11 +3,13 @@ package com.example.projecte_2dam_grup6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,11 @@ public class PeticioArtista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peticio_artista);
 
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         Intent intent = getIntent();
         arrIntent = intent.getStringExtra(PantallaPrincipal.EXTRA_MESSAGE);

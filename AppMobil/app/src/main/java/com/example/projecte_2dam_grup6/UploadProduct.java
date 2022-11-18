@@ -243,7 +243,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             multipartImageUpload();
             Log.d("IMAGE_PROD", "image exists? -> " + prodImageExists);
             if (!prodImageExists){
-                Toast.makeText(this, "Imatge necessaria", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.msg_imageNeeded, Toast.LENGTH_LONG).show();
                 //Reinici activity if there is no IMAGE
                 finish();
                 startActivity(getIntent());
@@ -303,7 +303,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             super.onPostExecute(s);
             ready = true;
             multipartImageUpload();
-            Toast.makeText(UploadProduct.this, "Producte afegit correctament", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadProduct.this, R.string.msg_addNewProd, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
             intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
             startActivity(intent);

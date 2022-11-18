@@ -8,45 +8,45 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/house"
-            android:title="Productes" />
+            android:title="@string/item_productes" />
         <item
             android:id="@+id/nav_self_products"
             android:icon="@drawable/box"
-            android:title="Els meus productes" />
+            android:title="@string/item_elsMeusProductes" />
         <item
             android:id="@+id/nav_like_products"
             android:icon="@drawable/heart"
-            android:title="M'agrada" />
-        <item android:title="Categories">
+            android:title="@string/item_magrada" />
+        <item android:title="@string/title_item_categories">
             <menu>
                 <group android:checkableBehavior="single">
                     <item
                         android:id="@+id/nav_eina"
                         android:icon="@drawable/tools"
-                        android:title="Eines" />
+                        android:title="@string/item_eines" />
                     <item
                         android:id="@+id/nav_moble"
                         android:icon="@drawable/furniture"
-                        android:title="Mobles" />
+                        android:title="@string/item_mobles" />
                     <item
                         android:id="@+id/nav_joguina"
                         android:icon="@drawable/toy"
-                        android:title="Joguines" />
+                        android:title="@string/item_joguines" />
                     <item
                         android:id="@+id/nav_roba"
                         android:icon="@drawable/laundry"
-                        android:title="Roba" />
+                        android:title="@string/item_roba" />
                 </group>
 
             </menu>
         </item>
-        <item android:title="Log Out">
+        <item android:title="@string/title_item_logout">
             <menu>
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/logout"
                     app:showAsAction="ifRoom"
-                    android:title="Log out" />
+                    android:title="@string/item_logout" />
             </menu>
         </item>
     </group>

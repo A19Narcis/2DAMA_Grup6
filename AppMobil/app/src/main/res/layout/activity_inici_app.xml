@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     android:orientation="vertical"
+    style="@style/Theme.Projecte_2DAM_Grup6"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/linearLayout"
     tools:context=".IniciApp">
 
     <TextView
@@ -16,7 +19,6 @@
         android:layout_marginBottom="@dimen/marginTitle_Image"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="@dimen/titleTextSize" />
 
 
@@ -33,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/screenMargin"
         android:layout_marginEnd="@dimen/screenMargin"
-        android:textColor="@color/black"
         android:textSize="@dimen/textSizeQuestion"
         android:textAlignment="textStart"
         android:text="@string/preguntaTopSignUp" />
@@ -55,7 +56,6 @@
         android:layout_marginStart="@dimen/screenMargin"
         android:layout_marginEnd="@dimen/screenMargin"
         android:layout_marginTop="@dimen/margin_between_btns"
-        android:textColor="@color/black"
         android:textSize="@dimen/textSizeQuestion"
         android:textAlignment="textStart"
         android:text="@string/preguntaTopSignIn" />

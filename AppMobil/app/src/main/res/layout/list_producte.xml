@@ -9,6 +9,7 @@
     app:cardElevation="4dp"
     app:cardCornerRadius="20dp"
     android:layout_marginBottom="25dp"
+    style="@style/Theme.Projecte_2DAM_Grup6"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="6dp">
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="150dp"
@@ -51,7 +53,6 @@
                     android:layout_marginBottom="10dp"
                     android:text="Nom Producte"
                     android:textSize="24dp"
-                    android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/textViewUser"
@@ -59,8 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="Usuari"
-                    android:textSize="20dp"
-                    android:textColor="@color/black"/>
+                    android:textSize="20dp"/>
                 <TextView
                     android:id="@+id/textViewPreu"
                     android:layout_width="match_parent"

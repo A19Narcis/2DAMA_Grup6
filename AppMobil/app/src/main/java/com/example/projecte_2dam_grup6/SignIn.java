@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +47,19 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
+
         //Hide title bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        txtUserSignIn = (EditText) findViewById(R.id.loginUsertxt);
-        txtPasswordSignIn = (EditText) findViewById(R.id.loginPasstxt);
+        txtUserSignIn = findViewById(R.id.loginUsertxt);
+        txtPasswordSignIn = findViewById(R.id.loginPasstxt);
         buttonSignIn = findViewById(R.id.sendDataSignIn);
         textErrorDades = findViewById(R.id.txtNoValidUser);
         btnStart = findViewById(R.id.btnBackToStart);

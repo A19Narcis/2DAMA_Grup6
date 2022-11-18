@@ -137,7 +137,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
             AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(PantallaPrincipal.this);
             alertaLogOut.setTitle("Log out");
-            alertaLogOut.setMessage("¿Quieres cerrar sesión en la aplicación?");
+            alertaLogOut.setMessage(R.string.msg_logOutBox);
             alertaLogOut.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

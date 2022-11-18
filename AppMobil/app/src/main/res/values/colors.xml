@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red_err">#F32525</color>
+    <color name="ele_blue">#2196F3</color>
+    <color name="dark_blue">#1F4899</color>
+    <color name="cv_nv_Color">#4EACB5</color>
+    <color name="cv_nv_ColorLight">#B7F9FF</color>
 </resources>
