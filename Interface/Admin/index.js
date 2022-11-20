@@ -12,112 +12,35 @@ var app = new Vue({
                     sortable: true,
                     value: 'nom',
                 },
-                { text: 'COGNOMS', value: 'cognoms' },
-                { text: 'EDAD', value: 'data_naixament' },
-                { text: 'EMAIL', value: 'email' },
-                { text: 'USERS', value: 'users' },
-                { text: 'PASSWORD', value: 'pass' },
-                { text: 'ROL', value: 'rol' },
-                { text: 'BAN', value: 'ban' },
-                { text: 'INFO' },
-                { text: 'BAN' }
-
+                { text: 'COGNOMS', value: 'cognoms' }, { text: 'EDAD', value: 'data_naixament' },
+                { text: 'EMAIL', value: 'email' }, { text: 'USERS', value: 'users' },
+                { text: 'PASSWORD', value: 'pass' },{ text: 'ROL', value: 'rol' }, 
+                { text: 'BAN', value: 'ban' },{ text: 'INFO' },{ text: 'BAN' }
             ],
-            search: '',
-            edit: 0,
-            snackbar: false,
-            teo: "Hola fumo porros",
-            timeout: 2000,
-            img_usu: '',
-            arrEdit: [],
-            arrPet: [],
-            isLock: false,
-            lat: "",
-            long: "",
-            login: 0,
-            s2rc: "",
-            prod: 0,
-            isUser: 0,
-            isArtista: 0,
-            usuinfo: [],
-            logout: 0,
-            sheet: false,
-            users: [],
-            seePr: [],
-            img_prod: ' ',
-            dial: 0,
-            img: ' ',
-            seeUs: [],
-            dialog: false,
-            dialog2: false,
-            isAdmin: 0,
-            showPassword: false,
-            password: null,
-            info: { values: [] },
-            error: ' ',
-            err: ' ',
-            products: [],
-            
-        }
-    },
-    dataProduct() {
-        return {
-            text: [
-            ],
-            headers: [
-                {
-                    text: 'NOM',
-                    align: 'start',
-                    sortable: true,
-                    value: 'nom',
-                },
-                { text: 'PREU', value: 'preu' },
-                { text: 'CATEGORIA', value: 'categoria' },
-                { text: 'ESTADO', value: 'estado_prod' },
-                { text: 'DESCRIPCIO', value: 'descripcio' },
-                { text: 'EMAIL', value: 'correu_usu' },
-                { text: 'VER' }
-            ],
-
-            search: '',
-            products: [],
-
-            hoverInit: ' ',
-            num_prod: 0,
-            seeUs: [],
-            dialog: false,
-            isadmin: 4,
-            showPassword: false,
-            password: null,
-            info: { values: [] },
-            error: ' ',
-            err: ' '
+            search: '', edit: 0, img_usu: '', arrEdit: [],
+            arrPet: [], lat: "", long: "", login: 0,
+            s2rc: "", prod: 0, isUser: 0, isArtista: 0,
+            usuinfo: [], logout: 0, sheet: false, users: [],
+            seePr: [], img_prod: ' ', dial: 0, img: ' ',
+            seeUs: [], dialog: false, dialog2: false,
+            isAdmin: 0, showPassword: false, password: null,
+            info: { values: [] }, error: ' ', err: ' ', products: [], 
         }
     },
     methods: {
         getUsers: function (data) {
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getUsers/",
                 {
-                    method: "POST",
-                    headers: {
+                    method: "POST", headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                    },
-                    mode: "cors",
-                    cache: "default"
+                    }, mode: "cors",cache: "default"
                 }
             ).then(
-                (response) => {
-                    //console.log(response);
-                    return (response.json());
-                }
+                (response) => {return (response.json());}
             ).then(
-                (data) => {
-                    //onsole.log(data);
-                    this.users = data;
-                }
+                (data) => {this.users = data;}
             ).catch(
                 (error) => {
                     console.log("Error. ");
@@ -125,12 +48,9 @@ var app = new Vue({
                 }
             );
         },
-
         getAdmins: function (data) {
             this.info.values.push(document.getElementById("user").value);
             this.info.values.push(document.getElementById("pass").value);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getAdmins/",
                 {
@@ -145,15 +65,12 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     for (let index = 0; index < data.length; index++)
                         if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin") {
-                            console.log("hola");
                             this.logout = 1;
                             this.info.values = [];
                             this.usuinfo = data[index];
@@ -179,8 +96,6 @@ var app = new Vue({
         },
 
         getProducts: function () {
-  
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getProducts/",
                 {
@@ -194,12 +109,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.login = 0;
                     this.prod = 1;
                     this.products = data;
@@ -208,7 +121,6 @@ var app = new Vue({
                     str = str + this.products[1].path;
                     this.img_prod = str;
                     this.info.values = []
-
                 }
             ).catch(
                 (error) => {
@@ -219,8 +131,6 @@ var app = new Vue({
         },
         seeProduct: function (id) {
             this.info.values.push(id);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeProduct/",
                 {
@@ -235,14 +145,11 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.seePr = data[0];
-                    console.log(this.seePr.path);
                     this.info.values = [];
                     this.sheet = true;
                 }
@@ -287,8 +194,6 @@ var app = new Vue({
             this.info.values.push(id);
             this.info.values.push(id_image);
             this.info.values.push(ban);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/editUser/",
                 {
@@ -303,12 +208,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
                     this.info.values = [];
                     app.getUsers();
                 }
@@ -325,9 +228,6 @@ var app = new Vue({
             }
             this.info.values.push(email);
             this.info.values.push(ban);
-            console.log(this.info.values);
-
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/banear/",
                 {
@@ -342,12 +242,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log("ban" + data);
                     this.info.values = [];
                     app.getUsers();
 
@@ -359,18 +257,8 @@ var app = new Vue({
                 }
             );
         },
-
-        changeloc: function()
-        {
-            this.s2rc = "https://maps.google.com/maps?q=+41.38591728341789+,+2.107479013502598+&hl=es;z=14&amp;output=embed";
-            console.log(document.getElementById('map').src =  this.s2rc);
-        },
         seeUsers: function (email) {
             this.info.values.push(email);
-
-            console.log(this.info.values);
-            console.log(email);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeUsers/",
                 {
@@ -385,32 +273,22 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.seeUs = data[0];
                     var str = "../../Backend/Server/";
                     str = str + this.seeUs.path;
                     str = str.replaceAll('"', '');
                     this.seeUs.path = str;
                     this.img = this.seeUs.path;
-                    //console.log(this.img);
-                    console.log("SeeUs" + this.seeUs.path);
                     var str = [];
                     str = this.seeUs.ubicacio.split(' ');
                     this.lat = str[0];
                     this.long = str[1];
-                    console.log( this.lat);
-                    console.log( this.long);
                     this.s2rc =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCGBVNGL-01rb2enDljAeYFQE-elNlu2RI &q="+this.lat+','+this.long+"&zoom=18";
-
-                    console.log(this.s2rc);
                     this.info.values = [];
-
-
                 }
             ).catch(
                 (error) => {
@@ -423,9 +301,6 @@ var app = new Vue({
             this.info.values.push(user);
             this.info.values.push(decision);
             this.info.values.push(id);
-            console.log(this.info.values);
-
-            console.log("decidirPeticion");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/decidirPeticion/",
                 {
@@ -440,12 +315,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.info.values = [];
                     app.getUsers();
                 }
@@ -458,10 +331,6 @@ var app = new Vue({
         },
         seeEdit: function (id) {
             this.info.values.push(id);
-
-            console.log(this.info.values);
-
-            console.log("SeeEdit");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeEdit/",
                 {
@@ -476,23 +345,17 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.arrEdit = data[0];
                     var str = "../../Backend/Server/";
                     str = str + this.arrEdit.path;
                     str = str.replaceAll('"', '');
                     this.arrEdit.path = str;
                     this.img = this.arrEdit.path;
-                    //console.log(this.img);
-                    console.log("arrEdit" + this.arrEdit.path);
                     this.info.values = [];
-
-
                 }
             ).catch(
                 (error) => {
@@ -502,8 +365,6 @@ var app = new Vue({
             );
         },
         seePeticiones: function () {
-            
-            console.log("seePeticiones");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seePeticiones/",
                 {
@@ -517,12 +378,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.arrPet = data;
                 }
             ).catch(
@@ -531,52 +390,6 @@ var app = new Vue({
                     console.log(error);
                 }
             );
-        },
-
-        ferAdmin: function (email, rol) {
-            if (confirm("Estas seguro de cambiar el rol a " + email) == true) {
-                this.info.values.push(email);
-                this.info.values.push(rol);
-                console.log(this.info.values);
-                console.log(email);
-                console.log("Get Data");
-                const myHeaders = new Headers();
-                fetch("http://localhost:3000/ferAdmin/",
-                    {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                        },
-                        mode: "cors",
-                        body: JSON.stringify(this.info),
-                        cache: "default"
-                    }
-                ).then(
-                    (response) => {
-                        //onsole.log(response);
-                        return (response.json());
-                    }
-                ).then(
-                    (data) => {
-                        //console.log(data);
-                        this.users = data[0];
-                        this.info.values = [];
-                        app.getUsers();
-
-                    }
-                ).catch(
-                    (error) => {
-                        console.log("Error. ");
-                        console.log(error);
-                    }
-                );
-            }
-
-        },
-
-        onClickImage() {
-            alert('Clicked image')
-        },
+        }
     }
 })
