@@ -10,6 +10,14 @@
     android:id="@+id/linearLayout"
     tools:context=".PeticioArtista">
 
+    <Button
+        android:id="@+id/btnBackToStart"
+        android:layout_width="@dimen/widthSmallButton"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartReturnButton"
+        android:layout_marginEnd="@dimen/screenMargin"
+        android:onClick="backToStart"
+        android:text="@string/btnBackInici"/>
 
     <TextView
         android:id="@+id/textView2"

@@ -10,5 +10,6 @@
     "dadesProductesMeGusta": "/getMeGustaProducts",
     "addNewLike": "/addMeGustaProduct",
     "removeLike": "/deleteMeGustaProduct",
-    "addNewPeticio": "/addNewPeticio"
+    "addNewPeticio": "/addNewPeticio",
+    "editUser": "/editUser"
 }

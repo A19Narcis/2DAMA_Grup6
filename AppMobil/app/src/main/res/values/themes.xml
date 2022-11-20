@@ -21,6 +21,10 @@
         <item name="android:background">@drawable/edit_text_background</item>
     </style>
 
+    <style name="Theme.Projecte_2DAM_Grup6.textViewUserInfo">
+        <item name="android:background">@drawable/edit_text_background</item>
+    </style>
+
     <style name="Theme.Projecte_2DAM_Grup6.navItemsStyle">
         <item name="android:layout_gravity">start</item>
         <item name="android:backgroundTint">@color/cv_nv_ColorLight</item>

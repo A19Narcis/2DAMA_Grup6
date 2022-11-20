@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.Projecte_2DAM_Grup6"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/linearLayout"
     tools:context=".FullProduct">
 
     <ScrollView
@@ -16,6 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btnBackToStart"
+                android:layout_width="@dimen/widthSmallButton"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStartReturnButton"
+                android:layout_marginEnd="@dimen/screenMargin"
+                android:onClick="backToStart"
+                android:text="@string/btnBackInici"/>
 
             <TextView
                 android:id="@+id/textViewNomProducte"

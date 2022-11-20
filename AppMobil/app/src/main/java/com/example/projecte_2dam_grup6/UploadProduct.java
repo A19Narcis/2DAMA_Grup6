@@ -9,6 +9,7 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -88,6 +90,12 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_product);
+
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         //GET DADES USER LOGIN
         Intent intent = getIntent();
@@ -213,9 +221,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
 
 
     public void backToStart(View view){
-        Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
-        intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
-        startActivity(intent);
+        super.onBackPressed();
     }
 
 
@@ -248,11 +254,11 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
                 finish();
                 startActivity(getIntent());
             } else {
-                String json = "{\"id_usu\":" + id_user_login
+                String json = "[{\"id_usu\":" + id_user_login
                         + ",\"nom\":\"" + titolProd.getText()
                         + "\",\"preu\":" + preuProd.getText()
                         + ",\"categoria\":\"" + catProd.getText()
-                        + "\",\"descripcion\":\"" + descProd.getText() + "\"}";
+                        + "\",\"descripcion\":\"" + descProd.getText() + "\"}]";
                 Log.d("JSON", "Prodcute: " + json);
 
                 //CONNEXIO SERVER
@@ -304,10 +310,12 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             ready = true;
             multipartImageUpload();
             Toast.makeText(UploadProduct.this, R.string.msg_addNewProd, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
-            intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
-            startActivity(intent);
+            goBack();
         }
+    }
+
+    private void goBack(){
+        super.onBackPressed();
     }
 
     @Override

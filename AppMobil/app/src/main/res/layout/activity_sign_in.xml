@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     android:orientation="vertical"
-    style="@style/Theme.Projecte_2DAM_Grup6"
+    android:theme="@style/Theme.Projecte_2DAM_Grup6"
     android:background="@drawable/gradient_list"
     android:id="@+id/linearLayout"
     tools:context=".SignIn">
@@ -63,7 +63,6 @@
                 android:id="@+id/loginPasstxt"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/alturaEditText"
-                android:layout_marginBottom="@dimen/margenBottom_BTN"
                 android:layout_marginStart="@dimen/marginEditTextScreen"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 style="@style/Theme.Projecte_2DAM_Grup6.editBox"
@@ -71,6 +70,16 @@
                 android:drawableEnd="@drawable/ic_password"
                 android:paddingEnd="@dimen/paddinIMG_EditText"
                 android:hint="@string/hintPassword"/>
+
+            <CheckBox
+                android:id="@+id/checkPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Veure contraseya"
+                android:buttonTint="@color/black"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginBottom="@dimen/margenBottom_BTN"
+                tools:ignore="MissingConstraints" />
 
             <Button
                 android:id="@+id/sendDataSignIn"

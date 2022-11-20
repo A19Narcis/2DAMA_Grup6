@@ -73,8 +73,6 @@ app.post("/getProducts", (req, res) => {
   
 });
 
-
-
 app.post("/seeProduct", (req, res) =>{
   console.log(req.body.values[0]);
 /*   con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
@@ -168,10 +166,24 @@ app.post("/registerNewUser", (req, res) => {
       } else {
         con.query("INSERT INTO PERSONA VALUES ('" + req.body.email + "','" + req.body.nom + "','" + req.body.cognoms + "','" + req.body.edad + "','" + req.body.ubicacio + "','" + req.body.user + "','" + req.body.pass + "','" + req.body.descripcio + "','" + req.body.rol + "',NULL ,1, 0)");
       }
-    }
-  );
+    });
   res.json(auth);
 });
+
+
+//Editar usuari
+app.post("/editUser/:id", (req, res) =>{
+  var auth = true;
+  con.query("SELECT email, user FROM PERSONA WHERE id != '" + req.body.id + "' and email = '" + req.body.email + "' or id != '" + req.body.id + "' and user = '" + req.body.user + "'", function(error, result, fields){ //And diff ID
+    if (result != 0) {
+      auth = false
+    } else {
+      con.query("UPDATE PERSONA SET email = '" + req.body.email + "', nom = '" +  req.body.nom + "', cognoms = '" + req.body.cognoms + "', data_naixament = '" + req.body.data_naixament + "', ubicacio = '" + req.body.ubicacio + "', user = '" + req.body.user + "', pass = '" + req.body.pass + "', descripcio = '" + req.body.descripcio + "' WHERE id = " + req.body.id + "");
+    }
+  });
+  res.json(auth);
+})
+
 
 //Afegir un producte a la llista de megusta
 app.post("/addMeGustaProduct", (req, res) => {
@@ -213,9 +225,9 @@ app.post("/addNewProduct", (req, res) => {
 });
 
 //Dades generals user per la PANTALLA PRINCIPAL APP
-app.get("/dadesUserLogin/:dadesUserLogIn", (req, res) => {
-  let user = req.params.dadesUserLogIn;
-  con.query("SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.user = '" + user + "'", function (err, result, fields) {
+app.get("/dadesUserLogin/:id_user", (req, res) => {
+  let id = req.params.id_user;
+  con.query("SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.id = '" + id + "'", function (err, result, fields) {
     res.send(result);
   });
 })
@@ -243,15 +255,15 @@ app.post("/addNewPeticio", (req, res) => {
 
 
 //GET IMAGE NAV BAR USER LOGIN
-app.get('/imageUserLogin/:dadesUserLogIn', (req, res) => {
-  var user = req.params.dadesUserLogIn;
+app.get('/imageUserLogin/:id_user', (req, res) => {
+  var id = req.params.id_user;
   var options = {
       root: path.join(__dirname)
   };
 
   var filename = "";
   var fileName = "";
-  con.query("SELECT UPLOADS.path FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.user = '" + user +"';", function (err, result, fields) {
+  con.query("SELECT UPLOADS.path FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.id = " + id + ";", function (err, result, fields) {
     filename = JSON.stringify(result);
     //console.log(filename);
     filename = filename.replace(/\[/g, "");
@@ -293,7 +305,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   //console.log("PASS: " + passwd);
   let auth = false;
   con.query(
-    "SELECT user, pass, rol, ban, id  FROM PERSONA WHERE user = '" +
+    "SELECT * FROM PERSONA WHERE user = '" +
     user +
     "' && pass ='" +
     passwd +

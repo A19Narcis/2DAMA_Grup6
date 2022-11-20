@@ -19,7 +19,7 @@
 
     //Margins
     <dimen name="marginTitle_Image">40dp</dimen>
-    <dimen name="marginBOT_image_buttons">130dp</dimen>
+    <dimen name="marginBOT_image_buttons">115dp</dimen>
     <dimen name="screenMargin">100dp</dimen>
     <dimen name="marginBottomScreen">60dp</dimen>
     <dimen name="margin_between_btns">20dp</dimen>

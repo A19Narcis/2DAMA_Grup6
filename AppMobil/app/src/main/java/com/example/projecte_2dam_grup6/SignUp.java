@@ -17,9 +17,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -114,6 +118,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
     private String server_path;
     private String register_path;
 
+    private CheckBox checkBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +165,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         autoGmail = findViewById(R.id.txtAutoGmail);
         txtErrorRegister = findViewById(R.id.txtNoValidUserRegister);
         showDateContainer = findViewById(R.id.viewUserInputDate);
+        checkBox = findViewById(R.id.checkPass);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    //Veure la contrasenya
+                    passRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //Veure la contrasenya en punts
+                    passRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
 
         fabCamera = findViewById(R.id.fab);
         fabCamera.setOnClickListener(this);
@@ -550,16 +571,24 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
     }
 
     public void backToStart(View view){
-        Intent intent = new Intent(this, IniciApp.class);
-        startActivity(intent);
+        super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void validarRegisterUser(View view){
         //Veure que tots els camps tenen informació
         boolean valid = true;
-        if (nomRegister.getText().length() == 0 || cognomRegister.getText().length() == 0 || userRegister.getText().length() == 0
-                || passRegister.getText().length() == 0 || descRegister.getText().length() == 0 || emailRegister.getText().length() == 0
+
+        //Veure que el text no son espais
+        String val_editNom = nomRegister.getText().toString().replace(" ", "");
+        String val_editCog = cognomRegister.getText().toString().replace(" ", "");
+        String val_editUse = userRegister.getText().toString().replace(" ", "");
+        String val_editPas = passRegister.getText().toString().replace(" ", "");
+        String val_editDes = descRegister.getText().toString().replace(" ", "");
+        String val_editEma = emailRegister.getText().toString().replace(" ", "");
+
+        if (val_editNom.length() == 0 ||val_editCog.length() == 0 || val_editUse.length() == 0
+                || val_editPas.length() == 0 || val_editDes.length() == 0 || val_editEma.length() == 0
                 || locationRegister.getText().length() == 0 || showDateContainer.getText().length() == 0){
             valid = false;
             Toast.makeText(this, R.string.omplirCamps, Toast.LENGTH_LONG).show();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class FullProduct extends AppCompatActivity {
     private String id_prod_selec;
     private String id_usuari;
     private String id_image_producte;
+    private String id_usuari_prod;
 
     private TextView titleProd;
     private String path_decodeProd;
@@ -54,6 +57,7 @@ public class FullProduct extends AppCompatActivity {
 
     private Button likeBtn;
     private Button dislikeBtn;
+    private Button goBack;
 
 
 
@@ -61,6 +65,12 @@ public class FullProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_product);
+
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         //Hide title bar
         if (getSupportActionBar() != null) {
@@ -91,9 +101,15 @@ public class FullProduct extends AppCompatActivity {
         imageViewProduct = findViewById(R.id.imageViewProducte);
         likeBtn = findViewById(R.id.btn_like);
         dislikeBtn = findViewById(R.id.btn_dontLike);
+        goBack = findViewById(R.id.btnBackToStart);
 
         getInfoProducte(); //Agafar les dades del producte
 
+    }
+
+
+    public void backToStart(View view){
+        super.onBackPressed();
     }
 
 
@@ -307,6 +323,7 @@ public class FullProduct extends AppCompatActivity {
                 nomUserProd.setText(jsonObject.optString("user"));
                 path_decodeProd = jsonObject.optString("path_prod");
                 id_image_producte = jsonObject.optString("id_image");
+                id_usuari_prod = jsonObject.optString("id");
 
                 StrictMode.ThreadPolicy gfgPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(gfgPolicy);
@@ -355,7 +372,7 @@ public class FullProduct extends AppCompatActivity {
         }
 
         private String getPathImageUser(){
-            String url_server = server_path + url_imageUser + "/" + nomUserProd.getText().toString();
+            String url_server = server_path + url_imageUser + "/" + id_usuari_prod;
             Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;

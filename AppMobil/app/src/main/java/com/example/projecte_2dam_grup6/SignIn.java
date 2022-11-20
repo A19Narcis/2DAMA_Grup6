@@ -7,9 +7,13 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +43,8 @@ public class SignIn extends AppCompatActivity {
     private String server_path;
     private String loginValidate_path;
 
+    private CheckBox checkBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,17 +66,32 @@ public class SignIn extends AppCompatActivity {
         buttonSignIn = findViewById(R.id.sendDataSignIn);
         textErrorDades = findViewById(R.id.txtNoValidUser);
         btnStart = findViewById(R.id.btnBackToStart);
+        checkBox = findViewById(R.id.checkPass);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    //Veure la contrasenya
+                    txtPasswordSignIn.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //Veure la contrasenya en punts
+                    txtPasswordSignIn.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
     }
 
     @Override
     public void finish(){
-        super.finish();
+        Intent intent = new Intent(SignIn.this, IniciApp.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void backToStart(View view){
-        Intent intent = new Intent(this, IniciApp.class);
+        Intent intent = new Intent(SignIn.this, IniciApp.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
@@ -168,7 +189,6 @@ public class SignIn extends AppCompatActivity {
                 textErrorDades.setVisibility(View.VISIBLE);
             } else {
                 Log.d("USER", "user: " + s);
-
                 try {
                     JSONArray jsonArray = new JSONArray(s);
                     JSONObject jsonObject = jsonArray.getJSONObject(0);

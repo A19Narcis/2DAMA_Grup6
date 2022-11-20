@@ -7,6 +7,8 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:theme="@style/Theme.Projecte_2DAM_Grup6"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/linearLayout"
     tools:context=".UploadProduct">
 
     <ScrollView

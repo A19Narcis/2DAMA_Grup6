@@ -33,11 +33,13 @@ public class PeticioArtista extends AppCompatActivity {
     private String addPet_path;
 
     private Button btnSend;
+    private Button goBack;
     private TextView textPeticio;
-
-    private String arrIntent;
+    
     private String id_user;
 
+    private boolean isValid;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +52,9 @@ public class PeticioArtista extends AppCompatActivity {
         animationDrawable.start();
 
         Intent intent = getIntent();
-        arrIntent = intent.getStringExtra(PantallaPrincipal.EXTRA_MESSAGE);
+        id_user = intent.getStringExtra("ID_USUARI");
 
-        Log.d("Dades_USER", arrIntent);
-
-        try {
-            JSONArray jsonArray = new JSONArray(arrIntent);
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            id_user = jsonObject.optString("id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Log.d("Dades_USER", id_user);
 
         //Hide title bar
         if (getSupportActionBar() != null) {
@@ -78,16 +72,38 @@ public class PeticioArtista extends AppCompatActivity {
 
         btnSend = findViewById(R.id.btnPeticio);
         textPeticio = findViewById(R.id.peticioUsuari);
+        goBack = findViewById(R.id.btnBackToStart);
 
     }
 
+
+    public void backToStart(View view){
+        super.onBackPressed();
+    }
+
     public void startPeticio(View view){
+        isValid = true;
+        
+        String clean_text = textPeticio.getText().toString().replace(" ", "");
+        
+        if (clean_text.length() == 0){
+            isValid = false;
+            Toast.makeText(this, "Has d'omplir el missatge", Toast.LENGTH_SHORT).show();
+        }
 
-        String json = "{\"id_usu\":\"" + id_user + "\",\"peticion\":\""
-                + textPeticio.getText().toString() + "\"}";
+        
+        if (isValid){
 
-        final String HOST = server_path + addPet_path;
-        new sendPeticio().execute(HOST, json);
+            String clerDesc = textPeticio.getText().toString();
+            clerDesc = clerDesc.replace('\n', ' ');
+            textPeticio.setText(clerDesc);
+
+            String json = "{\"id_usu\":\"" + id_user + "\",\"peticion\":\""
+                    + textPeticio.getText().toString() + "\"}";
+
+            final String HOST = server_path + addPet_path;
+            new sendPeticio().execute(HOST, json);
+        }
     }
 
     public class sendPeticio extends AsyncTask<String, Void, String>{
@@ -125,7 +141,12 @@ public class PeticioArtista extends AppCompatActivity {
         protected void onPostExecute(String s){
             super.onPostExecute(s);
             Toast.makeText(PeticioArtista.this, "Petició enviada!", Toast.LENGTH_SHORT).show();
+            goBack();
         }
+    }
+
+    private void goBack(){
+        super.onBackPressed();
     }
 
     private static void writeStringToOutputStream(String json, OutputStream outputStream) throws IOException {

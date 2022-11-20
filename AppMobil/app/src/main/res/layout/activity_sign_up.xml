@@ -128,11 +128,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/alturaEditText"
                 style="@style/Theme.Projecte_2DAM_Grup6.editBox"
-                android:layout_marginBottom="@dimen/maringEditText_Register"
                 android:layout_marginStart="@dimen/marginEditTextScreen"
                 android:layout_marginEnd="@dimen/marginEditTextScreen"
                 android:inputType="textPassword"
                 android:hint="@string/hint_register_password"/>
+
+            <CheckBox
+                android:id="@+id/checkPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Veure contraseya"
+                android:buttonTint="@color/black"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginBottom="@dimen/margenBottom_BTN"
+                tools:ignore="MissingConstraints" />
 
             <EditText
                 android:id="@+id/newDescrtxt"

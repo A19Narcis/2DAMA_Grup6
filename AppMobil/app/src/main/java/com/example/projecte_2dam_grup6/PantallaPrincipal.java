@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -90,7 +91,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         arrLogIn = intent.getStringExtra(SignIn.EXTRA_MESSAGE);
 
 
-
         //Llegir les dades del fitxer JSON en ASSETS
         try {
             JSONObject obj_settings = new JSONObject(loadJSONFromAsset());
@@ -106,6 +106,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             Log.d("Usuari", "DADES: " + jsonObject);
             dadesUserLogIn = jsonObject.optString("user");
+            Log.d("USUARIO", "NOMBRE USUUUUU: " + dadesUserLogIn);
             rolUser = jsonObject.optString("rol");
             id_user = jsonObject.optString("id");
         } catch (JSONException e){
@@ -182,8 +183,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         card = (CardView) headerView.findViewById(R.id.view2);
         card.setBackgroundColor(Color.TRANSPARENT);
         card.setCardElevation(0);
-        //navImageView.setImageBitmap(bitmapImage);
-        navUsername.setText(dadesUserLogIn);
+        navUsername.setText("@"+dadesUserLogIn);
 
 
         // Passing each menu ID as a set of Ids because each
@@ -195,6 +195,22 @@ public class PantallaPrincipal extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pantalla_principal);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        
+        if (id == R.id.action_settings){
+            Intent intent  = new Intent(PantallaPrincipal.this, EditUser.class);
+            intent.putExtra(EXTRA_MESSAGE, arrLogIn);
+            intent.putExtra("imageUser", String.valueOf(card));
+            startActivity(intent);
+            return true;
+        }
+        
+        return super.onOptionsItemSelected(item);
     }
 
     private void getinfoUser() {
@@ -216,7 +232,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            String url_server = server_path + loginValidate_path + "/" + dadesUserLogIn;
+            String url_server = server_path + loginValidate_path + "/" + id_user;
             Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
@@ -290,8 +306,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         }
     }
-
-
+    
     //GET IMAGE USER
     private class getImageUserLogIn extends AsyncTask<String, Void, String> {
 
@@ -308,7 +323,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            String url_server = server_path + loginValidate_path + "/" + dadesUserLogIn;
+            String url_server = server_path + loginValidate_path + "/" + id_user;
             Log.d("url_server", url_server);
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
@@ -394,8 +409,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             }
         }
     }
-
-
+    
     public String loadJSONFromAsset() {
         String json = null;
         try {

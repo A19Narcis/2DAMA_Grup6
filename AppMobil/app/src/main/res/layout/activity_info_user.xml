@@ -1,166 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
-    tools:context=".InfoUser"
-    >
-    <androidx.appcompat.widget.LinearLayoutCompat
+    android:orientation="vertical"
+    android:theme="@style/Theme.Projecte_2DAM_Grup6"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/linearLayout"
+    tools:context=".InfoUser">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        >
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/normal_user_img"
-            android:layout_gravity="center"
-            ></androidx.appcompat.widget.AppCompatImageView>
-        <TextView
-            android:id="@+id/nomUser"
-            android:text="Nom"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            />
+            android:orientation="vertical" >
 
-        <TableRow
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
-            >
+            <Button
+                android:id="@+id/btnBackToStart"
+                android:layout_width="@dimen/widthSmallButton"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStartReturnButton"
+                android:layout_marginEnd="@dimen/screenMargin"
+                android:onClick="backToStart"
+                android:text="@string/btnBackInici"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/infoUserImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/logo_rounded_hd"
+                android:layout_marginTop="45dp"
+                android:layout_gravity="center" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                tools:context=".InfoUser">
+
+                <TextView
+                    android:id="@+id/infoNom"
+                    style="@style/Theme.Projecte_2DAM_Grup6.editBox"
+                    android:layout_width="165dp"
+                    android:layout_height="@dimen/alturaEditText"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:paddingTop="10dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/infoCognom"
+                    style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                    android:layout_width="165dp"
+                    android:layout_height="@dimen/alturaEditText"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/infoUsername"
+                    android:layout_marginTop="55dp"
+                    style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                    android:layout_width="165dp"
+                    android:layout_height="@dimen/alturaEditText"
+                    app:layout_constraintTop_toBottomOf="@id/infoNom"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:paddingTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/infoPass"
+                    app:layout_constraintTop_toBottomOf="@id/infoCognom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="55dp"
+                    android:layout_width="165dp"
+                    android:layout_height="@dimen/alturaEditText"
+                    style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                    android:layout_marginEnd="10dp"
+                    android:paddingTop="10dp"
+                    android:inputType="textPassword"
+                    tools:ignore="MissingConstraints" />
+
+                <CheckBox
+                    android:id="@+id/checkPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/infoPass"
+                    app:layout_constraintStart_toStartOf="@id/infoPass"
+                    android:text="Veure contraseya"
+                    tools:ignore="MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/rolUserText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Rol: "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:id="@+id/infoEmail"
+                style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                android:layout_width="210dp"
+                android:layout_height="@dimen/alturaEditText"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                app:layout_constraintTop_toBottomOf="@id/infoUsername"
+                android:inputType="textEmailAddress"
+                android:paddingTop="10dp"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/rolUserMod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quin rol "
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                />
-        </TableRow>
-
-        <TableRow
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
-
-            >
+                android:id="@+id/infoRol"
+                android:layout_width="90dp"
+                android:layout_height="@dimen/alturaEditText"
+                style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
+                android:paddingTop="10dp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/idUserText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Id: "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:id="@+id/infoDesc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/altura_editText_descripcio"
+                style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="@dimen/marginEditTextScreen"
+                android:layout_marginEnd="@dimen/marginEditTextScreen"
+                android:paddingTop="10dp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/idUserMod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quin id "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </TableRow>
+                android:id="@+id/infoData"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alturaEditText"
+                style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                android:paddingEnd="20dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="120dp"
+                android:hint="@string/hint_dataNaixament"
+                android:layout_marginEnd="120dp"
+                android:inputType="textPostalAddress"/>
 
-        <TableRow
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
-            >
-
-            <TextView
-                android:id="@+id/emailUserText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Email: "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_height="250dp" />
 
             <TextView
-                android:id="@+id/emailUserMod"
+                android:id="@+id/infoLocation"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                style="@style/Theme.Projecte_2DAM_Grup6.textViewUserInfo"
+                android:paddingEnd="20dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_marginBottom="@dimen/maringEditText_Register"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:inputType="textMultiLine"
+                android:hint="@string/hint_register_location"/>
+
+            <Button
+                android:id="@+id/btnEnterPeticio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quin email "
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                />
-        </TableRow>
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/marginBottomScreen"
+                android:onClick="accessPeticiones"
+                android:text="Peticiones" />
 
-        <TableRow
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
-
-            >
-
-            <TextView
-                android:id="@+id/dataUserText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Data: "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/dataUserMod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="data"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
-
-            >
-
-            <TextView
-                android:id="@+id/ubicacioUserText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Ubicacio: "
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/ubicacioUserMod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ubicacio"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </TableRow>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

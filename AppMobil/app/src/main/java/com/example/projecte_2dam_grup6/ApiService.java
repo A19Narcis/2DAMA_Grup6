@@ -17,8 +17,4 @@ public interface ApiService {
     @Multipart
     @POST("/uploadProductImage")
     Call<ResponseBody> postImageProd (@Part MultipartBody.Part image, @Part("myFile")RequestBody name);
-
-    @GET("/dadesProductsJSON")
-    Call<Producte> getProductList();
-
 }
