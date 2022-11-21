@@ -11,7 +11,7 @@ const helmet = require('helmet');
 const app = express();
 const PORT = 3000;
 
-const IP = "192.168.65.15"
+const IP = "192.168.224.66"
 
 app.use(express.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
@@ -324,7 +324,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 
 //GET dades products per RECYCLE VIEW
 app.get("/dadesProductsJSON", (req, res) => {
-  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte", function(err, result, field){
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte DESC", function(err, result, field){
     res.send(result);
   });
 });

@@ -60,7 +60,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    public static final float INITIAL_ZOOM = 12f;
+    public static final float INITIAL_ZOOM = 14f;
 
     private String infoUserFromMainPage;
     private String rol_str;
@@ -327,7 +327,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
 
         // Add a ground overlay 100 meters in width to the home location.
         GroundOverlayOptions homeOverlay = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo_rounded_hd))
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.maps_mark))
                 .position(home, 100);
 
         mMap.addGroundOverlay(homeOverlay);

@@ -3,6 +3,7 @@ package com.example.projecte_2dam_grup6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -62,8 +63,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     public static final String EXTRA_MESSAGE = "com.example.projecte_2dam_grup6.extra.MESSAGE";
 
     private Button btnBack;
-    String[] cat_prod = {"Joguina", "Eina", "Roba", "Moble"};
-    AutoCompleteTextView autoCompleteProduteCat;
+    public AutoCompleteTextView autoCompleteProduteCat;
     ArrayAdapter<String> adapterCat;
     private EditText titolProd;
     private EditText descProd;
@@ -130,6 +130,12 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        String[] cat_prod = new String[4];
+        cat_prod[0] = getResources().getString(R.string.opt_upload_Juguete);
+        cat_prod[1] = getResources().getString(R.string.opt_upload_Herramienta);
+        cat_prod[2] = getResources().getString(R.string.opt_upload_Mueble);
+        cat_prod[3] = getResources().getString(R.string.opt_upload_Ropa);
 
         //Drop Down MENU (Categories)
         adapterCat = new ArrayAdapter<String>(this, R.layout.list_cat_prod, cat_prod);

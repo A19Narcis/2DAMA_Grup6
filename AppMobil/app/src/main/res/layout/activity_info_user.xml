@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/infoPass"
                     app:layout_constraintStart_toStartOf="@id/infoPass"
-                    android:text="Veure contraseya"
+                    android:text="@string/check_pass"
                     tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

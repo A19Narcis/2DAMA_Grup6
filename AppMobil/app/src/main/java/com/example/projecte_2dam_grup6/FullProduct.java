@@ -170,9 +170,9 @@ public class FullProduct extends AppCompatActivity {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             if (s.equals("false")) {
-                Toast.makeText(FullProduct.this, "Aquest producte no el tens a la llista", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FullProduct.this, R.string.rem_prodNotInList, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(FullProduct.this, "Prodcute esborrat correctament!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FullProduct.this, R.string.rem_product_msg, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -216,9 +216,9 @@ public class FullProduct extends AppCompatActivity {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             if (s.equals("false")) {
-                Toast.makeText(FullProduct.this, "Aquest producte ja el tens a la llista", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FullProduct.this, R.string.add_prodAlreadyInList, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(FullProduct.this, "Prodcute afegit correctament!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FullProduct.this, R.string.add_product_msg, Toast.LENGTH_SHORT).show();
             }
         }
 

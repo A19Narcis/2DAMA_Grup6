@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //General
+    <string name="app_name">Recicla APP</string>
+    <string name="omplirCamps">Fill in all the fields</string>
+    <string name="btnBackInici">&lt;</string>
+    <string name="check_pass">Show password</string>
+
+    //Inici APP
+    <string name="preguntaTopSignUp">Are you a new user?</string>
+    <string name="txtBtnSignUp">Sign Up</string>
+    <string name="preguntaTopSignIn">Do you already have an account?</string>
+    <string name="txtBtnSignIn">Sign In</string>
+
+    //Register
+    <string name="addNewImageText">+</string>
+    <string name="title_register">Register</string>
+    <string name="txt_Register_btn">Create User</string>
+    <string name="hint_register_location">Location</string>
+    <string name="hint_register_email">Email</string>
+    <string name="hint_register_desc">Description</string>
+    <string name="hint_register_nom">Name</string>
+    <string name="hint_register_cognom">Surname</string>
+    <string name="hint_register_user">Username</string>
+    <string name="hint_register_password">Password</string>
+    <string name="hint_register_edat">Date</string>
+    <string name="gmail_com">\@gmail.com</string>
+    <string name="errDataValue">The date is invalid</string>
+    <string name="imatge_usuari">User Image</string>
+    <string name="hint_dataNaixament">Birth Date</string>
+    <string name="errRegisterText">The EMAIL or USERNAME is already registered</string>
+
+    //LOGIN
+    <string name="hintPassword">Password</string>
+    <string name="hintUsuari">Username</string>
+    <string name="txt_benvingut_da">Welcome</string>
+    <string name="txtDadesNoValides_login">The username or password is not correct</string>
+    <string name="emojiErrorSignUp">Description can not have EMOJIS</string>
+    <string name="title_activity_pantalla_principal">MainPage</string>
+
+    //MAPS
+    <string name="title_activity_maps">Wander</string>
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+
+    //Pantalla productes, Pantalla producte, Pantalla usuari i fragments
+    <string name="action_settings">Edit User</string>
+    <string name="text_dislike">Remove form list</string>
+    <string name="text_like">I Like it</string>
+    <string name="hint_titol_addPr">Title</string>
+    <string name="preu_addPr">Price</string>
+    <string name="euro_sym">€</string>
+    <string name="defaultText_selectType">Category</string>
+    <string name="btn_addPR_text">Add</string>
+    <string name="title_peticio">Send request</string>
+    <string name="explicacio_peticio">Add a request to become an artist so you can upload products for people to see your proposals.</string>
+    <string name="hint_peticio">Request</string>
+    <string name="btn_peticio">Send</string>
+    <string name="item_productes">Products</string>
+    <string name="item_elsMeusProductes">My poducts</string>
+    <string name="item_magrada">My saves</string>
+    <string name="title_item_categories">Categories</string>
+    <string name="item_eines">Tools</string>
+    <string name="item_mobles">Furnitures</string>
+    <string name="item_joguines">Toys</string>
+    <string name="item_roba">Clothes</string>
+    <string name="title_item_logout">Log Out</string>
+    <string name="item_logout">Log Out</string>
+    <string name="msg_imageNeeded">An image is needed</string>
+    <string name="msg_addNewProd">Product added correctly</string>
+    <string name="msg_addUser">User added correctly</string>
+    <string name="msg_logOutBox">You will log out from the app</string>
+    <string name="err_noArtist">You are not an artist</string>
+    <string name="welcome_msg">Hi,</string>
+    <string name="btn_acc_editUser">Update</string>
+    <string name="btn_can_editUser">Cancel</string>
+    <string name="alert_editUser_title_update">Updates</string>
+    <string name="text_update_editUser">Do you want to save these updates?</string>
+    <string name="toast_msg_update">User updated correctly</string>
+    <string name="title_cancel_editUser">Go Back</string>
+    <string name="text_cancel_editUser">The modifications will not be saved</string>
+    <string name="cancel_option">Cancel</string>
+    <string name="pos_option_EditUser">Yes</string>
+
+    <string name="opt_upload_Juguete">Toy</string>
+    <string name="opt_upload_Herramienta">Tool</string>
+    <string name="opt_upload_Ropa">Clothes</string>
+    <string name="opt_upload_Mueble">Furniture</string>
+    <string name="rem_prodNotInList">You don\'t have this product in your list</string>
+    <string name="rem_product_msg">Removed product!</string>
+    <string name="add_prodAlreadyInList">You already have this product in your list</string>
+    <string name="add_product_msg">Added product!</string>
+
+</resources>

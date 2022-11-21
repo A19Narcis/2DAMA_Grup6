@@ -200,7 +200,7 @@ public class SignIn extends AppCompatActivity {
                     } else {
                         textErrorDades.setVisibility(View.INVISIBLE);
                         Intent intent = new Intent(SignIn.this, PantallaPrincipal.class);
-                        Toast.makeText(SignIn.this, "Benvingut " + txtUserSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignIn.this, getString(R.string.welcome_msg) + " " + txtUserSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
                         intent.putExtra(EXTRA_MESSAGE, s);
                         startActivity(intent);
                     }

@@ -74,7 +74,7 @@ public class EditUser extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    public static final float INITIAL_ZOOM = 12f;
+    public static final float INITIAL_ZOOM = 14f;
 
     private String arrInfoUser;
     private String server_path;
@@ -258,9 +258,9 @@ public class EditUser extends AppCompatActivity implements OnMapReadyCallback {
         //Fer la connexió per editar
         if (valid && validDate){
             AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(EditUser.this);
-            alertaLogOut.setTitle("Canvis");
-            alertaLogOut.setMessage("Vols fer aquests canvis en el teu usuari?");
-            alertaLogOut.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            alertaLogOut.setTitle(R.string.alert_editUser_title_update);
+            alertaLogOut.setMessage(R.string.text_update_editUser);
+            alertaLogOut.setPositiveButton(R.string.pos_option_EditUser, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     String clerDesc = editDesc.getText().toString();
@@ -331,9 +331,9 @@ public class EditUser extends AppCompatActivity implements OnMapReadyCallback {
             System.out.println("VALOR S ---> " + s);
             super.onPostExecute(s);
             if (s.equals("false")) {
-                Toast.makeText(EditUser.this, "Aquest correo o usuari ja es troba registrat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditUser.this, R.string.errRegisterText, Toast.LENGTH_SHORT).show();
             } else if (s.equals("true")) {
-                Toast.makeText(EditUser.this, "Usuari actualitzat correctament", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditUser.this, R.string.toast_msg_update, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditUser.this, PantallaPrincipal.class);
                 intent.putExtra(EXTRA_MESSAGE, "["+jsonNovesDades+"]");
                 startActivity(intent);
@@ -371,15 +371,15 @@ public class EditUser extends AppCompatActivity implements OnMapReadyCallback {
 
     public void cancelActionEditUser(View view){
         AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(EditUser.this);
-        alertaLogOut.setTitle("Tornar");
-        alertaLogOut.setMessage("Els canvis fets en el teu usuari no es desaran");
+        alertaLogOut.setTitle(R.string.title_cancel_editUser);
+        alertaLogOut.setMessage(R.string.text_cancel_editUser);
         alertaLogOut.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 goBack();
             }
         });
-        alertaLogOut.setNegativeButton("Cancel·la", new DialogInterface.OnClickListener() {
+        alertaLogOut.setNegativeButton(R.string.cancel_option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Es queda a la pantalla
@@ -410,8 +410,8 @@ public class EditUser extends AppCompatActivity implements OnMapReadyCallback {
 
         // Add a ground overlay 100 meters in width to the home location.
         GroundOverlayOptions homeOverlay = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo_rounded_hd))
-                .position(home, 100);
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.maps_mark))
+                .position(home, 200);
 
         mMap.addGroundOverlay(homeOverlay);
 

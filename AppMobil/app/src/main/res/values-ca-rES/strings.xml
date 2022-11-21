@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //General
+    <string name="app_name">Recicla APP</string>
+    <string name="omplirCamps">Omple tots els camps</string>
+    <string name="btnBackInici">&lt;</string>
+    <string name="check_pass">Veure contrasenya</string>
+
+    //Inici APP
+    <string name="txtBtnSignUp">Regístrate</string>
+    <string name="preguntaTopSignIn">Ya estas registrat?</string>
+    <string name="txtBtnSignIn">Iniciar Sessió</string>
+
+    //Register
+    <string name="addNewImageText">+</string>
+    <string name="title_register">Registrar</string>
+    <string name="txt_Register_btn">Crear Usuari</string>
+    <string name="hint_register_location">Ubicació</string>
+    <string name="hint_register_email">Email</string>
+    <string name="hint_register_desc">Descripció</string>
+    <string name="hint_register_nom">Nom</string>
+    <string name="hint_register_cognom">Cognoms</string>
+    <string name="hint_register_user">Usuari</string>
+    <string name="hint_register_password">Contrasenya</string>
+    <string name="hint_register_edat">Data</string>
+    <string name="gmail_com">\@gmail.com</string>
+    <string name="errDataValue">La data no és vàlida</string>
+    <string name="imatge_usuari">Imatge Usuari</string>
+    <string name="hint_dataNaixament">Data de naixament</string>
+    <string name="errRegisterText">El CORREU o USUARIO ya se encuentra registrado</string>
+
+    //LOGIN
+    <string name="hintPassword">Contrasenya</string>
+    <string name="hintUsuari">Usuari</string>
+    <string name="txt_benvingut_da">Benvingut/da</string>
+    <string name="txtDadesNoValides_login">Les dades no son vàlides</string>
+    <string name="emojiErrorSignUp">La descripció no pot tenir EMOTICONES</string>
+    <string name="title_activity_pantalla_principal">PantallaPrincipal</string>
+
+    //MAPS
+    <string name="title_activity_maps">Wander</string>
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+
+    //Pantalla productes, Pantalla producte, Pantalla usuari i fragments
+    <string name="action_settings">Editar Usuari</string>
+    <string name="text_dislike">Treure de la llista</string>
+    <string name="text_like">M\'agrada</string>
+    <string name="hint_titol_addPr">Títol</string>
+    <string name="preu_addPr">Preu</string>
+    <string name="euro_sym">€</string>
+    <string name="defaultText_selectType">Categoria</string>
+    <string name="btn_addPR_text">Afegir</string>
+    <string name="title_peticio">Enviar petició</string>
+    <string name="explicacio_peticio">Afegir una petició per demanar ser artista i poder pujar productes perquè la gent vegi les teves propostes</string>
+    <string name="hint_peticio">Petició</string>
+    <string name="btn_peticio">Enviar</string>
+    <string name="item_productes">Productes</string>
+    <string name="item_elsMeusProductes">Els meus productes</string>
+    <string name="item_magrada">M\'agrada</string>
+    <string name="title_item_categories">Categories</string>
+    <string name="item_eines">Eines</string>
+    <string name="item_mobles">Mobles</string>
+    <string name="item_joguines">Joguines</string>
+    <string name="item_roba">Roba</string>
+    <string name="title_item_logout">Tancar Sessió</string>
+    <string name="item_logout">Tancar Sessió</string>
+    <string name="msg_imageNeeded">Imatge necessària</string>
+    <string name="msg_addNewProd">Producte afegit correctament</string>
+    <string name="msg_addUser">Usuario afegit correctament</string>
+    <string name="msg_logOutBox">Vols tancar sessió?</string>
+    <string name="err_noArtist">No ets artista</string>
+    <string name="welcome_msg">Hola,</string>
+    <string name="btn_acc_editUser">Actualitzar</string>
+    <string name="btn_can_editUser">Cancel·lar</string>
+    <string name="alert_editUser_title_update">Canvis</string>
+    <string name="text_update_editUser">Vols fer aquests canvis?</string>
+    <string name="toast_msg_update">Usuario actualitzat correctament</string>
+    <string name="title_cancel_editUser">Tornar</string>
+    <string name="text_cancel_editUser">Els canvis no es desaran</string>
+    <string name="cancel_option">Cancel·lar</string>
+    <string name="pos_option_EditUser">Si</string>
+
+    <string name="opt_upload_Juguete">Joguina</string>
+    <string name="opt_upload_Herramienta">Eina</string>
+    <string name="opt_upload_Ropa">Roba</string>
+    <string name="opt_upload_Mueble">Moble</string>
+    <string name="preguntaTopSignUp">No tens compte?</string>
+    <string name="rem_prodNotInList">Aquest producte no el tens a la llista</string>
+    <string name="rem_product_msg">Producte esborrat correctament!</string>
+    <string name="add_prodAlreadyInList">Aquest producte ja el tens a la llista</string>
+    <string name="add_product_msg">Producte afegir correctament!</string>
+
+</resources>

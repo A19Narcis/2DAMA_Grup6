@@ -8,43 +8,43 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.HomeFragment"
-        android:label="Productes"
+        android:label="@string/item_productes"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_eina"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.EinesFragment"
-        android:label="Eines"
+        android:label="@string/item_eines"
         tools:layout="@layout/fragment_eines" />
 
     <fragment
         android:id="@+id/nav_roba"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.RobaFragment"
-        android:label="Roba"
+        android:label="@string/item_roba"
         tools:layout="@layout/fragment_roba" />
 
     <fragment
         android:id="@+id/nav_joguina"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.JoguinaFragment"
-        android:label="Joguines"
+        android:label="@string/item_joguines"
         tools:layout="@layout/fragment_joguina" />
 
     <fragment
         android:id="@+id/nav_moble"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.MobleFragment"
-        android:label="Mobles"
+        android:label="@string/item_mobles"
         tools:layout="@layout/fragment_moble" />
 
     <fragment
         android:id="@+id/nav_self_products"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.UserProductsFragment"
-        android:label="Els teus productes"
+        android:label="@string/item_elsMeusProductes"
         tools:layout="@layout/fragment_user_products" />
 
     <fragment
         android:id="@+id/nav_like_products"
         android:name="com.example.projecte_2dam_grup6.ui.fragments.LikesFragment"
-        android:label="M'agraden"
+        android:label="@string/item_magrada"
         tools:layout="@layout/fragment_likes" />
 
 

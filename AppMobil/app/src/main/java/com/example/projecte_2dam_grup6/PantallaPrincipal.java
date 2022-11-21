@@ -127,7 +127,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                     intent.putExtra(EXTRA_MESSAGE, arrLogIn);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PantallaPrincipal.this, "No ets artista", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PantallaPrincipal.this, R.string.err_noArtist, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,7 +137,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
             AlertDialog.Builder alertaLogOut = new AlertDialog.Builder(PantallaPrincipal.this);
-            alertaLogOut.setTitle("Log out");
+            alertaLogOut.setTitle(R.string.title_item_logout);
             alertaLogOut.setMessage(R.string.msg_logOutBox);
             alertaLogOut.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

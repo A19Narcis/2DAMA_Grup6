@@ -88,7 +88,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    public static final float INITIAL_ZOOM = 12f;
+    public static final float INITIAL_ZOOM = 11f;
     private GoogleMap mMap;
 
     private int contadorFlags = 0;
@@ -197,7 +197,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         mMap = googleMap;
 
         // Pan the camera to your home address (in this case, Google HQ).
-        LatLng home = new LatLng(41.376063, 2.108777);
+        LatLng home = new LatLng(41.3874, 2.1686);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, INITIAL_ZOOM));
 
         // Add a ground overlay 100 meters in width to the home location.
