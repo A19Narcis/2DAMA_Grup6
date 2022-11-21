@@ -95,5 +95,6 @@
     <string name="rem_product_msg">Producte esborrat correctament!</string>
     <string name="add_prodAlreadyInList">Aquest producte ja el tens a la llista</string>
     <string name="add_product_msg">Producte afegir correctament!</string>
+    <string name="msg_error_sendRequest">Has d\'omplir el missatge</string>
 
 </resources>

@@ -97,7 +97,7 @@ public class RobaFragment extends Fragment {
                                 o.getString("id_producte")
                         );
                         categoria = o.getString("categoria");
-                        if (categoria.equals("Roba")){
+                        if (categoria.equals("Roba") || categoria.equals("Ropa") || categoria.equals("Clothes")){
                             listItems.add(item);
                         }
                     }

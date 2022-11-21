@@ -55,7 +55,7 @@
     <string name="hint_titol_addPr">Title</string>
     <string name="preu_addPr">Price</string>
     <string name="euro_sym">€</string>
-    <string name="defaultText_selectType">Category</string>
+    <string name="defaultText_selectType">Ei</string>
     <string name="btn_addPR_text">Add</string>
     <string name="title_peticio">Send request</string>
     <string name="explicacio_peticio">Add a request to become an artist so you can upload products for people to see your proposals.</string>
@@ -95,5 +95,6 @@
     <string name="rem_product_msg">Removed product!</string>
     <string name="add_prodAlreadyInList">You already have this product in your list</string>
     <string name="add_product_msg">Added product!</string>
+    <string name="msg_error_sendRequest">You have to fill the message</string>
 
 </resources>

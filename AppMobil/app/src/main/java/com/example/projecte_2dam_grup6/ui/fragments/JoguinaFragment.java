@@ -95,7 +95,7 @@ public class JoguinaFragment extends Fragment {
                                 o.getString("id_producte")
                         );
                         categoria = o.getString("categoria");
-                        if (categoria.equals("Joguina")){
+                        if (categoria.equals("Joguina") || categoria.equals("Juguete") || categoria.equals("Toy")){
                             listItems.add(item);
                         }
                     }

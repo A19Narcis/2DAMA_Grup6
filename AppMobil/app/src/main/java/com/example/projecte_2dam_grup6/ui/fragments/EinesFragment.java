@@ -95,7 +95,7 @@ public class EinesFragment extends Fragment {
                                 o.getString("id_producte")
                         );
                         categoria = o.getString("categoria");
-                        if (categoria.equals("Eina")){
+                        if (categoria.equals("Eina") || categoria.equals("Herramienta") || categoria.equals("Tool")){
                             listItems.add(item);
                         }
                     }

@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Producte listItem = listItems.get(position);
 
         holder.textViewHead.setText(listItem.getHead());
-        holder.textViewUser.setText(listItem.getUser());
+        holder.textViewUser.setText("@" + listItem.getUser());
 
         Picasso.with(context).load(listItem.getImageURL()).into(holder.imageView);
 

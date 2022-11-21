@@ -76,6 +76,8 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
 
     private String dadesUserLogIn;
 
+    private String json;
+
     private boolean prodImageExists = true;
     Bitmap mBitmap;
     FloatingActionButton fabCamera;
@@ -177,6 +179,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             File file = new File(filesDir, "image" + ".png");
             OutputStream os;
             if (mBitmap != null){
+                prodImageExists = true;
                 if (ready){
                     try {
                         os = new FileOutputStream(file);
@@ -235,10 +238,17 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     public void validacioAddProducte(View view){
         boolean valid = true;
         //CAP TEXT SENSE VALOR
+        String clearDesc = descProd.getText().toString();
+        clearDesc = clearDesc.replace('\n', ' ');
+
+        String clearCat = catProd.getText().toString();
+
+        Log.d("CATEGORIA", "categoria: " + catProd.getText());
+
         if (titolProd.getText().length() == 0
-                || (preuProd.getText().length() == 0 || preuProd.getText().toString().startsWith("."))
-                || (catProd.getText().length() == 0 || catProd.getText().equals("Categoria"))
-                || descProd.getText().length() == 0){
+                || (preuProd.getText().length() == 0 || preuProd.getText().toString().startsWith(".")
+                || preuProd.getText().toString().endsWith(".") || clearCat.equals("Categoria") || clearCat.equals("Category"))
+                || clearDesc.length() == 0){
             valid = false;
         }
 
@@ -257,11 +267,11 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             if (!prodImageExists){
                 Toast.makeText(this, R.string.msg_imageNeeded, Toast.LENGTH_LONG).show();
             } else {
-                String json = "[{\"id_usu\":" + id_user_login
+                json = "{\"id_usu\":" + id_user_login
                         + ",\"nom\":\"" + titolProd.getText()
                         + "\",\"preu\":" + preuProd.getText()
                         + ",\"categoria\":\"" + catProd.getText()
-                        + "\",\"descripcion\":\"" + descProd.getText() + "\"}]";
+                        + "\",\"descripcion\":\"" + descProd.getText() + "\"}";
                 Log.d("JSON", "Prodcute: " + json);
 
                 //CONNEXIO SERVER
@@ -313,7 +323,10 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             ready = true;
             multipartImageUpload();
             Toast.makeText(UploadProduct.this, R.string.msg_addNewProd, Toast.LENGTH_SHORT).show();
-            goBack();
+            //goBack();
+            Intent intent = new Intent(UploadProduct.this, PantallaPrincipal.class);
+            intent.putExtra(EXTRA_MESSAGE, dadesUserLogIn);
+            startActivity(intent);
         }
     }
 

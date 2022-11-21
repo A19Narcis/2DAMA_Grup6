@@ -95,7 +95,7 @@ public class MobleFragment extends Fragment {
                                 o.getString("id_producte")
                         );
                         categoria = o.getString("categoria");
-                        if (categoria.equals("Moble")){
+                        if (categoria.equals("Moble") || categoria.equals("Mueble") || categoria.equals("Furniture")){
                             listItems.add(item);
                         }
                     }

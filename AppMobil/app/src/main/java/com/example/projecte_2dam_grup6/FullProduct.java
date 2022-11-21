@@ -320,7 +320,7 @@ public class FullProduct extends AppCompatActivity {
                 titleProd.setText(jsonObject.optString("nom"));
                 preuProd.setText(jsonObject.optString("preu") + " €");
                 descProd.setText(jsonObject.optString("descripcion"));
-                nomUserProd.setText(jsonObject.optString("user"));
+                nomUserProd.setText("@" +jsonObject.optString("user"));
                 path_decodeProd = jsonObject.optString("path_prod");
                 id_image_producte = jsonObject.optString("id_image");
                 id_usuari_prod = jsonObject.optString("id");

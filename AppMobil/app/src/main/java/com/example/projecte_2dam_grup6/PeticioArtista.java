@@ -88,7 +88,7 @@ public class PeticioArtista extends AppCompatActivity {
         
         if (clean_text.length() == 0){
             isValid = false;
-            Toast.makeText(this, "Has d'omplir el missatge", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_error_sendRequest, Toast.LENGTH_SHORT).show();
         }
 
         

@@ -94,5 +94,6 @@
     <string name="rem_product_msg">¡Prodcuto borrado correctamente!</string>
     <string name="add_prodAlreadyInList">Este producto ya lo tienes en la lista</string>
     <string name="add_product_msg">¡Prodcuto añadido correctamente!</string>
+    <string name="msg_error_sendRequest">Has de llenar el mensaje</string>
 
 </resources>

@@ -11,7 +11,7 @@ const helmet = require('helmet');
 const app = express();
 const PORT = 3000;
 
-const IP = "192.168.224.66"
+const IP = "192.168.65.15"
 
 app.use(express.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
