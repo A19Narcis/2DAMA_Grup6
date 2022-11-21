@@ -406,7 +406,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/user_images')
   },
   filename: function (req, file, cb) {
-    con.query("SELECT email FROM `PERSONA` WHERE id = (SELECT MAX(id) FROM PERSONA);", function (err, result, field) {
+    con.query("SELECT IF((SELECT MAX(id) FROM PERSONA) = 1, (SELECT MAX(id + 1) as id FROM PERSONA), (SELECT MAX(id) as id FROM PERSONA)) as id;", function (err, result, field) {
       console.log("HEY RESULT -> " + JSON.stringify(result));
       var emailNomFile = JSON.stringify(result);
       emailNomFile = emailNomFile.replace(/\[/g, "");

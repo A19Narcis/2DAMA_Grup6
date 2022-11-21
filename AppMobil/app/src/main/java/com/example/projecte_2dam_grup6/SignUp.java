@@ -200,13 +200,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         LatLng home = new LatLng(41.3874, 2.1686);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, INITIAL_ZOOM));
 
-        // Add a ground overlay 100 meters in width to the home location.
-        GroundOverlayOptions homeOverlay = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo_rounded_hd))
-                .position(home, 100);
-
-        mMap.addGroundOverlay(homeOverlay);
-
         mMap.getUiSettings().setRotateGesturesEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 

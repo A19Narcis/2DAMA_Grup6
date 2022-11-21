@@ -256,9 +256,6 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             Log.d("IMAGE_PROD", "image exists? -> " + prodImageExists);
             if (!prodImageExists){
                 Toast.makeText(this, R.string.msg_imageNeeded, Toast.LENGTH_LONG).show();
-                //Reinici activity if there is no IMAGE
-                finish();
-                startActivity(getIntent());
             } else {
                 String json = "[{\"id_usu\":" + id_user_login
                         + ",\"nom\":\"" + titolProd.getText()

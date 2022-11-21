@@ -204,7 +204,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/alturaEditText"
                 style="@style/Theme.Projecte_2DAM_Grup6.editBox"
-                android:paddingEnd="20dp"
                 android:gravity="center"
                 android:textSize="15sp"
                 android:layout_marginBottom="@dimen/maringEditText_Register"
