@@ -23,7 +23,7 @@
   <v-app id="app">
     <main class="fill-height" id="particles-js"></main>
     <!--LOGIN-->
-    <v-container fill-height v-show="!login && !prod && !logout && !edit">
+    <v-container fill-height v-show="!login && !prod && !logout && !edit && !game">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
           <v-card width="448" height="500" elevation="8" outlined>
@@ -45,13 +45,13 @@
     </v-container>
     <!--Boton al Home-->
 
-    <v-btn v-show = "!login && prod" @click ="login = 1, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
+    <v-btn v-show = "(!login && prod) || (!login && !prod && !logout && game)" @click ="login = 1, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
       mdi-arrow-expand-right
     </v-icon>
   </v-btn>
     <!--Peticiones-->
     <div class="text-right pr-6"
-      v-show="(!login && prod && logout) || (login && !prod && logout) || (!login && !prod && !logout && edit)">
+      v-show="(!login && prod && logout && !game) || (login && !prod && logout && !game) || (!login && !prod && !logout && edit)">
       <v-menu min-width="300px" rounded offset-y>
         <template v-slot:activator="{ on }">
           <v-btn icon color="white" @click="seePeticiones" x-large v-on="on">
@@ -104,6 +104,10 @@
               <v-divider class="my-3"></v-divider>
               <v-btn depressed rounded text @click="login = 0, logout=0, prod=0">
                 Disconnect
+              </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn depressed rounded text @click="login = 0, logout=0, prod=0, game = 1, edit = 1">
+                Game
               </v-btn>
             </div>
           </v-list-item-content>
@@ -193,6 +197,11 @@
                         </v-card>
                       </v-dialog>
                     </td>
+                    <!--  <td>
+                      <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">Admin/User</v-btn>
+                    </td> -->
+
+
 
                     <td>
                       <v-dialog v-model="dialog2" width="500" :retain-focus="false">
@@ -318,7 +327,7 @@
     </v-container>
 
     <!--Edit account-->
-    <v-container fill-height v-show="!login && !prod && !logout && edit">
+    <v-container fill-height v-show="!login && !prod && !logout && edit && !game">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
           <v-card width="auto" height="auto" elevation="8" outlined>
@@ -365,6 +374,39 @@
                 </v-col>
               </v-container>
             </v-card-text>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container fill-height v-show="!login && !prod && !logout && game && edit">
+      <v-row justify="center" align-items="center">
+        <v-col cols="10" sm="auto">
+          
+          <div class="container">
+            <div class="canvas-div">
+              <canvas id="game_canvas" width="600" height="300"></canvas>
+              <br>
+              <div class="text-right">
+                <v-btn @click ="fitBottle(), snackbar = true" color = "primary" >STOP</v-btn>
+              </div>
+              <div class="text-left mt-n9">
+                <v-btn @click="startOver" color = "primary">START</v-btn>
+              </div>
+            </div>
+          </div>
+          <v-snackbar v-model ="snackbar" :timeout="timeout">{{teo}}
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="pink"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+                id="conffetti"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
         </v-col>
       </v-row>
     </v-container>

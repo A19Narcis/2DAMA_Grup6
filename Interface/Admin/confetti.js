@@ -1,13 +1,21 @@
+const button = document.getElementById('confetti');
+const button2 = document.getElementById('conffetti');
 
-const button = document.getElementById('confetti')
-const jsConfetti = new JSConfetti()
+const jsConfetti = new JSConfetti();
 
 
  button.addEventListener('click', () => {
   jsConfetti.addConfetti({
-
-  emojiSize: 70,
-  confettiNumber: 305,
+    emojiSize: 70,
+    confettiNumber: 305,
+  });
+  return;
+});
+button2.addEventListener('click', () => {
+  jsConfetti.addConfetti({
+    emojis: ['🤡', '🤬'],
+    emojiSize: 70,
+    confettiNumber: 305,
   });
   return;
 });
