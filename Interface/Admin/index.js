@@ -6,6 +6,7 @@ var app = new Vue({
             text: [
             ],
             headers: [
+                { text: 'ID', value: 'id' },
                 {
                     text: 'NOM',
                     align: 'start',
@@ -71,40 +72,6 @@ var app = new Vue({
             products: [],
 
 
-        }
-    },
-    dataProduct() {
-        return {
-            text: [
-            ],
-            headers: [
-                {
-                    text: 'NOM',
-                    align: 'start',
-                    sortable: true,
-                    value: 'nom',
-                },
-                { text: 'PREU', value: 'preu' },
-                { text: 'CATEGORIA', value: 'categoria' },
-                { text: 'ESTADO', value: 'estado_prod' },
-                { text: 'DESCRIPCIO', value: 'descripcio' },
-                { text: 'EMAIL', value: 'correu_usu' },
-                { text: 'VER' }
-            ],
-
-            search: '',
-            products: [],
-
-            hoverInit: ' ',
-            num_prod: 0,
-            seeUs: [],
-            dialog: false,
-            isadmin: 4,
-            showPassword: false,
-            password: null,
-            info: { values: [] },
-            error: ' ',
-            err: ' '
         }
     },
     mounted() {
@@ -238,7 +205,7 @@ var app = new Vue({
                             return;
                         }
                     this.info.values = [];
-                    this.err = "Correo y/o contraseña incorrectos"
+                    this.err = "Usuario y/o contraseña incorrectos"
                 }
             ).catch(
                 (error) => {
@@ -322,26 +289,6 @@ var app = new Vue({
                     console.log(error);
                 }
             );
-        },
-        checkRol: function (rol) {
-            if (rol == 'admin') {
-                this.isUser = 1;
-                this.isArtista = 1;
-            }
-            if (rol == 'artista') {
-                this.isUser = 1;
-                this.isAdmin = 1;
-            }
-            if (rol == 'user') {
-                this.isArtista = 1;
-                this.isAdmin = 1;
-            }
-        },
-        checkBan: function (rol) {
-            if (rol == 'admin') {
-                this.isUser = 1;
-                this.isArtista = 1;
-            }
         },
 
         editUser: function (email, nom, cognoms, data_naixament, ubicacio, user, pass, descripcio, rol, id, id_image, ban) {
