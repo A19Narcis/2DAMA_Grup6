@@ -2,6 +2,7 @@ package com.example.projecte_2dam_grup6;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,6 +31,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -74,6 +78,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -84,7 +89,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SignUp extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
+public class SignUp extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -117,6 +122,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
 
     private String server_path;
     private String register_path;
+
+
+    private CircleImageView circleImageView;
 
     private CheckBox checkBox;
 
@@ -166,6 +174,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
         txtErrorRegister = findViewById(R.id.txtNoValidUserRegister);
         showDateContainer = findViewById(R.id.viewUserInputDate);
         checkBox = findViewById(R.id.checkPass);
+        circleImageView = findViewById(R.id.userImage);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -182,10 +191,48 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
 
 
         fabCamera = findViewById(R.id.fab);
-        fabCamera.setOnClickListener(this);
+
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
+
 
         initRetrofitClient();
     }
+
+    public void selectImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+
+        iniciIntentImage.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> iniciIntentImage = registerForActivityResult(
+            new ActivityResultContracts
+                    .StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null  && data.getData() != null) {
+                        Uri selectedImageUri = data.getData();
+                        mBitmap = null;
+                        try {
+                            mBitmap = MediaStore.Images.Media.getBitmap(
+                                    this.getContentResolver(),
+                                    selectedImageUri);
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        circleImageView.setImageBitmap(mBitmap);
+                    }
+                }
+            });
+
 
     /**
      * Triggered when the map is ready to be used.
@@ -345,120 +392,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, O
                 });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
-                break;
-        }
-    }
-
-    public Intent getPickImageChooserIntent() {
-
-        Uri outputFileUri = getCaptureImageOutputUri();
-
-        List<Intent> allIntents = new ArrayList<>();
-        PackageManager packageManager = getPackageManager();
-
-        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
-        for (ResolveInfo res : listCam) {
-            Intent intent = new Intent(captureIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(res.activityInfo.packageName);
-            if (outputFileUri != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-            }
-            allIntents.add(intent);
-        }
-
-
-        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
-        for (ResolveInfo res : listGallery) {
-            Intent intent = new Intent(galleryIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(res.activityInfo.packageName);
-            allIntents.add(intent);
-        }
-
-
-
-        Intent mainIntent = allIntents.get(allIntents.size() - 1);
-        for (Intent intent : allIntents) {
-            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
-                mainIntent = intent;
-                break;
-            }
-        }
-        allIntents.remove(mainIntent);
-
-        Intent chooserIntent = Intent.createChooser(mainIntent, "Select source");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
-
-        return chooserIntent;
-    }
-
-    private Uri getCaptureImageOutputUri() {
-        Uri outputFileUri = null;
-        File getImage = getExternalFilesDir("");
-        if (getImage != null) {
-            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "image.png"));
-        }
-        return outputFileUri;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == SignUp.RESULT_OK) {
-            ImageView imageView = findViewById(R.id.userImage);
-            if (requestCode == IMAGE_RESULT) {
-                String filePath = getImageFilePath(data);
-                if (filePath != null) {
-                    mBitmap = BitmapFactory.decodeFile(filePath);
-                    imageView.setImageBitmap(mBitmap);
-                }
-            }
-        }
-    }
-
-    private String getImageFromFilePath(Intent data) {
-        boolean isCamera = data == null || data.getData() == null;
-
-        if (isCamera) return getCaptureImageOutputUri().getPath();
-        else return getPathFromURI(data.getData());
-
-    }
-
-    public String getImageFilePath(Intent data) {
-        return getImageFromFilePath(data);
-    }
-
-    private String getPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Audio.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putParcelable("pic_uri", picUri);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        // get the file url
-        picUri = savedInstanceState.getParcelable("pic_uri");
-    }
 
     private void initRetrofitClient() {
         OkHttpClient client = new OkHttpClient.Builder().build();

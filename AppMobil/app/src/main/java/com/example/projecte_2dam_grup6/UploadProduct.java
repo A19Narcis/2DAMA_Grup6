@@ -1,7 +1,10 @@
 package com.example.projecte_2dam_grup6;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +61,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class UploadProduct extends AppCompatActivity implements View.OnClickListener {
+public class UploadProduct extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.projecte_2dam_grup6.extra.MESSAGE";
 
@@ -77,6 +80,8 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
     private String dadesUserLogIn;
 
     private String json;
+
+    private ImageView imageView;
 
     private boolean prodImageExists = true;
     Bitmap mBitmap;
@@ -123,6 +128,7 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         preuProd = findViewById(R.id.newProductPreu);
         catProd = findViewById(R.id.idAutoCategoria);
         addProduct = findViewById(R.id.btnAddProduct);
+        imageView = findViewById(R.id.productImage);
 
         //Llegir les dades del fitxer JSON en ASSETS
         try {
@@ -151,24 +157,52 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         });
 
         fabCamera = findViewById(R.id.fab_image);
-        fabCamera.setOnClickListener(this);
+
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         initRetrofitClient();
     }
+
+    public void selectImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+
+        iniciIntentImage.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> iniciIntentImage = registerForActivityResult(
+            new ActivityResultContracts
+                    .StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null  && data.getData() != null) {
+                        Uri selectedImageUri = data.getData();
+                        mBitmap = null;
+                        try {
+                            mBitmap = MediaStore.Images.Media.getBitmap(
+                                    this.getContentResolver(),
+                                    selectedImageUri);
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        imageView.setImageBitmap(mBitmap);
+                    }
+                }
+            });
+
 
     private void initRetrofitClient() {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         apiService = new Retrofit.Builder().baseUrl(server_path).client(client).build().create(ApiService.class);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab_image:
-                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
-                break;
-        }
     }
 
     private void multipartImageUpload() {
@@ -330,25 +364,6 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void goBack(){
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == SignUp.RESULT_OK) {
-            ImageView imageView = findViewById(R.id.productImage);
-            if (requestCode == IMAGE_RESULT) {
-                String filePath = getImageFilePath(data);
-                if (filePath != null) {
-                    mBitmap = BitmapFactory.decodeFile(filePath);
-                    imageView.setImageBitmap(mBitmap);
-                }
-            }
-        }
-    }
-
     private static void writeStringToOutputStream(String json, OutputStream outputStream) throws IOException {
         byte[] bytes = json.getBytes(StandardCharsets.UTF_8); // API 19: StandardCharsets.UTF_8
         outputStream.write(bytes);
@@ -389,86 +404,6 @@ public class UploadProduct extends AppCompatActivity implements View.OnClickList
             return null;
         }
         return json;
-    }
-
-    public Intent getPickImageChooserIntent() {
-
-        Uri outputFileUri = getCaptureImageOutputUri();
-
-        List<Intent> allIntents = new ArrayList<>();
-        PackageManager packageManager = getPackageManager();
-
-        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
-        for (ResolveInfo res : listCam) {
-            Intent intent = new Intent(captureIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(res.activityInfo.packageName);
-            if (outputFileUri != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-            }
-            allIntents.add(intent);
-        }
-
-        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
-        for (ResolveInfo res : listGallery) {
-            Intent intent = new Intent(galleryIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(res.activityInfo.packageName);
-            allIntents.add(intent);
-        }
-
-        Intent mainIntent = allIntents.get(allIntents.size() - 1);
-        for (Intent intent : allIntents) {
-            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
-                mainIntent = intent;
-                break;
-            }
-        }
-        allIntents.remove(mainIntent);
-
-        Intent chooserIntent = Intent.createChooser(mainIntent, "Select source");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
-
-        return chooserIntent;
-    }
-
-    private Uri getCaptureImageOutputUri() {
-        Uri outputFileUri = null;
-        File getImage = getExternalFilesDir("");
-        if (getImage != null) {
-            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "image.png"));
-        }
-        return outputFileUri;
-    }
-
-    private String getImageFromFilePath(Intent data) {
-        boolean isCamera = data == null || data.getData() == null;
-
-        if (isCamera) return getCaptureImageOutputUri().getPath();
-        else return getPathFromURI(data.getData());
-
-    }
-
-    public String getImageFilePath(Intent data) {
-        return getImageFromFilePath(data);
-    }
-
-    private String getPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Audio.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putParcelable("pic_uri", picUri);
     }
 
 }

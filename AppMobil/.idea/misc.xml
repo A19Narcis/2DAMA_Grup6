@@ -62,6 +62,8 @@
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/map_options.xml" value="0.2984375" />
         <entry key="..\:/AndroidStudioClones/2DAMA_Grup6/AppMobil/app/src/main/res/menu/pantalla_principal.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.319" />
+        <entry key="app/src/main/res/drawable/edit_text_background_night.xml" value="0.319" />
         <entry key="app/src/main/res/layout/activity_edit_user.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_full_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_info_user.xml" value="0.35208333333333336" />
