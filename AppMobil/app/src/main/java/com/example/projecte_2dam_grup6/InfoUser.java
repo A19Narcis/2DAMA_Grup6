@@ -70,6 +70,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
     private String getImagePath;
     private String[] location_values;
 
+    private TextView infoUsu;
     private TextView infoNom;
     private TextView infoCog;
     private TextView infoUser;
@@ -123,6 +124,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
         accessButton = findViewById(R.id.btnEnterPeticio);
         backToStart = findViewById(R.id.btnBackToStart);
 
+        infoUsu = findViewById((R.id.id_usu));
         infoNom = findViewById(R.id.infoNom);
         infoCog = findViewById(R.id.infoCognom);
         infoUser = findViewById(R.id.infoUsername);
@@ -143,6 +145,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
             JSONArray jsonArray = new JSONArray(infoUserFromMainPage);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             Log.d("Pantalla_USER", "Pantalla user personal: " + jsonObject);
+
             infoNom.setText(jsonObject.optString("nom"));
             infoCog.setText(jsonObject.optString("cognoms"));
             infoUser.setText(jsonObject.optString("user"));
@@ -153,6 +156,7 @@ public class InfoUser extends AppCompatActivity implements OnMapReadyCallback {
             infoLocation.setText(jsonObject.optString("ubicacio"));
             rol_str = jsonObject.optString("rol");
             idUserStr = jsonObject.optString("id");
+            infoUsu.setText(idUserStr);
             infoRol.setText(rol_str);
             //infoRol.setText(rol_str);
         } catch (JSONException e) {
