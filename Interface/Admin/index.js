@@ -3,75 +3,26 @@ var app = new Vue({
     vuetify: new Vuetify(),
     data() {
         return {
-            text: [
-            ],
+            text: [],
             headers: [
                 { text: 'ID', value: 'id' },
-                {
-                    text: 'NOM',
-                    align: 'start',
-                    sortable: true,
-                    value: 'nom',
-                },
-                { text: 'COGNOMS', value: 'cognoms' },
-                { text: 'EDAD', value: 'data_naixament' },
-                { text: 'EMAIL', value: 'email' },
-                { text: 'USERS', value: 'users' },
-                { text: 'PASSWORD', value: 'pass' },
-                { text: 'ROL', value: 'rol' },
-                { text: 'BAN', value: 'ban' },
-                { text: 'INFO' },
-                { text: 'BAN' }
-
+                { text: 'NOM', align: 'start', sortable: true, value: 'nom' },
+                { text: 'COGNOMS', value: 'cognoms' }, { text: 'EDAD', value: 'data_naixament' },
+                { text: 'EMAIL', value: 'email' }, { text: 'USERS', value: 'users' },
+                { text: 'PASSWORD', value: 'pass' }, { text: 'ROL', value: 'rol' },
+                { text: 'BAN', value: 'ban' }, { text: 'INFO' }, { text: 'BAN' }
             ],
-            search: '',
-            h: 0,
-            speed: 2,
-            w: 0,
-            game: 0,
-            bottle_width: 0,
-            bottle_height: 0,
-            bottle_radius: 0,
-            bottle_x: 0,
-            bottle_y: 0,
-            move_bottle_x: 0,
-            move_bottle_y: 0,
-            canv: null,
-            edit: 0,
-            snackbar: false,
-            teo: "Hola fumo porros",
-            timeout: 1500,
-            img_usu: '',
-            arrEdit: [],
-            arrPet: [],
-            isLock: false,
-            lat: "",
-            long: "",
-            login: 0,
-            s2rc: "",
-            prod: 0,
-            isUser: 0,
-            isArtista: 0,
-            usuinfo: [],
-            logout: 0,
-            sheet: false,
-            users: [],
-            seePr: [],
-            img_prod: ' ',
-            dial: 0,
-            img: ' ',
-            seeUs: [],
-            dialog: false,
-            dialog2: false,
-            isAdmin: 0,
-            showPassword: false,
-            password: null,
-            info: { values: [] },
-            error: ' ',
-            err: ' ',
-            products: [],
-
-
+            search: '', h: 0, speed: 2, w: 0,
+            game: 0, bottle_width: 0, bottle_height: 0,
+            bottle_radius: 0, bottle_x: 0, bottle_y: 0,
+            move_bottle_x: 0, move_bottle_y: 0, canv: null,
+            edit: 0, snackbar: false, teo: "Hola fumo porros",
+            timeout: 1500,img_usu: '', arrEdit: [],arrPet: [],isLock: false,
+            lat: "",long: "",login: 0,s2rc: "",prod: 0,isUser: 0,
+            isArtista: 0,usuinfo: [],logout: 0,sheet: false, users: [],
+            seePr: [],img_prod: ' ',dial: 0,img: ' ',seeUs: [],
+            dialog: false,dialog2: false,isAdmin: 0,showPassword: false,
+            password: null,info: { values: [] },error: ' ',err: ' ',products: [],
         }
     },
     mounted() {
@@ -80,21 +31,18 @@ var app = new Vue({
         this.h = canvas.height;
         var ctx = canvas.getContext('2d');
         this.canv = ctx;
-        console.log(this.canv);
     },
     methods: {
-        moveBottle() {
+        mover() {
             if (this.move_bottle_x == 0)
                 this.move_bottle_x = this.w;
             this.canv.fillStyle = "#F1F1F1";
             this.canv.fillRect(0, 0, this.w, this.h);
-
-            this.drawBottle(this.bottle_x, this.bottle_y, '#E8E8E8');
-            this.drawBottle(this.move_bottle_x, this.move_bottle_y, '#AFDBFF');
+            this.draw(this.bottle_x, this.bottle_y, '#E8E8E8');
+            this.draw(this.move_bottle_x, this.move_bottle_y, '#AFDBFF');
             this.move_bottle_x--;
         },
-
-        drawBottle(x, y, fillColor) {
+        draw(x, y, fillColor) {
             width = this.bottle_width, height = this.bottle_height, radius = this.bottle_radius;
             this.canv.fillStyle = fillColor;
             this.canv.strokeStyle = 'black';
@@ -112,28 +60,26 @@ var app = new Vue({
             this.canv.stroke();
             this.canv.fill();
         },
-
-        fitBottle() {
+        stop() {
             if (typeof game_loop != "undefined") clearInterval(game_loop);
-            if (this.bottle_x == this.move_bottle_x || this.bottle_x == (this.move_bottle_x -2) || (this.bottle_x == this.move_bottle_x +2) )
-                this.teo = 'You won';
+            if (this.bottle_x == this.move_bottle_x || this.bottle_x == (this.move_bottle_x - 2) || (this.bottle_x == this.move_bottle_x + 2))
+                this.teo = 'Ganaste';
             else
-                this.teo = 'You lose';
+                this.teo = 'Has perdido';
         },
-        startOver() {
+        start() {
             this.bottle_width = 60;
             this.bottle_height = 100;
             this.bottle_radius = 20;
-            this.bottle_x = (this.w-this.bottle_width) /2;
-            this.bottle_y = this.h-(this.bottle_height+30);
+            this.bottle_x = (this.w - this.bottle_width) / 2;
+            this.bottle_y = this.h - (this.bottle_height + 30);
             this.move_bottle_x = this.w;
-            this.move_bottle_y = this.h-(this.bottle_height+30);
-            this.move_bottle_x = this.w, this.move_bottle_y = this.h-(this.bottle_height+30);
-            if(typeof game_loop != "undefined") clearInterval(game_loop);
-            game_loop = setInterval(this.moveBottle, this.speed);
+            this.move_bottle_y = this.h - (this.bottle_height + 30);
+            this.move_bottle_x = this.w, this.move_bottle_y = this.h - (this.bottle_height + 30);
+            if (typeof game_loop != "undefined") clearInterval(game_loop);
+            game_loop = setInterval(this.mover, this.speed);
         },
         getUsers: function (data) {
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getUsers/",
                 {
@@ -147,27 +93,21 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //onsole.log(data);
                     this.users = data;
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
-
         getAdmins: function (data) {
             this.info.values.push(document.getElementById("user").value);
             this.info.values.push(document.getElementById("pass").value);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getAdmins/",
                 {
@@ -182,15 +122,13 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     for (let index = 0; index < data.length; index++)
                         if (data[index].user == this.info.values[0] && data[index].pass == this.info.values[1] && data[index].rol == "admin") {
-                            console.log("hola");
+                            this.err = ""
                             this.logout = 1;
                             this.info.values = [];
                             this.usuinfo = data[index];
@@ -203,21 +141,18 @@ var app = new Vue({
                             this.$refs.inputRef.reset();
                             this.$refs.inputRef2.reset();
                             return;
+                        } else {
+                            this.err = "Usuario y/o contraseña incorrectos"
                         }
                     this.info.values = [];
-                    this.err = "Usuario y/o contraseña incorrectos"
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
-
         getProducts: function () {
-
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/getProducts/",
                 {
@@ -231,33 +166,26 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.login = 0;
                     this.prod = 1;
                     this.products = data;
-                    console.log("PROD" + this.products[0]);
                     var str = "../../Backend/Server/";
                     str = str + this.products[1].path;
                     this.img_prod = str;
                     this.info.values = []
-
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
         seeProduct: function (id) {
             this.info.values.push(id);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeProduct/",
                 {
@@ -272,12 +200,10 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.seePr = data[0];
                     console.log(this.seePr.path);
                     this.info.values = [];
@@ -285,12 +211,10 @@ var app = new Vue({
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
-
         editUser: function (email, nom, cognoms, data_naixament, ubicacio, user, pass, descripcio, rol, id, id_image, ban) {
             this.info.values.push(email);
             this.info.values.push(nom);
@@ -304,8 +228,6 @@ var app = new Vue({
             this.info.values.push(id);
             this.info.values.push(id_image);
             this.info.values.push(ban);
-            console.log(this.info.values);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/editUser/",
                 {
@@ -320,18 +242,15 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log(data);
                     this.info.values = [];
                     app.getUsers();
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
@@ -342,9 +261,6 @@ var app = new Vue({
             }
             this.info.values.push(email);
             this.info.values.push(ban);
-            console.log(this.info.values);
-
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/banear/",
                 {
@@ -359,34 +275,22 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    console.log("ban" + data);
                     this.info.values = [];
                     app.getUsers();
 
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
-
-        changeloc: function () {
-            this.s2rc = "https://maps.google.com/maps?q=+41.38591728341789+,+2.107479013502598+&hl=es;z=14&amp;output=embed";
-            console.log(document.getElementById('map').src = this.s2rc);
-        },
         seeUsers: function (email) {
             this.info.values.push(email);
-
-            console.log(this.info.values);
-            console.log(email);
-            console.log("Get Data");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeUsers/",
                 {
@@ -401,36 +305,25 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.seeUs = data[0];
                     var str = "../../Backend/Server/";
                     str = str + this.seeUs.path;
                     str = str.replaceAll('"', '');
                     this.seeUs.path = str;
                     this.img = this.seeUs.path;
-                    //console.log(this.img);
-                    console.log("SeeUs" + this.seeUs.path);
                     var str = [];
                     str = this.seeUs.ubicacio.split(' ');
                     this.lat = str[0];
                     this.long = str[1];
-                    console.log(this.lat);
-                    console.log(this.long);
                     this.s2rc = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCGBVNGL-01rb2enDljAeYFQE-elNlu2RI &q=" + this.lat + ',' + this.long + "&zoom=18";
-
-                    console.log(this.s2rc);
                     this.info.values = [];
-
-
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
@@ -439,9 +332,6 @@ var app = new Vue({
             this.info.values.push(user);
             this.info.values.push(decision);
             this.info.values.push(id);
-            console.log(this.info.values);
-
-            console.log("decidirPeticion");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/decidirPeticion/",
                 {
@@ -456,28 +346,21 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.info.values = [];
                     app.getUsers();
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
         seeEdit: function (id) {
             this.info.values.push(id);
-
-            console.log(this.info.values);
-
-            console.log("SeeEdit");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seeEdit/",
                 {
@@ -492,34 +375,25 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.arrEdit = data[0];
                     var str = "../../Backend/Server/";
                     str = str + this.arrEdit.path;
                     str = str.replaceAll('"', '');
                     this.arrEdit.path = str;
                     this.img = this.arrEdit.path;
-                    //console.log(this.img);
-                    console.log("arrEdit" + this.arrEdit.path);
                     this.info.values = [];
-
-
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
         },
         seePeticiones: function () {
-
-            console.log("seePeticiones");
             const myHeaders = new Headers();
             fetch("http://localhost:3000/seePeticiones/",
                 {
@@ -533,62 +407,17 @@ var app = new Vue({
                 }
             ).then(
                 (response) => {
-                    //console.log(response);
                     return (response.json());
                 }
             ).then(
                 (data) => {
-                    //console.log(data);
                     this.arrPet = data;
                 }
             ).catch(
                 (error) => {
-                    console.log("Error. ");
                     console.log(error);
                 }
             );
-        },
-
-        ferAdmin: function (email, rol) {
-            if (confirm("Estas seguro de cambiar el rol a " + email) == true) {
-                this.info.values.push(email);
-                this.info.values.push(rol);
-                console.log(this.info.values);
-                console.log(email);
-                console.log("Get Data");
-                const myHeaders = new Headers();
-                fetch("http://localhost:3000/ferAdmin/",
-                    {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                        },
-                        mode: "cors",
-                        body: JSON.stringify(this.info),
-                        cache: "default"
-                    }
-                ).then(
-                    (response) => {
-                        //onsole.log(response);
-                        return (response.json());
-                    }
-                ).then(
-                    (data) => {
-                        //console.log(data);
-                        this.users = data[0];
-                        this.info.values = [];
-                        app.getUsers();
-
-                    }
-                ).catch(
-                    (error) => {
-                        console.log("Error. ");
-                        console.log(error);
-                    }
-                );
-            }
-
-        },
+        }
     }
 })

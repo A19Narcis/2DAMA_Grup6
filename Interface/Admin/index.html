@@ -45,10 +45,11 @@
     </v-container>
     <!--Boton al Home-->
 
-    <v-btn v-show = "(!login && prod) || (!login && !prod && !logout && game)" @click ="login = 1, edit = 0, prod = 0" color="primary">HOME&nbsp;<v-icon>
-      mdi-arrow-expand-right
-    </v-icon>
-  </v-btn>
+    <v-btn v-show="(!login && prod) || (!login && !prod && !logout && game)" @click="login = 1, edit = 0, prod = 0"
+      color="primary">HOME&nbsp;<v-icon>
+        mdi-arrow-expand-right
+      </v-icon>
+    </v-btn>
     <!--Peticiones-->
     <div class="text-right pr-6"
       v-show="(!login && prod && logout && !game) || (login && !prod && logout && !game) || (!login && !prod && !logout && edit)">
@@ -198,12 +199,6 @@
                         </v-card>
                       </v-dialog>
                     </td>
-                    <!--  <td>
-                      <v-btn color="primary" @click="ferAdmin(row.item.email, row.item.rol)">Admin/User</v-btn>
-                    </td> -->
-
-
-
                     <td>
                       <v-dialog v-model="dialog2" width="500" :retain-focus="false">
                         <template v-slot:activator="{ on, attrs }">
@@ -254,7 +249,7 @@
           </v-col>
         </v-col>
     </v-container>
-    
+
     <!--Productes-->
     <v-container fill-height v-show="!login && prod">
 
@@ -278,7 +273,7 @@
                 </v-card>
               </template>
             </v-hover>
-            <v-bottom-sheet  v-model="sheet" :retain-focus="false">
+            <v-bottom-sheet v-model="sheet" :retain-focus="false">
               <v-sheet scrollable class="text-center" height="auto">
                 <v-btn class="mt-6" text color="primary" @click="sheet = !sheet">
                   close
@@ -290,31 +285,32 @@
                       <v-text-field label="ID" outlined :value="seePr.id_producte" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field label="nom" outlined  :value="seePr.nom" readonly></v-text-field>
+                      <v-text-field label="nom" outlined :value="seePr.nom" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field label="preu" outlined  :value="seePr.preu" readonly></v-text-field>
+                      <v-text-field label="preu" outlined :value="seePr.preu" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="categoria" outlined  :value="seePr.categoria" readonly></v-text-field>
+                      <v-text-field label="categoria" outlined :value="seePr.categoria" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-text-field label="estado_prod" outlined  :value="seePr.estado_prod" readonly></v-text-field>
+                      <v-text-field label="estado_prod" outlined :value="seePr.estado_prod" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-text-field label="descripcio" outlined  :value="seePr.descripcion" readonly></v-text-field>
+                      <v-text-field label="descripcio" outlined :value="seePr.descripcion" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-text-field label="id Usu" outlined  :value="seePr.id_usu" readonly></v-text-field>
+                      <v-text-field label="id Usu" outlined :value="seePr.id_usu" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-text-field label="id image" outlined  :value="seePr.id_image" readonly></v-text-field>
+                      <v-text-field label="id image" outlined :value="seePr.id_image" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="Path Imatge" outlined  :value="seePr.path" readonly></v-text-field>
+                      <v-text-field label="Path Imatge" outlined :value="seePr.path" readonly></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="0">
-                    <p style="font-size: 20px;">{{seePr.likes}}&nbsp;<v-icon large color="red">mdi-heart</v-icon></p>
+                      <p style="font-size: 20px;">{{seePr.likes}}&nbsp;<v-icon large color="red">mdi-heart</v-icon>
+                      </p>
                     </v-col>
                   </v-row>
                 </div>
@@ -382,28 +378,22 @@
     <v-container fill-height v-show="!login && !prod && !logout && game && edit">
       <v-row justify="center" align-items="center">
         <v-col cols="10" sm="auto">
-          
+
           <div class="container">
             <div class="canvas-div">
               <canvas id="game_canvas" width="600" height="300"></canvas>
               <br>
               <div class="text-right">
-                <v-btn @click ="fitBottle(), snackbar = true" color = "primary" >STOP</v-btn>
+                <v-btn @click="stop(), snackbar = true" color="primary">STOP</v-btn>
               </div>
               <div class="text-left mt-n9">
-                <v-btn @click="startOver" color = "primary">START</v-btn>
+                <v-btn @click="start" color="primary">START</v-btn>
               </div>
             </div>
           </div>
-          <v-snackbar v-model ="snackbar" :timeout="timeout">{{teo}}
+          <v-snackbar v-model="snackbar" :timeout="timeout">{{teo}}
             <template v-slot:action="{ attrs }">
-              <v-btn
-                color="pink"
-                text
-                v-bind="attrs"
-                @click="snackbar = false"
-                id="conffetti"
-              >
+              <v-btn color="pink" text v-bind="attrs" @click="snackbar = false" id="conffetti">
                 Close
               </v-btn>
             </template>
