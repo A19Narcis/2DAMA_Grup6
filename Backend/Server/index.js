@@ -59,30 +59,21 @@ app.post("/getAdmins", (req, res) => {
   con.query("SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload)", function (err, result, fields) {
     dades = result;
     res.json(dades);
-    //console.log(dades);
   });
 });
 
 //Agafar els productes
 app.post("/getProducts", (req, res) => {
-  
     con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) ORDER BY PRODUCTE.id_producte ASC", function (err, result, fields) {
       if (err) throw err;
       res.json(result);
     });
-  
 });
 
+//Veure productes
 app.post("/seeProduct", (req, res) =>{
-  console.log(req.body.values[0]);
-/*   con.query("SELECT * FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
+  con.query("SELECT *, COUNT(MEGUSTA.id_producte) as likes FROM PRODUCTE JOIN MEGUSTA USING (id_producte) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
     if (err) throw err;
-    //console.log(result);
-    res.json(result);
-  }); */
-    con.query("SELECT *, COUNT(MEGUSTA.id_producte) as likes FROM PRODUCTE JOIN MEGUSTA USING (id_producte) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + req.body.values[0] + "'", function (err, result, fields) {
-    if (err) throw err;
-    //console.log(result);
     res.json(result);
   }); 
 
@@ -90,8 +81,6 @@ app.post("/seeProduct", (req, res) =>{
 
 //Veure tots els usuaris al Servidor
 app.post("/seeUsers", (req, res) => {
-  var dades = [];
-  //console.log(req.body.values[0]);
   con.query(
     "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.email = '" + req.body.values[0] + "'",
     function (err, result, fields) {
@@ -99,9 +88,10 @@ app.post("/seeUsers", (req, res) => {
     }
   );
 });
+
+//Veure les peticions
 app.post("/seePeticiones", (req, res) => {
   var dades = [];
-  //console.log(req.body.values[0]);
   con.query(
     "SELECT PERSONA.user, PETICIONES.peticion, PETICIONES.id_usu FROM PETICIONES JOIN PERSONA ON (PETICIONES.id_usu = PERSONA.id)",
     function (err, result, fields) {
@@ -110,6 +100,7 @@ app.post("/seePeticiones", (req, res) => {
   );
 });
 
+//Fer admin o no
 app.post("/decidirPeticion", (req, res) => {
   var decision = req.body.values[1];
   var user = req.body.values[0];
@@ -117,7 +108,6 @@ app.post("/decidirPeticion", (req, res) => {
   
   if (decision == 1)
   {
-    console.log("solo borro");
     con.query(
       "DELETE FROM PETICIONES WHERE id_usu = " + id + "",
       function (err, result, fields) {
@@ -127,8 +117,6 @@ app.post("/decidirPeticion", (req, res) => {
   }
   if (decision == 0)
   {
-    console.log("borro y update");
-
     con.query(
       "DELETE FROM PETICIONES WHERE id_usu = " + id + "",
       function (err, result, fields) {
@@ -146,7 +134,6 @@ app.post("/decidirPeticion", (req, res) => {
 
 app.post("/seeEdit", (req, res) => {
   var dades = [];
-  //console.log(req.body.values[0]);
   con.query(
     "SELECT * FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.id = '" + req.body.values[0] + "'",
     function (err, result, fields) {
@@ -217,7 +204,6 @@ app.post("/deleteMeGustaProduct", (req, res) => {
 //Registre PRODUCTE nou APP
 app.post("/addNewProduct", (req, res) => {
   let auth = true;
-  //console.log("Producte: " + req.body.id_usu + ", " + req.body.nom + ", " + req.body.preu + ", " + req.body.categoria + ", " + req.body.descripcion);
   con.query("INSERT INTO PRODUCTE VALUES (NULL, '" + req.body.nom + "', " + req.body.preu + ", '" + req.body.categoria + "', 'Disponible', '" + req.body.descripcion + "', '" + req.body.id_usu + "', NULL)",function (err, result, fields) {
       auth = true;
   });
@@ -246,7 +232,6 @@ app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
 app.post("/addNewPeticio", (req, res) => {
   con.query("INSERT INTO PETICIONES VALUES(" + req.body.id_usu + ", '" + req.body.peticion + "')", function (err, result, fields) {
     res.send(result);
-    console.log("INERTADA");
   });
 });
 
@@ -265,7 +250,6 @@ app.get('/imageUserLogin/:id_user', (req, res) => {
   var fileName = "";
   con.query("SELECT UPLOADS.path FROM PERSONA JOIN UPLOADS ON (PERSONA.id_image = UPLOADS.id_upload) WHERE PERSONA.id = " + id + ";", function (err, result, fields) {
     filename = JSON.stringify(result);
-    //console.log(filename);
     filename = filename.replace(/\[/g, "");
     filename = filename.replace(/\{/g, "");
     filename = filename.replace(/\}/g, "");
@@ -275,9 +259,6 @@ app.get('/imageUserLogin/:id_user', (req, res) => {
     filename = filename.replace(/\:/g, "");
     filename = filename.replace(/.$/, "");
     var array = filename.split("\\".concat("\\"));
-    //console.log("Filename: " + filename);
-    
-    //console.log("ARRAY[2]: " + array[2]);
     
     fileName = "/uploads/user_images/".concat(array[2]);
     
@@ -301,8 +282,6 @@ app.get('/imageUserLogin/:id_user', (req, res) => {
 app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
   let user = req.params.txtUserSignIn;
   let passwd = req.params.txtPasswordSignIn;
-  //console.log("USER: " + user);
-  //console.log("PASS: " + passwd);
   let auth = false;
   con.query(
     "SELECT * FROM PERSONA WHERE user = '" +
@@ -311,7 +290,6 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
     passwd +
     "'",
     function (err, result, fields) {
-      console.log(JSON.stringify(result));
       if (result != 0) {
         res.send(JSON.stringify(result));
       } else {
@@ -407,7 +385,6 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     con.query("SELECT IF((SELECT MAX(id) FROM PERSONA) = 1, (SELECT MAX(id + 1) as id FROM PERSONA), (SELECT MAX(id) as id FROM PERSONA)) as id;", function (err, result, field) {
-      console.log("HEY RESULT -> " + JSON.stringify(result));
       var emailNomFile = JSON.stringify(result);
       emailNomFile = emailNomFile.replace(/\[/g, "");
       emailNomFile = emailNomFile.replace(/\{/g, "");
@@ -415,7 +392,6 @@ var storage = multer.diskStorage({
       emailNomFile = emailNomFile.replace(/\:/g, "_");
       emailNomFile = emailNomFile.replace(/\}/g, "_");
       emailNomFile = emailNomFile.replace(/\]/g, "_");
-      console.log("FINAL TEXT: " + emailNomFile);
       cb(null, file.fieldname + '-' + emailNomFile + '.jpg')
     });
   }
@@ -450,7 +426,6 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     con.query("SELECT id_producte FROM `PRODUCTE` WHERE id_producte = (SELECT MAX(id_producte) FROM PRODUCTE);", function (err, result, field) {
-      //console.log("HEY RESULT -> " + JSON.stringify(result));
       var productName = JSON.stringify(result);
       productName = productName.replace(/\[/g, "");
       productName = productName.replace(/\{/g, "");
@@ -458,7 +433,6 @@ var storage = multer.diskStorage({
       productName = productName.replace(/\:/g, "_");
       productName = productName.replace(/\}/g, "_");
       productName = productName.replace(/\]/g, "_");
-      //console.log("FINAL TEXT: " + productName);
       cb(null, file.fieldname + '_' + productName + '.jpg')
     });
   }
