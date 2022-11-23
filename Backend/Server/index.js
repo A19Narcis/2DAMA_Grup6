@@ -23,10 +23,6 @@ app.use(
   })
 );
 
-//Creacío connextió al LABS
-//Llegir els valors del fitxer JSON
-//<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" id="map" marginwidth="0" src="https://maps.google.com/maps?q=+41.38591728341789+,+2.107479013502598+&hl=es;z=14&amp;output=embed"></iframe>                                </v-col>
-
 var rutaFitxer = path.join(__dirname + '/server_settings.json');
 var dadesServer = JSON.parse(fs.readFileSync(rutaFitxer, 'utf-8'));
 
@@ -341,22 +337,6 @@ app.post("/banear", (req, res) =>{
   }
 });
 
-
-
-
-//Filtra per usuari els productes que es demanen
-app.post("/getProductUser", (req, res) => {
-  var data = [];
-  var emailUser = "x@i";
-  con.query(
-    "SELECT nom FROM PRODUCTE WHERE correu_usu='" + emailUser + "';",
-    function (err, result, fields) {
-      if (err) throw err;
-      data.push(result);
-      res.json(data);
-    }
-  );
-});
 
 app.post("/editUser", (req, res)=>{
   var email = req.body.values[0]; 
