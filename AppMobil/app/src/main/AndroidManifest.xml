@@ -42,6 +42,7 @@
         <activity
             android:name=".PeticioArtista"
             android:exported="false"
+            android:theme="@style/Theme.Projecte_2DAM_Grup6"
             android:screenOrientation="portrait" />
         <activity
             android:name=".InfoUser"
