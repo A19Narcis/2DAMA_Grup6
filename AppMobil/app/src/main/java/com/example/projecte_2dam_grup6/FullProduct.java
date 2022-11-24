@@ -116,7 +116,8 @@ public class FullProduct extends AppCompatActivity {
     public void afegirMeGusta (View view){
         String json = "{\"id_usuari\":\"" + id_usuari +
                 "\",\"id_producte\":\"" + id_prod_selec +
-                "\",\"id_image_prod\":\"" + id_image_producte + "\"}";
+                "\",\"id_image_prod\":\"" + id_image_producte +
+                "\", \"user_prod\":\"" + nomUserProd.getText().toString() + "\"}";
         Log.d("PRODUTCTE LIKE", json);
 
         final String HOST = server_path + addLikePath;
@@ -126,7 +127,8 @@ public class FullProduct extends AppCompatActivity {
     public void removeMeGusta(View view) {
         String json = "{\"id_usuari\":\"" + id_usuari +
                 "\",\"id_producte\":\"" + id_prod_selec +
-                "\",\"id_image_prod\":\"" + id_image_producte + "\"}";
+                "\",\"id_image_prod\":\"" + id_image_producte +
+                "\", \"user_prod\":\"" + nomUserProd.getText().toString() + "\"}";
         Log.d("PRODUTCTE DISLIKE", json);
 
         final String HOST = server_path + remLikePath;
@@ -320,7 +322,7 @@ public class FullProduct extends AppCompatActivity {
                 titleProd.setText(jsonObject.optString("nom"));
                 preuProd.setText(jsonObject.optString("preu") + " €");
                 descProd.setText(jsonObject.optString("descripcion"));
-                nomUserProd.setText("@" +jsonObject.optString("user"));
+                nomUserProd.setText(jsonObject.optString("user"));
                 path_decodeProd = jsonObject.optString("path_prod");
                 id_image_producte = jsonObject.optString("id_image");
                 id_usuari_prod = jsonObject.optString("id");
