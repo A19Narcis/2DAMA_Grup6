@@ -9,9 +9,9 @@ const e = require("cors");
 const helmet = require('helmet');
 
 const app = express();
-const PORT = 3000;
+const PORT = 7001;
 
-const IP = "192.168.224.66"
+const IP = "51.68.226.126"
 
 app.use(express.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
@@ -176,7 +176,7 @@ app.post("/addMeGustaProduct", (req, res) => {
       auth = false;
       res.json(auth);
     } else {
-      con.query("INSERT INTO MEGUSTA VALUES (NULL, " + req.body.id_usuari + ", " + req.body.id_producte + ", " + req.body.id_image_prod + ")");
+      con.query("INSERT INTO MEGUSTA VALUES (NULL, " + req.body.id_usuari + ", " + req.body.id_producte + ", " + req.body.id_image_prod + ", '" + req.body.user_prod + "')");
       res.json(auth);
     }
   });
@@ -218,7 +218,7 @@ app.get("/dadesUserLogin/:id_user", (req, res) => {
 //Informacio del producte seleccionat
 app.get("/getInfoSelectedProduct/:id_producte", (req, res) => {
   let id_producte = req.params.id_producte;
-  con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path_prod, PERSONA.id, PRODUCTE.id_image FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
+  con.query("SELECT PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.categoria, PRODUCTE.descripcion, PERSONA.user, CONCAT('http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server/',UPLOADS_PRODUCT.path) as path_prod, PERSONA.id, PRODUCTE.id_image FROM PRODUCTE JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) WHERE PRODUCTE.id_producte = '" + id_producte + "'", function (err, result, fields) {
     res.send(result);
   });
 })
@@ -264,12 +264,12 @@ app.get('/imageUserLogin/:id_user', (req, res) => {
       array = filename.split("\/");
       fileName = "/uploads/user_images/".concat(array[2]);
       if (array[2] == "normal_user_img.jp"){
-        res.send("http://" + IP + ":5501/Backend/Server/uploads/user_images/normal_user_img.jpg");
+        res.send("http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server/uploads/user_images/normal_user_img.jpg");
       } else {
-        res.send("http://" + IP + ":5501/Backend/Server" + fileName);
+        res.send("http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server" + fileName);
       }
     } else {
-      res.send("http://" + IP + ":5501/Backend/Server" + fileName);
+      res.send("http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server" + fileName);
     }    
   });
 });
@@ -298,7 +298,7 @@ app.get("/validarLogIn/:txtUserSignIn/:txtPasswordSignIn", (req, res) => {
 
 //GET dades products per RECYCLE VIEW
 app.get("/dadesProductsJSON", (req, res) => {
-  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte DESC", function(err, result, field){
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM PRODUCTE JOIN UPLOADS_PRODUCT ON (PRODUCTE.id_image = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (PRODUCTE.id_usu = PERSONA.id) ORDER BY PRODUCTE.id_producte DESC", function(err, result, field){
     res.send(result);
   });
 });
@@ -307,7 +307,7 @@ app.get("/dadesProductsJSON", (req, res) => {
 //GET dades dels products que te ME GUSTA de l'usuari
 app.get("/getMeGustaProducts/:id_usuari", (req, res) => {
   let id_usuari = req.params.id_usuari;
-  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://" + IP + ":5501/Backend/Server/',UPLOADS_PRODUCT.path) as path, PERSONA.user, PRODUCTE.estado_prod FROM MEGUSTA JOIN UPLOADS_PRODUCT ON (MEGUSTA.id_image_prod = UPLOADS_PRODUCT.id_upload) JOIN PERSONA ON (MEGUSTA.id_usuari = PERSONA.id) JOIN PRODUCTE ON (MEGUSTA.id_producte = PRODUCTE.id_producte) WHERE MEGUSTA.id_usuari = " + id_usuari +" ORDER BY PRODUCTE.id_producte", function(err, result, field){
+  con.query("SELECT PRODUCTE.id_producte, PRODUCTE.nom, PRODUCTE.preu, PRODUCTE.descripcion, PRODUCTE.categoria, CONCAT('http://51.68.226.126/~a19teomerrod/2DAMA_Grup6/Backend/Server/',UPLOADS_PRODUCT.path) as path, MEGUSTA.user, PRODUCTE.estado_prod FROM MEGUSTA JOIN UPLOADS_PRODUCT ON (MEGUSTA.id_image_prod = UPLOADS_PRODUCT.id_upload) JOIN PRODUCTE ON (MEGUSTA.id_producte = PRODUCTE.id_producte) WHERE MEGUSTA.id_usuari = " + id_usuari + " ORDER BY PRODUCTE.id_producte;", function(err, result, field){
     res.send(result);
   });
 });
