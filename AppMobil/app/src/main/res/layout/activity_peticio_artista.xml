@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    style="@style/Theme.Projecte_2DAM_Grup6"
     android:background="@drawable/gradient_list"
     android:id="@+id/linearLayout"
     tools:context=".PeticioArtista">
@@ -48,12 +49,12 @@
         android:id="@+id/peticioUsuari"
         android:layout_width="match_parent"
         android:layout_height="@dimen/altura_editText_descripcio"
-        android:background="@drawable/edit_text_background"
+        style="@style/Theme.Projecte_2DAM_Grup6.editBox"
         android:layout_marginBottom="@dimen/maringEditText_Register"
         android:layout_marginStart="@dimen/marginEditTextScreen"
         android:layout_marginEnd="@dimen/marginEditTextScreen"
-        android:layout_marginTop="35dp"
         android:paddingTop="10dp"
+        android:layout_marginTop="35dp"
         android:inputType="textMultiLine"
         android:gravity="top"
         android:hint="@string/hint_peticio"/>
